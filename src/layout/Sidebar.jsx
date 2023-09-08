@@ -20,58 +20,58 @@ const Sidebar = () => {
       </div>
       <div className="flex-grow">
         <Link to="/dashboard">
-          <div className="group py-3 pl-5 flex items-center cursor-pointer  hover:text-sky-500 hover:bg-active_menu hover:border-r-4 hover:border-sky-500">
+          <div className="group py-3 pl-5 flex items-center cursor-pointer  hover:text-sky-500 hover:bg-slate-200 hover:border-r-4 hover:border-sky-500">
             <h6 className="flex group-hover:translate-x-2 font-medium">
               <FaHome className="pr-2 text-2xl" /> Dashboard
             </h6>
           </div>
         </Link>
-        <Link to="/feed">
-          <div className="group py-3 pl-5 flex items-center cursor-pointer hover:text-sky-500 hover:bg-active_menu hover:border-r-4 hover:border-sky-500">
+        <Link to="/post-orders">
+          <div className="group py-3 pl-5 flex items-center cursor-pointer hover:text-sky-500 hover:bg-slate-200 hover:border-r-4 hover:border-sky-500">
             <h6 className="flex transition-all group-hover:translate-x-2 font-medium">
-              <FaFolder className="pr-2 text-2xl" /> Feed
+              <FaFolder className="pr-2 text-2xl" /> Post Orders
             </h6>
           </div>
         </Link>
-        <Link to="/events">
-          <div className="group py-3 pl-5 flex items-center cursor-pointer hover:text-sky-500 hover:bg-active_menu hover:border-r-4 hover:border-sky-500">
+        <Link to="/list-orders">
+          <div className="group py-3 pl-5 flex items-center cursor-pointer hover:text-sky-500 hover:bg-slate-200 hover:border-r-4 hover:border-sky-500">
             <h6 className="flex transition-all group-hover:translate-x-2 font-medium">
-              <FaClock className="pr-2 text-2xl" /> Events
+              <FaClock className="pr-2 text-2xl" /> List Orders
             </h6>
           </div>
         </Link>
-        <Link to="/chapters">
-          <div className="group py-3 pl-5 flex items-center cursor-pointer hover:text-sky-500 hover:bg-active_menu hover:border-r-4 hover:border-sky-500">
+        <Link to="/writers-profiles">
+          <div className="group py-3 pl-5 flex items-center cursor-pointer hover:text-sky-500 hover:bg-slate-200 hover:border-r-4 hover:border-sky-500">
             <h6 className="flex transition-all group-hover:translate-x-2 font-medium items-center">
-              <FaCalendarAlt className="pr-2 text-xl" /> Chapters
+              <FaCalendarAlt className="pr-2 text-xl" /> Writers Profiles
             </h6>
           </div>
         </Link>
-        <Link to="/hubs">
-          <div className="group py-3 pl-5 flex items-center cursor-pointer hover:text-sky-500 hover:bg-active_menu hover:border-r-4 hover:border-sky-500">
+        <Link to="/add-writer">
+          <div className="group py-3 pl-5 flex items-center cursor-pointer hover:text-sky-500 hover:bg-slate-200 hover:border-r-4 hover:border-sky-500">
             <h6 className="flex items-center transition-all group-hover:translate-x-2 font-medium">
-              <FaAcquisitionsIncorporated className="pr-2 text-xl" /> Hubs
+              <FaAcquisitionsIncorporated className="pr-2 text-xl" /> Add Writer
             </h6>
           </div>
         </Link>
-        <Link to="/opportunities">
-          <div className="group py-3 pl-5 flex items-center cursor-pointer hover:text-sky-500 hover:bg-active_menu hover:border-r-4 hover:border-sky-500">
+        <Link to="/order">
+          <div className="group py-3 pl-5 flex items-center cursor-pointer hover:text-sky-500 hover:bg-slate-200 hover:border-r-4 hover:border-sky-500">
             <h6 className="flex items-center transition-all group-hover:translate-x-2 font-medium">
-              <FaAddressBook className="pr-2 text-xl" /> Opportunities
+              <FaAddressBook className="pr-2 text-xl" />Order Resources
             </h6>
           </div>
         </Link>
-        <Link to="/alumni">
-          <div className="group py-3 pl-5 flex items-center cursor-pointer hover:text-sky-500 hover:bg-active_menu hover:border-r-4 hover:border-sky-500">
+        <Link to="/settings">
+          <div className="group py-3 pl-5 flex items-center cursor-pointer hover:text-sky-500 hover:bg-slate-200 hover:border-r-4 hover:border-sky-500">
             <h6 className="flex transition-all group-hover:translate-x-2 font-medium">
-              <FaCcMastercard className="pr-2 text-2xl" /> Alumni Directory
+              <FaCcMastercard className="pr-2 text-2xl" /> Settings
             </h6>
           </div>
         </Link>
       </div>
       <div className="flex-shrink mt-52">
         
-        <div className="bg-white p-2 text-center border-t text-xs text-semibold border-slate-300 flex items-center"><FaUserCircle className="text-3xl pr-2"/> 2023 ELP Portal</div>
+        <div className="bg-white p-2 text-center border-t text-xs text-semibold border-slate-300 flex items-center"><FaUserCircle className="text-3xl pr-2"/> 2023 Reserved </div>
       </div>
     </aside>
   );
