@@ -1,4 +1,7 @@
+/* eslint-disable react-refresh/only-export-components */
 // import React from 'react';
+
+import MainLayout from "../../layout/MainLayout";
 
 function WritersProfiles() {
   return (
@@ -8,4 +11,4 @@ function WritersProfiles() {
   );
 }
 
-export default WritersProfiles;
+export default MainLayout(WritersProfiles);

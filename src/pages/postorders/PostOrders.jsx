@@ -1,5 +1,7 @@
 // import React from 'react';
 
+import MainLayout from "../../layout/MainLayout";
+
 function PostOrders() {
   return (
     <div>
@@ -8,4 +10,4 @@ function PostOrders() {
   );
 }
 
-export default PostOrders;
+export default MainLayout(PostOrders);

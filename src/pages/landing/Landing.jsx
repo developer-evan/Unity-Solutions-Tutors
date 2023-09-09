@@ -2,6 +2,7 @@
 // import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
+// import MainLayout from '../../layout/MainLayout';
 
 const Landing = () => {
   return (
@@ -12,12 +13,12 @@ const Landing = () => {
           <h1 className="text-3xl font-semibold mb-4 text-center">Welcome to Our Website</h1>
           <p className="text-gray-600 text-center mb-8">Discover amazing features of our platform.</p>
           <div className="flex justify-between">
-            <Link to="/dashboard" className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
-              Login
+            <Link to="/login" className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+              Get started
             </Link>
-            <Link to="/signup" className="bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-600">
+            {/* <Link to="/login" className="bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-600">
               Sign Up
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>

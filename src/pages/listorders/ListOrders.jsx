@@ -1,4 +1,7 @@
+/* eslint-disable react-refresh/only-export-components */
 // import React from 'react';
+
+import MainLayout from "../../layout/MainLayout";
 
 function ListOrders() {
   return (
@@ -8,4 +11,4 @@ function ListOrders() {
   );
 }
 
-export default ListOrders;
+export default MainLayout(ListOrders);
