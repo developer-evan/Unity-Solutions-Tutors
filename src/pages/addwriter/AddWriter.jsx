@@ -1,4 +1,6 @@
+/* eslint-disable react-refresh/only-export-components */
 // import React from 'react';
+import MainLayout from '../../layout/MainLayout';
 
 function AddWriter() {
   return (
@@ -8,4 +10,4 @@ function AddWriter() {
   );
 }
 
-export default AddWriter;
+export default MainLayout(AddWriter);
