@@ -11,7 +11,7 @@ import {
 
 const Navbar = () => {
   return (
-    <header className="bg-transparent p-3 ">
+    <header className="bg-white ml-1 p-3 md:ml-[48] overflow-hidden">
       <div className="flex flex-col-reverse gap-4 md:gap-0 md:flex-row items-center">
         <div className="flex items-center flex-grow">
           <div className="md:w-1/4 flex items-center  px-3  rounded-full">

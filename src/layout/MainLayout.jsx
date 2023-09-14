@@ -8,15 +8,20 @@ const MainLayout = (Component) => function HOC(){
   return (
     
 
-      <div className="flex bg-slate-200">
-        <Sidebar className=""/>
-        <div className="flex flex-col flex-grow  ">
+    <div className="flex bg-slate-300 relative">
+    <Sidebar />
+    {/* <MobileMenu mobile={showMenu} setMobile={setShowMenu} /> */}
+    <div className="md:ml-48 flex flex-col flex-grow bg-slate-300">
+      <div className="sticky top-0 z-20">
         <Navbar />
-        <main className="p-2 bg-white rounded-lg  h-full justify-center m-2">
-         <Component/>
-          </main>
-        </div>
       </div>
+      <main className="relative h-full overflow-hidden  bg-white justify-center md:mt-2 ">
+          <Component/>
+      </main>
+      
+    </div>
+    {/* <ProfileCompletionPopup /> */}
+  </div>
      
   
   );
