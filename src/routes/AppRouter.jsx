@@ -14,6 +14,7 @@ import Login from '../Login';
 import Landing from '../pages/landing/Landing';
 import Profile from '../pages/profile/Profile';
 import Projects from '../pages/projects/Projects';
+import ViewFile from '../pages/projects/ViewFile';
 import Tasks from '../pages/tasks/Tasks';
 import Writers from '../pages/writers/Writers';
 import Analytics from '../pages/analytics/Analytics';
@@ -34,6 +35,7 @@ function AppRouter() {
        <Route path="/settings" element={<Settings/>} />
        <Route path="/profile" element={<Profile/>} />
        <Route path="/projects" element={<Projects/>} />
+        <Route path="/view-file" element={<ViewFile/>} />
        <Route path="/tasks" element={<Tasks/>} />
        <Route path="/writers" element={<Writers/>} />
        <Route path="analytics" element={<Analytics />} />

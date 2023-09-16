@@ -151,7 +151,7 @@ function Dashboard() {
     <div className="flex flex-col space-y-4">
       <div className="flex">
         {data.map((item) => (
-          <div className="max-w-xs mx-2 p-3" key={item.id}>
+          <div className="max-w-xs mx-auto p-3" key={item.id}>
             <div className={`bg-white shadow-md rounded-lg p-3 flex space-x-16`}>
               <div>
                 <h2 className="text-xs font-semibold mb-2">{item.title}</h2>
