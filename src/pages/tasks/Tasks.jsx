@@ -10,7 +10,8 @@ const initialTasks = [
     writer: 'John Denver',
     client: 'Client A',
     bookBalance: '$500',
-    value: '20.37%',
+    // value: '20.37%',
+    deadline: '2021-10-10',
   },
   {
     id: 2,
@@ -18,7 +19,8 @@ const initialTasks = [
     writer: 'Jane Erickson',
     client: 'Client B',
     bookBalance: '$800',
-    value: '15.12%',
+    // value: '15.12%',
+    deadline: '2021-10-10',
   },
 ];
 
@@ -31,7 +33,7 @@ function Tasks() {
     writer: '',
     client: '',
     bookBalance: '',
-    value: '',
+    deadline: '',
   });
 
   const toggleAddOrderModal = () => {
@@ -50,7 +52,7 @@ function Tasks() {
       newOrder.writer.trim() !== '' &&
       newOrder.client.trim() !== '' &&
       newOrder.bookBalance.trim() !== '' &&
-      newOrder.value.trim() !== ''
+      newOrder.deadline.trim() !== ''
     ) {
       setOrders([...orders, newOrder]);
       setNewOrder({
@@ -58,7 +60,7 @@ function Tasks() {
         writer: '',
         client: '',
         bookBalance: '',
-        value: '',
+        deadline: '',
       });
       setShowAddOrderModal(false);
     }
@@ -86,13 +88,13 @@ function Tasks() {
                 <th className="px-2 py-2 text-start">Writer</th>
                 <th className="px-2 py-2 text-start">Client</th>
                 <th className="px-2 py-2 text-start">Book Balance</th>
-                <th className="px-2 py-2 text-start">Value</th>
+                <th className="px-2 py-2 text-start">Deadline</th>
               </tr>
             </thead>
             <tbody>
               {/* Map through the orders and display them */}
               {orders.map((order) => (
-                <tr key={order.id} className="border-t border-gray-300">
+                <tr key={order.id} className="border-t border-gray-300 hover:bg-slate-100">
                   <td className="px-2 py-2">
                     <button
                       className={`bg-${order.status.toLowerCase()}-400 py-2 px-2 rounded-lg w-28 bg-sky-600 text-xs font-bold text-slate-100`}
@@ -103,7 +105,7 @@ function Tasks() {
                   <td className="px-2 py-2 text-gray-500">{order.writer}</td>
                   <td className="px-2 py-2 text-gray-500">{order.client}</td>
                   <td className="px-2 py-2 text-slate-600 font-semibold">{order.bookBalance}</td>
-                  <td className="px-2 py-2 text-slate-600 font-semibold">{order.value}</td>
+                  <td className="px-2 py-2 text-slate-600 font-semibold">{order.deadline}</td>
                 </tr>
               ))}
             </tbody>
@@ -158,11 +160,11 @@ function Tasks() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-800">Value</label>
+            <label className="block text-gray-800">Deadline</label>
             <input
-              type="text"
-              name="value"
-              value={newOrder.value}
+              type="date"
+              name="deadline"
+              value={newOrder.deadline}
               onChange={handleInputChange}
               className="w-full p-2 border border-gray-300 rounded"
             />
