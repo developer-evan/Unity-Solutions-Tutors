@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { useState } from 'react';
 import MainLayout from '../../layout/MainLayout';
 
@@ -134,13 +135,13 @@ function Tasks() {
                     <td className="px-2 py-2">
                       <button
                         onClick={() => handleEditOrder(order.id)}
-                        className="bg-blue-400 py-2 px-2 rounded-lg w-28 bg-blue-600 text-xs font-bold text-slate-100 mr-2"
+                        className=" py-2 px-2 rounded-lg w-28 bg-blue-600 text-xs font-bold text-slate-100 mr-2"
                       >
                         Edit
                       </button>
                       <button
                         onClick={() => handleDeleteOrder(order.id)}
-                        className="bg-red-400 py-2 px-2 rounded-lg w-28 bg-red-600 text-xs font-bold text-slate-100"
+                        className="py-2 px-2 rounded-lg w-28 bg-red-600 text-xs font-bold text-slate-100"
                       >
                         Delete
                       </button>
