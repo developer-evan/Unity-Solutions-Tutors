@@ -18,7 +18,7 @@ import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <aside className="hidden  bg-slate-800 text-slate-400 w-48 h-full md:flex flex-col fixed">
+    <aside className="hidden  bg-slate-800 text-slate-400 w-60 h-full md:flex flex-col fixed">
       <div className="flex items-center justify-center h-20">
         {/* <img src="./img/logo.png" alt="Logo" className="h-10 w-auto" /> */}
         <Link to={"/"}>

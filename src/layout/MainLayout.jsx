@@ -11,7 +11,7 @@ const MainLayout = (Component) => function HOC(){
     <div className="flex bg-slate-300 relative">
     <Sidebar />
     {/* <MobileMenu mobile={showMenu} setMobile={setShowMenu} /> */}
-    <div className="md:ml-48 flex flex-col flex-grow bg-slate-300">
+    <div className="md:ml-60 flex flex-col flex-grow bg-slate-300">
       <div className="sticky top-0 z-20">
         <Navbar />
       </div>
