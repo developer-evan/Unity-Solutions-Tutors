@@ -10,7 +10,8 @@ import WritersProfiles from "../pages/writersprofiles/WritersProfiles";
 import AddWriter from "../pages/addwriter/AddWriter";
 import Order from "../pages/order/Order";
 import Settings from "../pages/settings/Settings";
-import Login from '../Login';
+// import Login from '../pages/authentication/Login';
+import Login from '../pages/authentication/Login';
 import Landing from '../pages/landing/Landing';
 import Profile from '../pages/profile/Profile';
 import Projects from '../pages/projects/Projects';
@@ -21,6 +22,7 @@ import Analytics from '../pages/analytics/Analytics';
 
 
 function AppRouter() {
+
   return (
     <Router>
       <Routes>       
