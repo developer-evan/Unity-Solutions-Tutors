@@ -1,4 +1,4 @@
-
+import { FaAccusoft, FaAcquisitionsIncorporated, FaAddressBook, FaAdjust, FaBookmark,  } from "react-icons/fa";
 
 
 
@@ -12,7 +12,7 @@ const HowWeWork = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="flex flex-col items-center">
             <div className="p-6 rounded-full bg-white text-blue-400 text-4xl">
-              1
+              <FaBookmark />
             </div>
             <p className="text-lg mt-4">
               Understand your writing needs
@@ -20,7 +20,7 @@ const HowWeWork = () => {
           </div>
           <div className="flex flex-col items-center">
             <div className="p-6 rounded-full bg-white text-blue-400 text-4xl">
-              2
+              <FaAcquisitionsIncorporated />
             </div>
             <p className="text-lg mt-4">
               Conduct thorough research and brainstorming
@@ -28,7 +28,7 @@ const HowWeWork = () => {
           </div>
           <div className="flex flex-col items-center">
             <div className="p-6 rounded-full bg-white text-blue-400 text-4xl">
-              3
+              <FaAdjust />
             </div>
             <p className="text-lg mt-4">Write and edit your content</p>
           </div>
@@ -36,7 +36,7 @@ const HowWeWork = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
           <div className="flex flex-col items-center">
             <div className="p-6 rounded-full bg-white text-blue-400 text-4xl">
-              4
+              <FaAccusoft />
             </div>
             <p className="text-lg mt-4">
               Gather client feedback and make revisions
@@ -44,7 +44,7 @@ const HowWeWork = () => {
           </div>
           <div className="flex flex-col items-center">
             <div className="p-6 rounded-full bg-white text-blue-400 text-4xl">
-              5
+              <FaAddressBook />
             </div>
             <p className="text-lg mt-4">Deliver high-quality content</p>
           </div>
