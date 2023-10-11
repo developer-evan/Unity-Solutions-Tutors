@@ -5,6 +5,7 @@ import Samples from './components/Samples';
 import Reviews from './components/Reviews';
 import Services from './components/Services';
 import ContactUs from './components/ContactUs';
+import Hero from './components/Hero';
 // import MainLayout from '../../layout/MainLayout';
 
 const Landing = () => {
@@ -12,6 +13,7 @@ const Landing = () => {
     <div>
       <div className="bg-gray-100 min-h-screen scroll-smooth">
       <Header />
+      <Hero />
       <HowWeWork />
       <Samples />
       <Reviews />
