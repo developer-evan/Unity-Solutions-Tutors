@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Hero() {
   return (
-    <div className="bg-gradient-to-r from-sky-500 to-blue-800 h-screen">
+    <div className="bg-gradient-to-r from-sky-500 to-blue-800 md:h-screen">
       <div className="max-w-screen-xl mx-auto pt-28 px-6 xl:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 grid-rows-2 gap-8 py-4 sm:py-16">
           <div className="row-start-2 sm:row-start-1 flex flex-col justify-center items-start">
