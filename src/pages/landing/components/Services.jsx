@@ -9,11 +9,11 @@ const Services = () => {
           Explore our diverse range of writing services tailored to your needs:
         </p>
         <ul className="text-lg text-gray-200 list-disc list-inside pl-4">
-          <li className="mb-4">Content Writing</li>
-          <li className="mb-4">Copywriting</li>
-          <li className="mb-4">Blog Post Creation</li>
-          <li className="mb-4">Editing and Proofreading</li>
-          <li className="mb-4">Custom Writing Projects</li>
+          <li className="mb-4 text-start">Content Writing</li>
+          <li className="mb-4 text-start">Copywriting</li>
+          <li className="mb-4 text-start">Blog Post Creation</li>
+          <li className="mb-4 text-start">Editing and Proofreading</li>
+          <li className="mb-4 text-start">Custom Writing Projects</li>
         </ul>
       </div>
     </section>
