@@ -34,7 +34,7 @@ function Login() {
     <div>
       <div className="bg-blue-700 p-4">
         <div className="container mx-auto">
-          <h1 className="text-white text-2xl font-semibold">Adam Admin</h1>
+          {/* <h1 className="text-white text-2xl font-semibold">Adam Admin</h1> */}
         </div>
       </div>
       <div className="bg-gradient-to-r from-blue-400 to-indigo-600 min-h-screen flex items-center justify-center py-16">
