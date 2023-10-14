@@ -10,8 +10,8 @@ import Hero from './components/Hero';
 
 const Landing = () => {
   return (
-    <div>
-      <div className="bg-gray-100 min-h-screen scroll-smooth">
+    <div className='scroll-smooth'>
+      <div className="bg-gray-100 min-h-screen ">
       <Header />
       <Hero />
       <HowWeWork />
@@ -19,6 +19,7 @@ const Landing = () => {
       <Reviews />
       <Services />
       <ContactUs />
+
       {/* <Header />
       <div className="bg-gradient-to-r from-blue-400 to-indigo-600 min-h-screen flex items-center justify-center">
         <div className="bg-white p-8 rounded-lg shadow-lg w-96">
@@ -34,6 +35,7 @@ const Landing = () => {
           {/* </div>
         </div>
       </div> */}
+      
       </div>
     </div>
   );

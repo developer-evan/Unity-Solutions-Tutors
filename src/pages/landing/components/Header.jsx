@@ -1,54 +1,49 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { FaBars, FaTimes } from "react-icons/fa";
-
-const Header = () => {
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+function  Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
-  return (
-    <header className="bg-gradient-to-r fixed top-0 left-0 right-0 z-50 from-purple-800 to-blue-600 py-4 shadow-md">
-      <div className="container mx-auto flex justify-between items-center">
-        <h1 className="text-3xl font-extrabold text-white">Unity Solutions</h1>
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
 
-        {/* Responsive Menu Button */}
-        <div className="lg:hidden">
-          <button
-            className="text-white hover:text-purple-300"
-            onClick={toggleMenu}
+  return (
+    <div className='fixed top-0 w-full bg-gradient-to-r from-violet-500 to-blue-800 md:flex md:justify-between md:items-center md:px-4'>
+      <header className='flex justify-between p-3 items-center '>
+        <h2 className='font-bold text-white text-lg md:text-2xl'>Unity Solutions</h2>
+
+        <div className='md:hidden flex flex-row justify-center gap-2 items-center'>
+        <button
+          className='block md:hidden text-white p-2'
+          onClick={toggleMenu}
+        >
+          <svg
+            className='h-6 w-6 text-white'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='currentColor'
           >
             {menuOpen ? (
-              <FaTimes className="text-2xl" />
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M6 18L18 6M6 6l12 12'
+              />
             ) : (
-              <FaBars className="text-2xl" />
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M4 6h16M4 12h16M4 18h16'
+              />
             )}
-          </button>
-        </div>
-
-        {/* Navigation Menu */}
-        <nav className={`lg:flex ${menuOpen ? "block" : "hidden"}`}>
-          <ul className="flex space-x-6 lg:flex">
-            <li className="text-white hover:text-purple-300">
-              <a href="#how-we-work">How we work</a>
-            </li>
-            <li className="text-white hover:text-purple-300">
-              <a href="#samples">Samples</a>
-            </li>
-            <li className="text-white hover:text-purple-300">
-              <a href="#reviews">Reviews</a>
-            </li>
-            <li className="text-white hover:text-purple-300">
-              <a href="#services">Services</a>
-            </li>
-            <li className="text-white hover:text-purple-300">
-              <a href="#contact-us">Contact us</a>
-            </li>
-          </ul>
-        </nav>
-
+          </svg>
+        </button>
         <button className="text-white hover:text-purple-300">
           <Link
             to="/login"
@@ -57,9 +52,58 @@ const Header = () => {
             Login
           </Link>
         </button>
-      </div>
-    </header>
+    </div>
+        
+      </header>
+      <ul
+        className={`${
+          menuOpen ? 'block' : 'hidden'
+        } md:flex md:w-auto text-start text-white  p-4 md:p-0 md:static md:space-x-4`}
+      >
+     <a href='#home'  >      
+      <li className='mx-4 font-bold hover:translate-x-2' onClick={closeMenu}>
+          Home
+        </li>
+        </a>
+        <a href='#samples'  >
+        <li className='mx-4 font-bold hover:translate-x-2' onClick={closeMenu}>
+          Samples
+        </li>
+        </a>
+        <a href='#how-we-work'  > 
+        <li className='mx-4 font-bold hover:translate-x-2' onClick={closeMenu}>
+          Our Work
+        </li>
+        </a>
+        <a href='#reviews'  > 
+        <li className='mx-4 font-bold hover:translate-x-2' onClick={closeMenu}>
+          Reviews
+        </li>
+        </a>
+        <a href='#services'  > 
+        <li className='mx-4 font-bold hover:translate-x-2' onClick={closeMenu}>
+          Services
+        </li>
+        </a>
+        <a href='#contact-us'  > 
+        <li className='mx-4 font-bold hover:translate-x-2
+        
+        ' onClick={closeMenu}>
+          Contact Us
+        </li>
+        </a>
+      </ul>
+     
+      <button className="hidden md:block text-white hover:text-purple-300">
+          <Link
+            to="/login"
+            className="bg-blue-500 text-white px-4 py-2 w-36 rounded-lg hover:bg-blue-600"
+          >
+            Login
+          </Link>
+        </button>
+    </div>
   );
-};
+}
 
 export default Header;
