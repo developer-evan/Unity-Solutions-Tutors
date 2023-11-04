@@ -3,9 +3,9 @@
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 const ContactUs = () => {
   return (
-    <section id="contact-us" className="bg-gray-100 py-16">
+    <section id="contact-us" className="bg-gray-100 py-16 px-3">
        <h2 className="text-3xl font-extrabold text-center ntext-gray-900 mb-6">Contact Us</h2>
-      <div className="container mx-auto text-center text-start">
+      <div className="container mx-auto item-center text-start">
        
         <p className="text-lg text-gray-700 mb-6">
           If you have any questions or need assistance, don't hesitate to get in touch with our team:
