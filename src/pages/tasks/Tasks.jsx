@@ -1,40 +1,46 @@
-/* eslint-disable react-refresh/only-export-components */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import MainLayout from '../../layout/MainLayout';
 
-const initialTasks = [
-  {
-    id: 1,
-    status: 'New',
-    writer: 'John Denver',
-    client: 'Client A',
-    bookBalance: '$500',
-    deadline: '2021-10-10',
-  },
-  {
-    id: 2,
-    status: 'Pending',
-    writer: 'Jane Erickson',
-    client: 'Client B',
-    bookBalance: '$800',
-    deadline: '2021-10-10',
-  },
-];
-
 function Tasks() {
-  const [orders, setOrders] = useState(initialTasks);
+  const [orders, setOrders] = useState([]);
   const [showAddOrderModal, setShowAddOrderModal] = useState(false);
   const [newOrder, setNewOrder] = useState({
-    id: null, // Add an ID field for tracking edited order
+    id: null,
     status: '',
     writer: '',
     client: '',
-    bookBalance: '',
+    book_balance: '',
     deadline: '',
   });
 
+  const fetchTasks = async () => {
+    try {
+      const response = await axios.get('https://adamsite-c8e88a6bb1a1.herokuapp.com/api/tasks/');
+      if (response.status === 200) {
+        setOrders(response.data);
+      } else {
+        console.error('Failed to fetch tasks');
+      }
+    } catch (error) {
+      console.error('Error fetching tasks:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
   const toggleAddOrderModal = () => {
     setShowAddOrderModal(!showAddOrderModal);
+    setNewOrder({
+      id: null,
+      status: '',
+      writer: '',
+      client: '',
+      book_balance: '',
+      deadline: '',
+    });
   };
 
   const handleInputChange = (e) => {
@@ -42,55 +48,63 @@ function Tasks() {
     setNewOrder({ ...newOrder, [name]: value });
   };
 
-  const handleAddOrder = () => {
+  const handleAddOrder = async () => {
     if (
       newOrder.status.trim() !== '' &&
       newOrder.writer.trim() !== '' &&
       newOrder.client.trim() !== '' &&
-      newOrder.bookBalance.trim() !== '' &&
+      newOrder.book_balance.trim() !== '' &&
       newOrder.deadline.trim() !== ''
     ) {
-      if (newOrder.id !== null) {
-        // Edit existing order
-        const updatedOrders = orders.map((order) =>
-          order.id === newOrder.id ? newOrder : order
-        );
-        setOrders(updatedOrders);
-      } else {
-        // Add new order
-        setOrders([...orders, { ...newOrder, id: Date.now() }]);
+      try {
+        if (newOrder.id) {
+          // If an ID exists, it's an existing task that needs updating
+          const response = await axios.put(`https://adamsite-c8e88a6bb1a1.herokuapp.com/api/tasks/${newOrder.id}`, newOrder);
+
+          if (response.status === 200) {
+            alert('The task has been successfully updated');
+          } else {
+            console.error('Failed to update the task');
+          }
+        } else {
+          // If no ID, it's a new task that needs adding
+          const response = await axios.post('https://adamsite-c8e88a6bb1a1.herokuapp.com/api/tasks/', newOrder);
+
+          if (response.status === 201) {
+            alert('The task has been successfully added');
+          } else {
+            console.error('Failed to add the task');
+          }
+        }
+
+        fetchTasks();
+        toggleAddOrderModal();
+      } catch (error) {
+        console.error('Error adding/updating task:', error);
       }
-
-      // Clear the newOrder state
-      setNewOrder({
-        id: null,
-        status: '',
-        writer: '',
-        client: '',
-        bookBalance: '',
-        deadline: '',
-      });
-
-      setShowAddOrderModal(false);
     }
-  };
+  }
 
   const handleEditOrder = (orderId) => {
-    // Find the order you want to edit by its ID
     const orderToEdit = orders.find((order) => order.id === orderId);
-
-    // Set the newOrder state to the order you want to edit
     setNewOrder(orderToEdit);
-
-    // Show the modal for editing
     setShowAddOrderModal(true);
   };
 
-  const handleDeleteOrder = (orderId) => {
-    // Filter out the order with the given ID and update the orders state
-    const updatedOrders = orders.filter((order) => order.id !== orderId);
-    setOrders(updatedOrders);
+  const handleDeleteOrder = async (orderId) => {
+    try {
+      const response = await axios.delete(`https://adamsite-c8e88a6bb1a1.herokuapp.com/api/tasks/${orderId}`);
+      if (response.status === 204) {
+        const updatedOrders = orders.filter((order) => order.id !== orderId);
+        setOrders(updatedOrders);
+      } else {
+        console.error('Failed to delete the task');
+      }
+    } catch (error) {
+      console.error('Error deleting task:', error);
+    }
   };
+
 
   return (
     <div className="flex flex-col md:flex-row p-4 md:p-0">
@@ -130,7 +144,7 @@ function Tasks() {
                     </td>
                     <td className="px-2 py-2 text-gray-500">{order.writer}</td>
                     <td className="px-2 py-2 text-gray-500">{order.client}</td>
-                    <td className="px-2 py-2 text-slate-600 font-semibold">{order.bookBalance}</td>
+                    <td className="px-2 py-2 text-slate-600 font-semibold">{order.book_balance}</td>
                     <td className="px-2 py-2 text-slate-600 font-semibold">{order.deadline}</td>
                     <td className="px-2 py-2">
                       <button
@@ -172,8 +186,8 @@ function Tasks() {
                 <option value="Approved">Approved</option>
                 <option value="Rejected">Rejected</option>
                 <option value="Pending">Pending</option>
-                <option value="Complete">Complete</option>
-                <option value="Canceled">Canceled</option>
+                <option value="Completed">Completed</option>
+                <option value="Cancelled">Cancelled</option>
                 <option value="New">New</option>
                 <option value="Revision">Revision</option>
                 <option value="Resubmission">Resubmission</option>
@@ -203,8 +217,8 @@ function Tasks() {
               <label className="block text-gray-800">Book Balance</label>
               <input
                 type="text"
-                name="bookBalance"
-                value={newOrder.bookBalance}
+                name="book_balance"
+                value={newOrder.book_balance}
                 onChange={handleInputChange}
                 className="w-full p-2 border border-gray-300 rounded"
               />
@@ -222,13 +236,13 @@ function Tasks() {
             <div className="flex justify-end mt-4">
               <button
                 onClick={handleAddOrder}
-                className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+                className="px-4 py-2 bg-green-500 text-white rounded hover-bg-green-600"
               >
                 {newOrder.id ? 'Save' : 'Add'}
               </button>
               <button
                 onClick={toggleAddOrderModal}
-                className="ml-2 px-4 py-2 bg-gray-400 text-gray-900 rounded hover:bg-gray-600"
+                className="ml-2 px-4 py-2 bg-gray-400 text-gray-900 rounded hover-bg-gray-600"
               >
                 Close
               </button>
