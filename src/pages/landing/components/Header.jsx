@@ -15,6 +15,7 @@ function  Header() {
     <div className='fixed top-0 w-full bg-gradient-to-r from-violet-500 to-blue-800 md:flex md:justify-between md:items-center md:px-4'>
       <header className='flex justify-between p-3 items-center '>
         <h2 className='font-bold text-white text-lg md:text-2xl'>Unity Solutions</h2>
+        {/* <img src='./tutor.png' alt='logo' className='h- w-28' /> */}
 
         <div className='md:hidden flex flex-row justify-center gap-2 items-center'>
         <button

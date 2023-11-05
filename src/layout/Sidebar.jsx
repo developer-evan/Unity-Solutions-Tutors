@@ -19,11 +19,13 @@ import { Link } from "react-router-dom";
 const Sidebar = () => {
   return (
     <aside className="hidden  bg-slate-800 text-slate-400 w-60 h-full md:flex flex-col fixed">
-      <div className="flex items-center justify-center h-20">
+      <div className="flex items-center justify-center ">
         {/* <img src="./img/logo.png" alt="Logo" className="h-10 w-auto" /> */}
-        <Link to={"/"}>
+
+        {/* <Link to={"/"}>
           <FaAccusoft className="text-5xl"/>
-        </Link>
+        </Link> */}
+        <img src="./tutor.png" alt='logo' className='h-40 w-40' />
       </div>
       <div className="flex-grow">
         <Link to="/dashboard">
