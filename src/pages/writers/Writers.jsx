@@ -19,6 +19,8 @@ function Writers() {
     try {
       const response = await axios.get("https://adamsite-c8e88a6bb1a1.herokuapp.com/api/writers/all/");
       setWriters(response.data);
+      console.log(response.data);
+      // alert("Data fetched successfully");
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -33,6 +35,7 @@ function Writers() {
       // Send a POST request to add a new writer
       const response = await axios.post("https://adamsite-c8e88a6bb1a1.herokuapp.com/api/writers/", newWriter);
       setWriters([...writers, response.data]);
+      alert("Writer added successfully");
       setIsModalOpen(false);
       resetForm();
     } catch (error) {
@@ -48,6 +51,7 @@ function Writers() {
         const updatedWriters = writers.map((writer) =>
           writer.id === editingWriter.id ? { ...newWriter } : writer
         );
+        alert("Writer updated successfully");
         setWriters(updatedWriters);
         setIsModalOpen(false);
         resetForm();
@@ -64,6 +68,7 @@ function Writers() {
       const updatedWriters = writers.filter((writer) => writer.id !== id);
       setWriters(updatedWriters);
       setDeletingWriter(null); // Reset deletingWriter
+      alert("Writer deleted successfully");
     } catch (error) {
       console.error("Error deleting writer:", error);
     }
@@ -108,30 +113,31 @@ function Writers() {
       </button>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {writers.map((writer) => (
-          <div
-            key={writer.id}
-            className="bg-white border border-gray-300 p-4 rounded-md shadow-md"
-          >
-            <h2 className="text-xl font-semibold">{writer.name}</h2>
-            <p className="text-gray-600">Specialization{writer.specialization}</p>
-            <p className="text-gray-600">Email: {writer.email}</p>
-            <p className="text-gray-600">Phone Number: {writer.phone_number}</p>
-            <p className="text-gray-600">Date Added: {writer.date}</p>
-            <div className="mt-2 flex justify-end space-x-2">
-              <button
-                className="text-blue-500 hover:text-blue-700"
-                onClick={() => handleEditWriter(writer)}
-              >
-                Edit
-              </button>
-              <button
-                className="text-red-500 hover:text-red-700"
-                onClick={() => setDeletingWriter(writer)}
-              >
-                Delete
-              </button>
-            </div>
-          </div>
+         <div
+         key={writer.id}
+         className="bg-white border border-gray-300 p-4 rounded-md shadow-md transition-transform hover:scale-105 transform-gpu"
+       >
+         <h2 className="text-xl font-semibold text-blue-700">{writer.name}</h2>
+         <p className="text-gray-600 mt-2">Specialization: {writer.specialization}</p>
+         <p className="text-gray-600">Email: {writer.email}</p>
+         <p className="text-gray-600">Phone Number: {writer.phone_number}</p>
+         <p className="text-gray-600">Date Added: {writer.date}</p>
+         <div className="mt-4 flex justify-end space-x-2">
+           <button
+             className="text-white bg-blue-500 hover:bg-blue-700 py-2 px-4 rounded-md transition-transform transform-gpu hover:scale-105"
+             onClick={() => handleEditWriter(writer)}
+           >
+             Edit
+           </button>
+           <button
+             className="text-white bg-red-500 hover:bg-red-700 py-2 px-4 rounded-md transition-transform transform-gpu hover:scale-105"
+             onClick={() => setDeletingWriter(writer)}
+           >
+             Delete
+           </button>
+         </div>
+       </div>
+       
         ))}
       </div>
 
