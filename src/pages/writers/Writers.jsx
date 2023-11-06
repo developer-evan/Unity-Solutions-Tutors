@@ -113,7 +113,7 @@ function Writers() {
             className="bg-white border border-gray-300 p-4 rounded-md shadow-md"
           >
             <h2 className="text-xl font-semibold">{writer.name}</h2>
-            <p className="text-gray-600">{writer.specialization}</p>
+            <p className="text-gray-600">Specialization{writer.specialization}</p>
             <p className="text-gray-600">Email: {writer.email}</p>
             <p className="text-gray-600">Phone Number: {writer.phone_number}</p>
             <p className="text-gray-600">Date Added: {writer.date}</p>
