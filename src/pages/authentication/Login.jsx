@@ -1,19 +1,20 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function Login() {
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState({ email: '', password: '' });
   const [loggedIn, setLoggedIn] = useState(false);
   const [error, setError] = useState('');
-  const navigate = useNavigate(); // Get the navigate function
+  const navigate = useNavigate();
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get('https://adamsite-c8e88a6bb1a1.herokuapp.com/api/login', {
-        email: userData.loginEmail,
-        password: userData.loginPassword,
+      const response = await axios.post('https://adamsite-c8e88a6bb1a1.herokuapp.com/api/auth/login', {
+        email: userData.email,
+        password: userData.password,
+        // console.log(response.data);
       });
 
       if (response.status === 200) {
@@ -34,7 +35,7 @@ function Login() {
     <div>
       <div className="bg-blue-700 p-4">
         <div className="container mx-auto">
-          {/* <h1 className="text-white text-2xl font-semibold">Adam Admin</h1> */}
+          {/* Add your header here */}
         </div>
       </div>
       <div className="bg-gradient-to-r from-blue-400 to-indigo-600 min-h-screen flex items-center justify-center py-16">
@@ -48,39 +49,37 @@ function Login() {
                 <div className="mb-4">
                   <label
                     className="block text-gray-700 text-sm font-bold mb-2"
-                    htmlFor="loginEmail"
+                    htmlFor="email"
                   >
                     Email Address
                   </label>
                   <input
                     type="email"
-                    id="loginEmail"
-                    name="loginEmail"
+                    id="email"
+                    name="email"
                     className="w-full border rounded-md py-2 px-3"
                     placeholder="Enter your email"
                     required
-                    onChange={(e) =>
-                      setUserData({ ...userData, loginEmail: e.target.value })
-                    }
+                    value={userData.email}
+                    onChange={(e) => setUserData({ ...userData, email: e.target.value })}
                   />
                 </div>
                 <div className="mb-4">
                   <label
                     className="block text-gray-700 text-sm font-bold mb-2"
-                    htmlFor="loginPassword"
+                    htmlFor="password"
                   >
                     Password
                   </label>
                   <input
                     type="password"
-                    id="loginPassword"
-                    name="loginPassword"
+                    id="password"
+                    name="password"
                     className="w-full border rounded-md py-2 px-3"
                     placeholder="Enter your password"
                     required
-                    onChange={(e) =>
-                      setUserData({ ...userData, loginPassword: e.target.value })
-                    }
+                    value={userData.password}
+                    onChange={(e) => setUserData({ ...userData, password: e.target.value })}
                   />
                 </div>
                 <button
@@ -94,7 +93,7 @@ function Login() {
             </div>
           )}
           <p className="text-gray-600 text-center mt-4">
-            Dont have an account?{' '}
+            Don't have an account?{' '}
             <Link to="/signup" className="text-blue-500 hover:underline">
               Sign Up
             </Link>

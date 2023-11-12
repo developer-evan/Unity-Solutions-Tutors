@@ -1,5 +1,5 @@
-/* eslint-disable react-refresh/only-export-components */
-import { useState } from 'react';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import MainLayout from '../../layout/MainLayout';
 
@@ -8,13 +8,28 @@ function Projects() {
   const [newProject, setNewProject] = useState({
     title: '',
     deadline: '',
-    writer: '',
+    writer_assigned: '',
     status: '',
     description: '',
     fileUrl: '',
   });
   const [editingProject, setEditingProject] = useState(null);
   const [isAddingProject, setIsAddingProject] = useState(false);
+
+  // Define a function to fetch data from the endpoint
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('https://adamsite-c8e88a6bb1a1.herokuapp.com/api/projects/');
+      setProjects(response.data); // Assuming the response contains an array of projects
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  // Use the useEffect hook to fetch data when the component mounts
+  useEffect(() => {
+    fetchData();
+  }, []); // The empty dependency array ensures this effect runs once after the initial render
 
   const openAddProjectModal = () => {
     setIsAddingProject(true);
@@ -32,58 +47,83 @@ function Projects() {
     }
   };
 
-  const handleAddProject = () => {
+  const handleAddProject = async () => {
     if (
       !newProject.title ||
       !newProject.deadline ||
-      !newProject.writer ||
-      !newProject.status ||
-      !newProject.description
+      !newProject.writer_assigned ||
+      !newProject.status 
+      // !newProject.description
     ) {
       alert('Please fill in all fields.');
       return;
     }
 
-    setProjects([...projects, { ...newProject, id: Date.now() }]);
-    setNewProject({
-      title: '',
-      deadline: '',
-      writer: '',
-      status: '',
-      description: '',
-      fileUrl: '',
-    });
-    closeAddProjectModal();
+    try {
+      const response = await axios.post('https://adamsite-c8e88a6bb1a1.herokuapp.com/api/projects/', newProject);
+      setProjects([...projects, response.data]);
+      setNewProject({
+        title: '',
+        deadline: '',
+        writer_assigned: '',
+        status: '',
+        // description: '',
+        fileUrl: '',
+      });
+      closeAddProjectModal();
+    } catch (error) {
+      console.error('Error adding project:', error);
+    }
   };
 
-  const handleEditProject = () => {
+  const handleEditProject = async () => {
     if (!editingProject) return;
 
     if (
       !editingProject.title ||
       !editingProject.deadline ||
-      !editingProject.writer ||
-      !editingProject.status ||
-      !editingProject.description
+      !editingProject.writer_assigned ||
+      !editingProject.status 
+      // !editingProject.description
     ) {
       alert('Please fill in all fields.');
       return;
     }
 
-    const updatedProjects = projects.map((project) =>
-      project.id === editingProject.id ? editingProject : project
-    );
+    try {
+      const response = await axios.put(`https://adamsite-c8e88a6bb1a1.herokuapp.com/api/projects/${editingProject.id}`, editingProject);
+      const updatedProjects = projects.map((project) =>
+        project.id === editingProject.id ? response.data : project
+      );
 
-    setProjects(updatedProjects);
-    setEditingProject(null);
+      setProjects(updatedProjects);
+      setEditingProject(null);
+    } catch (error) {
+      console.error('Error editing project:', error);
+    }
   };
 
-  const handleDeleteProject = (id) => {
-    const updatedProjects = projects.filter((project) => project.id !== id);
-    setProjects(updatedProjects);
+  const handleDeleteProject = async (id) => {
+    try {
+      await axios.delete(`https://adamsite-c8e88a6bb1a1.herokuapp.com/api/projects/${id}`);
+      const updatedProjects = projects.filter((project) => project.id !== id);
+      setProjects(updatedProjects);
+    } catch (error) {
+      console.error('Error deleting project:', error);
+    }
   };
 
-  const statusOptions = ['In Progress', 'Completed', 'On Hold', 'Cancelled'];
+  // const statusOptions = ['In Progress', 'Completed', 'On Hold', 'Cancelled'];
+  const statusOptions = [
+    'New',
+    'Completed',
+    'Rejected',
+    'Cancelled',
+    'Revision',
+    'Resubmission',
+    'Pending',
+  ];
+  
 
   return (
     <div className="container mx-auto p-4">
@@ -102,7 +142,7 @@ function Projects() {
             <th className="border p-2">Deadline</th>
             <th className="border p-2">Writer Assigned</th>
             <th className="border p-2">Status</th>
-            <th className="border p-2">Description</th>
+            {/* <th className="border p-2">Description</th> */}
             <th className="border p-2 items-center justify-center">Project File</th>
             <th className="border p-2">Actions</th>
           </tr>
@@ -112,9 +152,9 @@ function Projects() {
             <tr key={project.id}>
               <td className="border p-2">{project.title}</td>
               <td className="border p-2">{project.deadline}</td>
-              <td className="border p-2">{project.writer}</td>
+              <td className="border p-2">{project.writer_assigned}</td>
               <td className="border p-2">{project.status}</td>
-              <td className="border p-2">{project.description}</td>
+              {/* <td className="border p-2">{project.description}</td> */}
               <td className="border p-2">
                 <Link
                   to={`/view-file/${project.id}`}
@@ -173,9 +213,9 @@ function Projects() {
                 <label className="block text-gray-700 font-bold mb-2">Writer Assigned:</label>
                 <input
                   type="text"
-                  value={newProject.writer}
+                  value={newProject.writer_assigned}
                   onChange={(e) =>
-                    setNewProject({ ...newProject, writer: e.target.value })
+                    setNewProject({ ...newProject, writer_assigned: e.target.value })
                   }
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 />
@@ -197,7 +237,7 @@ function Projects() {
                   ))}
                 </select>
               </div>
-              <div className="w-full mb-4">
+              {/* <div className="w-full mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Description:</label>
                 <textarea
                   type="text"
@@ -207,12 +247,13 @@ function Projects() {
                   }
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 />
-              </div>
+              </div> */}
               <div className="w-full mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Attachment:</label>
                 <input
                   type="file"
                   onChange={handleFileChange}
+                  value={newProject.attachment}
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 />
               </div>
@@ -237,8 +278,7 @@ function Projects() {
         </div>
       )}
 
-      
-{editingProject && (
+      {editingProject && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="modal bg-white p-4 rounded-lg shadow-lg w-96">
             <h2 className="text-2xl font-bold mb-4">Edit Project</h2>
@@ -269,9 +309,9 @@ function Projects() {
                 <label className="block text-gray-700 font-bold mb-2">Writer Assigned:</label>
                 <input
                   type="text"
-                  value={editingProject.writer}
+                  value={editingProject.writer_assigned}
                   onChange={(e) =>
-                    setEditingProject({ ...editingProject, writer: e.target.value })
+                    setEditingProject({ ...editingProject, writer_assigned: e.target.value })
                   }
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 />
@@ -293,7 +333,15 @@ function Projects() {
                   ))}
                 </select>
               </div>
-              <div className="mb-4">
+              <div className="w-full mb-4">
+                <label className="block text-gray-700 font-bold mb-2">Attachment:</label>
+                <input
+                  type="file"
+                  onChange={handleFileChange}
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
+                />
+              </div>
+              {/* <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Description:</label>
                 <textarea
                   type="text"
@@ -303,7 +351,7 @@ function Projects() {
                   }
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 />
-              </div>
+              </div> */}
               <button
                 type="button"
                 onClick={handleEditProject}

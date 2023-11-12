@@ -217,7 +217,7 @@ function Dashboard() {
           </div>
         </div>
 
-        <div className="bg-white shadow-md rounded-lg p-3 w-1/3">
+        {/* <div className="bg-white shadow-md rounded-lg p-3 w-1/3">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold text-gray-800">Our Writers</h2>
             <button
@@ -238,7 +238,7 @@ function Dashboard() {
               </li>
             ))}
           </ul>
-        </div>
+        </div> */}
       </div>
 
       {showAddWriterModal && (
