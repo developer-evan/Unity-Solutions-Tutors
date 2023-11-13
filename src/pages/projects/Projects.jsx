@@ -19,7 +19,7 @@ function Projects() {
   // Define a function to fetch data from the endpoint
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://adamsite-6rkhyi6ou-denny254.vercel.app/api/projects/');
+      const response = await axios.get('https://adamsite-tawny.vercel.app/api/projects/');
       setProjects(response.data); // Assuming the response contains an array of projects
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -60,7 +60,7 @@ function Projects() {
     }
 
     try {
-      const response = await axios.post('https://adamsite-6rkhyi6ou-denny254.vercel.app/api/projects/', newProject);
+      const response = await axios.post('https://adamsite-tawny.vercel.app/api/projects/', newProject);
       setProjects([...projects, response.data]);
       setNewProject({
         title: '',
@@ -91,7 +91,7 @@ function Projects() {
     }
 
     try {
-      const response = await axios.put(`https://adamsite-6rkhyi6ou-denny254.vercel.app/api/projects/${editingProject.id}`, editingProject);
+      const response = await axios.put(`https://adamsite-tawny.vercel.app/api/projects/${editingProject.id}`, editingProject);
       const updatedProjects = projects.map((project) =>
         project.id === editingProject.id ? response.data : project
       );
@@ -105,7 +105,7 @@ function Projects() {
 
   const handleDeleteProject = async (id) => {
     try {
-      await axios.delete(`https://adamsite-6rkhyi6ou-denny254.vercel.app/api/projects/${id}`);
+      await axios.delete(`https://adamsite-tawny.vercel.app/api/projects/${id}`);
       const updatedProjects = projects.filter((project) => project.id !== id);
       setProjects(updatedProjects);
     } catch (error) {

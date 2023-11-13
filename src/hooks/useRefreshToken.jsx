@@ -1,6 +1,6 @@
 import useAuth from "./useAuth";
 import jwt_decode from "jwt-decode";
-import { axiosPublic } from "../lib/axios/axios";
+import axios from "axios";
 
 const useRefreshToken = () => {
   const { setAuth } = useAuth();
@@ -13,7 +13,7 @@ const useRefreshToken = () => {
     let payload = {
       refresh: refreshToken,
     };
-    const { data } = await axiosPublic.post("/api/token/refresh/", payload);
+    const { data } = await axios.post("https://adamsite-tawny.vercel.app/api/token/refresh/", payload);
     localStorage.setItem("refresh", data.refresh);
     // console.log("res",data)
     var decoded = jwt_decode(data.access);

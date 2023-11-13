@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-// import jwt_decode from 'jwt-decode'; // Uncommented jwt_decode import
 import useAuth from '../../hooks/useAuth';
-import { ToastContainer, toast } from 'react-toastify'; // Uncommented toast import
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
@@ -14,6 +13,7 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { setAuth } = useAuth();
+
   const clearFormValues = () => {
     setUserData({
       email: '',
@@ -25,7 +25,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://adamsite-6rkhyi6ou-denny254.vercel.app/api/auth/login/', {
+      const response = await axios.post('https://adamsite-tawny.vercel.app/api/auth/login/', {
         email: userData.email.toLowerCase(),
         password: userData.password,
       });
@@ -39,21 +39,13 @@ const Login = () => {
           pauseOnHover: true,
           draggable: true,
         });
-        alert('Login successfully');
 
         const { access, refresh } = response.data;
-        const decoded = jwt_decode(access);
 
         localStorage.setItem('refresh', refresh);
         setAuth({
-          user_id: decoded.user_id,
-          user: decoded.email,
-          roles: [decoded.user_group],
-          username: decoded.username,
           accessToken: access,
         });
-
-        localStorage.setItem('cat', [decoded.user_group]);
 
         navigate('/dashboard', { replace: true });
       } else {
