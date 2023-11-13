@@ -1,33 +1,86 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+// import jwt_decode from 'jwt-decode'; // Uncommented jwt_decode import
+import useAuth from '../../hooks/useAuth';
+import { ToastContainer, toast } from 'react-toastify'; // Uncommented toast import
+import 'react-toastify/dist/ReactToastify.css';
 
-function Login() {
-  const [userData, setUserData] = useState({});
-  const [loggedIn, setLoggedIn] = useState(false);
+const Login = () => {
+  const [userData, setUserData] = useState({
+    email: '',
+    password: '',
+  });
   const [error, setError] = useState('');
-  const navigate = useNavigate(); // Get the navigate function
+  const navigate = useNavigate();
+  const { setAuth } = useAuth();
+  const clearFormValues = () => {
+    setUserData({
+      email: '',
+      password: '',
+    });
+  };
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      const response = await axios.get('https://adamsite-c8e88a6bb1a1.herokuapp.com/api/login', {
-        email: userData.loginEmail,
-        password: userData.loginPassword,
+      const response = await axios.post('https://adamsite-6rkhyi6ou-denny254.vercel.app/api/auth/login/', {
+        email: userData.email.toLowerCase(),
+        password: userData.password,
       });
 
-      if (response.status === 200) {
-        setLoggedIn(true);
-        setError('');
+      if (response.status === 201 || response.status === 200) {
+        toast.success('Login successfully', {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+        alert('Login successfully');
 
-        // Redirect to a different page upon successful login
-        navigate('/dashboard'); // Change '/dashboard' to your desired route
+        const { access, refresh } = response.data;
+        const decoded = jwt_decode(access);
+
+        localStorage.setItem('refresh', refresh);
+        setAuth({
+          user_id: decoded.user_id,
+          user: decoded.email,
+          roles: [decoded.user_group],
+          username: decoded.username,
+          accessToken: access,
+        });
+
+        localStorage.setItem('cat', [decoded.user_group]);
+
+        navigate('/dashboard', { replace: true });
       } else {
-        setError(response.data.message || 'Login failed');
+        setError('Login failed');
+        toast.error('Login failed', {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
       }
     } catch (error) {
+      console.error('Error during login:', error);
       setError('Login failed');
+      toast.error('Login failed', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     }
+
+    clearFormValues();
   };
 
   return (
@@ -39,70 +92,75 @@ function Login() {
       </div>
       <div className="bg-gradient-to-r from-blue-400 to-indigo-600 min-h-screen flex items-center justify-center py-16">
         <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-          <h1 className="text-3xl font-semibold mb-4 text-center">Login</h1>
-          {loggedIn ? (
-            <p className="text-green-600 text-center">Logged in successfully!</p>
-          ) : (
-            <div>
-              <form onSubmit={handleLoginSubmit}>
-                <div className="mb-4">
-                  <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
-                    htmlFor="loginEmail"
-                  >
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    id="loginEmail"
-                    name="loginEmail"
-                    className="w-full border rounded-md py-2 px-3"
-                    placeholder="Enter your email"
-                    required
-                    onChange={(e) =>
-                      setUserData({ ...userData, loginEmail: e.target.value })
-                    }
-                  />
-                </div>
-                <div className="mb-4">
-                  <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
-                    htmlFor="loginPassword"
-                  >
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    id="loginPassword"
-                    name="loginPassword"
-                    className="w-full border rounded-md py-2 px-3"
-                    placeholder="Enter your password"
-                    required
-                    onChange={(e) =>
-                      setUserData({ ...userData, loginPassword: e.target.value })
-                    }
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-                >
-                  Login
-                </button>
-              </form>
-              {error && <p className="text-red-500 text-center mt-4">{error}</p>}
+          <form onSubmit={handleLoginSubmit}>
+            <div className='mb-4'>
+              <label
+                className='block text-gray-700 text-sm font-bold mb-2'
+                htmlFor='loginEmail'
+              >
+                Email Address <span className='text-red-500'>*</span>
+              </label>
+              <input
+                type='email'
+                id='loginEmail'
+                name='email'
+                value={userData.email}
+                onChange={(e) =>
+                  setUserData({ ...userData, email: e.target.value })
+                }
+                className='w-full border rounded-md py-2 px-3'
+                placeholder='Enter your email'
+                required
+              />
             </div>
-          )}
-          <p className="text-gray-600 text-center mt-4">
-            Dont have an account?{' '}
-            <Link to="/signup" className="text-blue-500 hover:underline">
-              Sign Up
-            </Link>
-          </p>
+            <div className='mb-4'>
+              <label
+                className='block text-gray-700 text-sm font-bold mb-2'
+                htmlFor='loginPassword'
+              >
+                Password <span className='text-sky-500'>*</span>
+              </label>
+              <input
+                type='password'
+                id='loginPassword'
+                name='password'
+                value={userData.password}
+                onChange={(e) =>
+                  setUserData({ ...userData, password: e.target.value })
+                }
+                className='w-full border rounded-md py-2 px-3'
+                placeholder='Enter your password'
+                required
+              />
+            </div>
+
+            {/* checkbox and forgot password */}
+            <div className='mb-4 flex flex-wrap  justify-between items-center'>
+              <label className='flex items-center'>
+                <input type='checkbox' className='form-checkbox text-red-500' />
+                <span className='ml-2 text-gray-950'>Keep me signed in</span>
+              </label>
+              <Link
+                to='/forgot-password'
+                className='text-red-900 font-bold hover:underline'
+              >
+                Forgot Password?
+              </Link>
+            </div>
+
+            <button
+              type='submit'
+              className='w-full bg-sky-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600'
+            >
+              Sign In
+            </button>
+          </form>
+
+          {error && <p className='text-red-500 text-center mt-4'>{error}</p>}
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Login;
