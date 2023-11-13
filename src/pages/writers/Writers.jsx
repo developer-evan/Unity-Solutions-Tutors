@@ -17,7 +17,7 @@ function Writers() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("https://adamsite-6rkhyi6ou-denny254.vercel.app/api/writers/all/");
+      const response = await axios.get("https://adamsite-tawny.vercel.app/api/writers/all/");
       setWriters(response.data);
       console.log(response.data);
       // alert("Data fetched successfully");
@@ -33,7 +33,7 @@ function Writers() {
   const handleAddWriter = async () => {
     try {
       // Send a POST request to add a new writer
-      const response = await axios.post("https://adamsite-6rkhyi6ou-denny254.vercel.app/api/writers/", newWriter);
+      const response = await axios.post("https://adamsite-tawny.vercel.app/api/writers/", newWriter);
       setWriters([...writers, response.data]);
       alert("Writer added successfully");
       setIsModalOpen(false);
@@ -47,7 +47,7 @@ function Writers() {
     try {
       if (editingWriter) {
         // Send a PATCH request to update an existing writer
-        await axios.patch(`https://adamsite-6rkhyi6ou-denny254.vercel.app/api/writers/update/${editingWriter.id}`, newWriter);
+        await axios.patch(`https://adamsite-tawny.vercel.app/api/writers/update/${editingWriter.id}`, newWriter);
         const updatedWriters = writers.map((writer) =>
           writer.id === editingWriter.id ? { ...newWriter } : writer
         );
@@ -64,7 +64,7 @@ function Writers() {
   const handleDelete = async (id) => {
     try {
       // Send a DELETE request to delete a writer by ID
-      await axios.delete(`https://adamsite-6rkhyi6ou-denny254.vercel.app/api/writers/delete/${id}`);
+      await axios.delete(`https://adamsite-tawny.vercel.app/api/writers/delete/${id}`);
       const updatedWriters = writers.filter((writer) => writer.id !== id);
       setWriters(updatedWriters);
       setDeletingWriter(null); // Reset deletingWriter
