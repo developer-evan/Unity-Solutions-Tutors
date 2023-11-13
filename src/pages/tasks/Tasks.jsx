@@ -16,7 +16,7 @@ function Tasks() {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get('https://adamsite-c8e88a6bb1a1.herokuapp.com/api/tasks/');
+      const response = await axios.get('https://adamsite-6rkhyi6ou-denny254.vercel.app/api/tasks/');
       if (response.status === 200) {
         setOrders(response.data);
       } else {
@@ -59,7 +59,7 @@ function Tasks() {
       try {
         if (newOrder.id) {
           // If an ID exists, it's an existing task that needs updating
-          const response = await axios.put(`https://adamsite-c8e88a6bb1a1.herokuapp.com/api/tasks/${newOrder.id}`, newOrder);
+          const response = await axios.put(`https://adamsite-6rkhyi6ou-denny254.vercel.app/api/tasks/${newOrder.id}`, newOrder);
 
           if (response.status === 200) {
             alert('The task has been successfully updated');
@@ -68,7 +68,7 @@ function Tasks() {
           }
         } else {
           // If no ID, it's a new task that needs adding
-          const response = await axios.post('https://adamsite-c8e88a6bb1a1.herokuapp.com/api/tasks/', newOrder);
+          const response = await axios.post('https://adamsite-6rkhyi6ou-denny254.vercel.app/api/tasks/', newOrder);
 
           if (response.status === 201) {
             alert('The task has been successfully added');
@@ -93,7 +93,7 @@ function Tasks() {
 
   const handleDeleteOrder = async (orderId) => {
     try {
-      const response = await axios.delete(`https://adamsite-c8e88a6bb1a1.herokuapp.com/api/tasks/${orderId}`);
+      const response = await axios.delete(`https://adamsite-6rkhyi6ou-denny254.vercel.app/api/tasks/${orderId}`);
       if (response.status === 204) {
         const updatedOrders = orders.filter((order) => order.id !== orderId);
         setOrders(updatedOrders);
