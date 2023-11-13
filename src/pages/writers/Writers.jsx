@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import MainLayout from "../../layout/MainLayout";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Writers() {
   const [writers, setWriters] = useState([]);
@@ -23,7 +25,15 @@ function Writers() {
       // alert("Data fetched successfully");
     } catch (error) {
       console.error("Error fetching data:", error);
-    }
+      toast.error('Error fetching data', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+      }
   };
 
   useEffect(() => {
@@ -35,11 +45,28 @@ function Writers() {
       // Send a POST request to add a new writer
       const response = await axios.post("https://adamsite-tawny.vercel.app/api/writers/", newWriter);
       setWriters([...writers, response.data]);
-      alert("Writer added successfully");
+      // alert("Writer added successfully");
+      toast.success('Writer added successfully', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+
       setIsModalOpen(false);
       resetForm();
     } catch (error) {
       console.error("Error adding writer:", error);
+      toast.error('Error adding writer', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     }
   };
 
@@ -51,13 +78,29 @@ function Writers() {
         const updatedWriters = writers.map((writer) =>
           writer.id === editingWriter.id ? { ...newWriter } : writer
         );
-        alert("Writer updated successfully");
+        // alert("Writer updated successfully");
+        toast.success('Writer updated successfully', {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
         setWriters(updatedWriters);
         setIsModalOpen(false);
         resetForm();
       }
     } catch (error) {
       console.error("Error updating writer:", error);
+      toast.error('Error updating writer', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     }
   };
 
@@ -68,9 +111,27 @@ function Writers() {
       const updatedWriters = writers.filter((writer) => writer.id !== id);
       setWriters(updatedWriters);
       setDeletingWriter(null); // Reset deletingWriter
-      alert("Writer deleted successfully");
+      // alert("Writer deleted successfully");
+      toast.success('Writer deleted successfully', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+
     } catch (error) {
       console.error("Error deleting writer:", error);
+      toast.error('Error deleting writer', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+
     }
   };
 
@@ -100,6 +161,7 @@ function Writers() {
 
   return (
     <div className="container mx-auto mt-8 p-4">
+      <ToastContainer />
       <h1 className="text-3xl font-semibold mb-4">Writers</h1>
       <button
         className="bg-blue-500 text-white py-2 px-4 rounded-md mb-4"

@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import MainLayout from '../../layout/MainLayout';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Projects() {
   const [projects, setProjects] = useState([]);
@@ -21,6 +23,7 @@ function Projects() {
     try {
       const response = await axios.get('https://adamsite-tawny.vercel.app/api/projects/');
       setProjects(response.data); // Assuming the response contains an array of projects
+     
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -54,8 +57,18 @@ function Projects() {
       !newProject.writer_assigned ||
       !newProject.status 
       // !newProject.description
+      
     ) {
-      alert('Please fill in all fields.');
+      // alert('Please fill in all fields.');
+      toast.error('Please fill in all fields.',{
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+     
+
       return;
     }
 
@@ -70,9 +83,25 @@ function Projects() {
         // description: '',
         fileUrl: '',
       });
+      toast.success('Project added successfully!',{
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+      }
+      );
       closeAddProjectModal();
     } catch (error) {
       console.error('Error adding project:', error);
+      toast.error('Error adding project!',{
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+
     }
   };
 
@@ -86,7 +115,16 @@ function Projects() {
       !editingProject.status 
       // !editingProject.description
     ) {
-      alert('Please fill in all fields.');
+      // alert('Please fill in all fields.');
+      toast.error('Please fill in all fields.',{
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+      }
+      );
+      
       return;
     }
 
@@ -98,8 +136,24 @@ function Projects() {
 
       setProjects(updatedProjects);
       setEditingProject(null);
+      toast.success('Project edited successfully!',{
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+      }
+      );
     } catch (error) {
       console.error('Error editing project:', error);
+      toast.error('Error editing project!',{
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+      }
+      );
     }
   };
 
@@ -108,8 +162,24 @@ function Projects() {
       await axios.delete(`https://adamsite-tawny.vercel.app/api/projects/${id}`);
       const updatedProjects = projects.filter((project) => project.id !== id);
       setProjects(updatedProjects);
+      toast.success('Project deleted successfully!',{
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+      }
+      );
     } catch (error) {
       console.error('Error deleting project:', error);
+      toast.error('Error deleting project!',{
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+      }
+      );
     }
   };
 
@@ -127,6 +197,7 @@ function Projects() {
 
   return (
     <div className="container mx-auto p-4">
+      <ToastContainer/>
       <h1 className="text-2xl font-bold mb-4">All Projects</h1>
       <button
         onClick={openAddProjectModal}

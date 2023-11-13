@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import MainLayout from '../../layout/MainLayout';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Tasks() {
   const [orders, setOrders] = useState([]);
@@ -62,18 +64,50 @@ function Tasks() {
           const response = await axios.put(`https://adamsite-tawny.vercel.app/api/tasks/${newOrder.id}`, newOrder);
 
           if (response.status === 200) {
-            alert('The task has been successfully updated');
+            // alert('The task has been successfully updated');
+            toast.success('Task updated successfully', {
+              position: "top-center",
+              autoClose: 3000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              draggable: true,
+            });
+
           } else {
             console.error('Failed to update the task');
+            toast.error('Failed to update the task', {
+              position: "top-center",
+              autoClose: 3000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              draggable: true,
+            });
+
           }
         } else {
           // If no ID, it's a new task that needs adding
           const response = await axios.post('https://adamsite-tawny.vercel.app/api/tasks/', newOrder);
 
           if (response.status === 201) {
-            alert('The task has been successfully added');
+            // alert('The task has been successfully added');
+            toast.success('Task added successfully', {
+              position: "top-center",
+              autoClose: 3000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              draggable: true,
+            });
+
           } else {
             console.error('Failed to add the task');
+            toast.error('Failed to add the task', {
+              position: "top-center",
+              autoClose: 3000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              draggable: true,
+            });
+
           }
         }
 
@@ -97,8 +131,23 @@ function Tasks() {
       if (response.status === 204) {
         const updatedOrders = orders.filter((order) => order.id !== orderId);
         setOrders(updatedOrders);
+        toast.success('Task deleted successfully', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          draggable: true,
+        });
       } else {
-        console.error('Failed to delete the task');
+        // console.error('Failed to delete the task');
+        toast.error('Failed to delete the task', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          draggable: true,
+        });
+
       }
     } catch (error) {
       console.error('Error deleting task:', error);
@@ -108,6 +157,7 @@ function Tasks() {
 
   return (
     <div className="flex flex-col md:flex-row p-4 md:p-0">
+      <ToastContainer />
       <div className="flex-1">
         <div className="bg-white shadow-md rounded-lg p-3">
           <div className="flex justify-between items-center">

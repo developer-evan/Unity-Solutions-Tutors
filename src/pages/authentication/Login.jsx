@@ -80,6 +80,7 @@ const Login = () => {
       <div className="bg-blue-700 p-4">
         <div className="container mx-auto">
           {/* <h1 className="text-white text-2xl font-semibold">Adam Admin</h1> */}
+          <ToastContainer/>
         </div>
       </div>
       <div className="bg-gradient-to-r from-blue-400 to-indigo-600 min-h-screen flex items-center justify-center py-16">
@@ -133,7 +134,7 @@ const Login = () => {
                 <span className='ml-2 text-gray-950'>Keep me signed in</span>
               </label>
               <Link
-                to='/forgot-password'
+                to='/login'
                 className='text-red-900 font-bold hover:underline'
               >
                 Forgot Password?
@@ -148,7 +149,7 @@ const Login = () => {
             </button>
           </form>
 
-          {error && <p className='text-red-500 text-center mt-4'>{error}</p>}
+          {/* {error && <p className='text-red-500 text-center mt-4'>{error}</p>} */}
         </div>
       </div>
     </div>
