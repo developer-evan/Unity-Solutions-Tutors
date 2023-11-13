@@ -391,7 +391,7 @@ function Dashboard() {
                   <th className="px-2 py-2 text-start">Client</th>
                   <th className="px-2 py-2 text-start">Book Balance</th>
                   <th className="px-2 py-2 text-start">Deadline</th>
-                  <th className="px-2 py-2 text-start">Actions</th>
+                  {/* <th className="px-2 py-2 text-start">Actions</th> */}
                 </tr>
               </thead>
               <tbody>
@@ -408,20 +408,20 @@ function Dashboard() {
                     <td className="px-2 py-2 text-gray-500">{order.client}</td>
                     <td className="px-2 py-2 text-slate-600 font-semibold">{order.book_balance}</td>
                     <td className="px-2 py-2 text-slate-600 font-semibold">{order.deadline}</td>
-                    <td className="px-2 py-2">
+                    {/* <td className="px-2 py-2">
                       <button
                         onClick={() => handleEditOrder(order.id)}
-                        className=" py-2 px-2 rounded-lg w-28 bg-blue-600 text-xs font-bold text-slate-100 mr-2"
+                        className=" py-2 px-4 w-20 rounded-lg  bg-blue-600 text-xs font-bold text-slate-100 mr-2"
                       >
                         Edit
                       </button>
                       <button
                         onClick={() => handleDeleteOrder(order.id)}
-                        className="py-2 px-2 rounded-lg w-28 bg-red-600 text-xs font-bold text-slate-100"
+                        className="py-2 px-4 w-20 rounded-lg  bg-red-600 text-xs font-bold text-slate-100"
                       >
                         Delete
                       </button>
-                    </td>
+                    </td> */}
                   </tr>
                 ))}
               </tbody>
