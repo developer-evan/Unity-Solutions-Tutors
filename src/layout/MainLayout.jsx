@@ -3,12 +3,9 @@ import React from "react";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 
-
 const MainLayout = (Component) => function HOC(){
   return (
-    
-
-    <div className="flex bg-slate-300 relative">
+        <div className="flex bg-slate-300 relative">
     <Sidebar />
     {/* <MobileMenu mobile={showMenu} setMobile={setShowMenu} /> */}
     <div className="md:ml-60 flex flex-col flex-grow bg-slate-300">
@@ -17,8 +14,7 @@ const MainLayout = (Component) => function HOC(){
       </div>
       <main className="relative h-full overflow-hidden  bg-white justify-center md:mt-2 ">
           <Component/>
-      </main>
-      
+      </main>      
     </div>
     {/* <ProfileCompletionPopup /> */}
   </div>

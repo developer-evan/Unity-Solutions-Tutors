@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -30,7 +31,7 @@ function Projects() {
   };
 
   // Use the useEffect hook to fetch data when the component mounts
-  useEffect(() => {
+  useEffect(() => {    
     fetchData();
   }, []); // The empty dependency array ensures this effect runs once after the initial render
 
@@ -257,8 +258,8 @@ function Projects() {
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="modal bg-white p-4 rounded-lg shadow-lg w-96">
             <h2 className="text-2xl font-bold mb-4">Add Project</h2>
-            <form className="flex flex-wrap">
-              <div className="w-full md:w-1/2 mb-4">
+            <form className="flex flex-wrap gap-2">
+              <div className="w-full  mb-4 ">
                 <label className="block text-gray-700 font-bold mb-2">Title:</label>
                 <input
                   type="text"
@@ -269,7 +270,7 @@ function Projects() {
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 />
               </div>
-              <div className="w-full md:w-1/2 mb-4">
+              <div className="w-full md:w-full mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Deadline:</label>
                 <input
                   type="date"
@@ -280,7 +281,7 @@ function Projects() {
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 />
               </div>
-              <div className="w-full md:w-1/2 mb-4">
+              <div className="w-full md:w-full mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Writer Assigned:</label>
                 <input
                   type="text"
@@ -291,7 +292,7 @@ function Projects() {
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 />
               </div>
-              <div className="w-full md:w-1/2 mb-4">
+              <div className="w-full md:w-full mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Status:</label>
                 <select
                   value={newProject.status}
