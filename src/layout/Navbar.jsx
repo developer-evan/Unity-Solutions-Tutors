@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 // import GlobalSearch from '../components/globalsearch/GlobalSearch';
 
@@ -10,10 +11,8 @@ import {
 import { AiOutlineLogout, AiOutlineUser } from 'react-icons/ai';
 // import { axiosPublic } from '../lib/axios/axios';
 import axios from 'axios';
-
-
 import useAuth from '../hooks/useAuth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -25,7 +24,10 @@ const Navbar = () => {
   // const { id } = useParams();
   const { auth, setAuth} = useAuth();
   console.log(auth, 'auth')
-  // const id = auth.user_id;
+  const id = auth.user_id;
+  console.log(id, 'id')
+
+  const navigate = useNavigate();
   
  
   useEffect(() => {
@@ -34,7 +36,7 @@ const Navbar = () => {
         const response = await axios.get(`https://adamsite-tawny.vercel.app/api/user/get-user/${id}/`);
         setUserData(response.data);      
         console.log('user data' ,userData);
-        // console.log('user', userData.data.username)
+        console.log('user', userData.data.username)
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -43,9 +45,27 @@ const Navbar = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [id, userData]);
 
   
+  // const handleLogout = (e) => {
+  //   e.preventDefault();
+  //   // toast.confirm = () => {};
+  //   toast.success('Logout successful', {
+  //     position: 'top-right',
+  //     autoClose: 3000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //   });
+  //   setAuth(null);
+  //   // Clear refresh token from local storage
+  //   localStorage.removeItem("refresh");
+  //   // Clear access token from context
+   
+  //   // window.location.reload();
+  // };
   const handleLogout = (e) => {
     e.preventDefault();
     // toast.confirm = () => {};
@@ -57,19 +77,21 @@ const Navbar = () => {
       pauseOnHover: true,
       draggable: true,
     });
-    // setAuth(null);
-    // Clear refresh token from local storage
-    localStorage.removeItem("refresh");
-    // Clear access token from context
-   
-    // window.location.reload();
-  };
+    // console.log('Logout');
+    // CLEAR DATA FROM STORAGE
+    localStorage.clear();
+    sessionStorage.clear();
+
+    navigate("/login");
+}
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
   return (
     <header className="bg-[#364258]  ml-1 p-3 md:ml-[48] overflow-hidden">
+      <ToastContainer />
+      
       <div className="flex flex-col-reverse gap-4 md:gap-0 md:flex-row items-center">
         <div className="flex items-center flex-grow">
           <div className="md:w-1/4 flex items-center px-3 rounded-full">
@@ -93,7 +115,7 @@ const Navbar = () => {
               <AiOutlineUser />
             </p>
             <p className=" text-lg">
-              {userData ? userData.username : 'Unity Admin'}
+              {userData ? userData.username : 'Unity'}
             </p>
           </div>
           {isOpen && (
@@ -104,9 +126,9 @@ const Navbar = () => {
                     <AiOutlineUser /> Profile
                   </p>
                 </Link>
-                <Link to="/login" className=" flex items-center gap-1  text-sm px-1  hover:bg-slate-200 hover:text-blue-800 cursor-pointer">
+                <Link to="" className=" flex items-center gap-1  text-sm px-1  hover:bg-slate-200 hover:text-blue-800 cursor-pointer">
           <p 
-          // onClick={handleLogout}  
+          onClick={handleLogout}  
           className="flex items-center gap-1 hover:translate-x-2 text-sm px-4 py-2 hover:font-semibold cursor-pointer">
                 <AiOutlineLogout /> Logout
           </p>

@@ -1,18 +1,33 @@
+/* eslint-disable react-refresh/only-export-components */
 import { useState, useEffect } from "react";
 import MainLayout from "../../layout/MainLayout";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
+const getFormattedDate = () => {
+  const today = new Date();
+  const year = today.getFullYear();
+  let month = today.getMonth() + 1; // Months are 0-indexed
+  month = month < 10 ? `0${month}` : month;
+  let day = today.getDate();
+  day = day < 10 ? `0${day}` : day;
+  return `${year}-${month}-${day}`;
+};
+
 function Writers() {
   const [writers, setWriters] = useState([]);
+  const [currentDate, setCurrentDate] = useState(getFormattedDate());
+
   const [newWriter, setNewWriter] = useState({
     name: "",
     specialization: "",
-    date: "",
+    date: currentDate,
     email: "",
     phone_number: "",
   });
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingWriter, setEditingWriter] = useState(null);
   const [deletingWriter, setDeletingWriter] = useState(null);
@@ -33,12 +48,17 @@ function Writers() {
         pauseOnHover: true,
         draggable: true,
       });
-      }
+    }
   };
 
   useEffect(() => {
     fetchData();
   }, []); // Fetch data when the component mounts
+
+  useEffect(() => {
+    // Update the current date whenever the component re-renders
+    setCurrentDate(getFormattedDate());
+  }, []);
 
   const handleAddWriter = async () => {
     try {
@@ -120,7 +140,6 @@ function Writers() {
         pauseOnHover: true,
         draggable: true,
       });
-
     } catch (error) {
       console.error("Error deleting writer:", error);
       toast.error('Error deleting writer', {
@@ -131,7 +150,6 @@ function Writers() {
         pauseOnHover: true,
         draggable: true,
       });
-
     }
   };
 
@@ -139,7 +157,7 @@ function Writers() {
     setNewWriter({
       name: "",
       specialization: "",
-      date: "",
+      date: currentDate, // Set the current date when resetting the form
       email: "",
       phone_number: "",
     });
@@ -175,31 +193,30 @@ function Writers() {
       </button>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {writers.map((writer) => (
-         <div
-         key={writer.id}
-         className="bg-white border border-gray-300 p-4 rounded-md shadow-md transition-transform hover:scale-105 transform-gpu"
-       >
-         <h2 className="text-xl font-semibold text-blue-700">{writer.name}</h2>
-         <p className="text-gray-600 mt-2">Specialization: {writer.specialization}</p>
-         <p className="text-gray-600">Email: {writer.email}</p>
-         <p className="text-gray-600">Phone Number: {writer.phone_number}</p>
-         <p className="text-gray-600">Date Added: {writer.date}</p>
-         <div className="mt-4 flex justify-end space-x-2">
-           <button
-             className="text-white bg-blue-500 hover:bg-blue-700 py-2 px-4 rounded-md transition-transform transform-gpu hover:scale-105"
-             onClick={() => handleEditWriter(writer)}
-           >
-             Edit
-           </button>
-           <button
-             className="text-white bg-red-500 hover:bg-red-700 py-2 px-4 rounded-md transition-transform transform-gpu hover:scale-105"
-             onClick={() => setDeletingWriter(writer)}
-           >
-             Delete
-           </button>
-         </div>
-       </div>
-       
+          <div
+            key={writer.id}
+            className="bg-white border border-gray-300 p-4 rounded-md shadow-md transition-transform hover:scale-105 transform-gpu"
+          >
+            <h2 className="text-xl font-semibold text-blue-700">{writer.name}</h2>
+            <p className="text-gray-600 mt-2">Specialization: {writer.specialization}</p>
+            <p className="text-gray-600">Email: {writer.email}</p>
+            <p className="text-gray-600">Phone Number: {writer.phone_number}</p>
+            <p className="text-gray-600">Date Added: {writer.date}</p>
+            <div className="mt-4 flex justify-end space-x-2">
+              <button
+                className="text-white bg-blue-500 hover:bg-blue-700 py-2 px-4 rounded-md transition-transform transform-gpu hover:scale-105"
+                onClick={() => handleEditWriter(writer)}
+              >
+                Edit
+              </button>
+              <button
+                className="text-white bg-red-500 hover:bg-red-700 py-2 px-4 rounded-md transition-transform transform-gpu hover:scale-105"
+                onClick={() => setDeletingWriter(writer)}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
         ))}
       </div>
 
