@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import MainLayout from '../../layout/MainLayout';
@@ -15,6 +16,9 @@ function Tasks() {
     book_balance: '',
     deadline: '',
   });
+  const [writers, setWriters] = useState([]);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [orderToDelete, setOrderToDelete] = useState(null);
 
   const fetchTasks = async () => {
     try {
@@ -125,11 +129,44 @@ function Tasks() {
     setShowAddOrderModal(true);
   };
 
-  const handleDeleteOrder = async (orderId) => {
+  // const handleDeleteOrder = async (orderId) => {
+  //   try {
+  //     const response = await axios.delete(`https://adamsite-tawny.vercel.app/api/tasks/${orderId}`);
+  //     if (response.status === 204) {
+  //       const updatedOrders = orders.filter((order) => order.id !== orderId);
+  //       setOrders(updatedOrders);
+  //       toast.success('Task deleted successfully', {
+  //         position: "top-center",
+  //         autoClose: 3000,
+  //         hideProgressBar: true,
+  //         closeOnClick: true,
+  //         draggable: true,
+  //       });
+  //     } else {
+  //       // console.error('Failed to delete the task');
+  //       toast.error('Failed to delete the task', {
+  //         position: "top-center",
+  //         autoClose: 3000,
+  //         hideProgressBar: true,
+  //         closeOnClick: true,
+  //         draggable: true,
+  //       });
+
+  //     }
+  //   } catch (error) {
+  //     console.error('Error deleting task:', error);
+  //   }
+  // };
+  const handleDeleteOrder = (orderId) => {
+    setOrderToDelete(orderId);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDelete = async () => {
     try {
-      const response = await axios.delete(`https://adamsite-tawny.vercel.app/api/tasks/${orderId}`);
+      const response = await axios.delete(`https://adamsite-tawny.vercel.app/api/tasks/${orderToDelete}`);
       if (response.status === 204) {
-        const updatedOrders = orders.filter((order) => order.id !== orderId);
+        const updatedOrders = orders.filter((order) => order.id !== orderToDelete);
         setOrders(updatedOrders);
         toast.success('Task deleted successfully', {
           position: "top-center",
@@ -147,12 +184,33 @@ function Tasks() {
           closeOnClick: true,
           draggable: true,
         });
-
       }
     } catch (error) {
       console.error('Error deleting task:', error);
+    } finally {
+      setShowDeleteModal(false);
+      setOrderToDelete(null);
     }
   };
+
+  const cancelDelete = () => {
+    setShowDeleteModal(false);
+    setOrderToDelete(null);
+  };
+
+  useEffect(() => {
+    const fetchWriters = async () => {
+      try {
+        const response = await axios.get('https://adamsite-tawny.vercel.app/api/writers/all/');
+        setWriters(response.data);
+      } catch (error) {
+        console.error('Error fetching writers:', error);
+      }
+    };
+  
+    fetchWriters();
+  }, []);
+  
 
 
   return (
@@ -243,7 +301,7 @@ function Tasks() {
                 <option value="Resubmission">Resubmission</option>
               </select>
             </div>
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <label className="block text-gray-800">Writer</label>
               <input
                 type="text"
@@ -252,7 +310,25 @@ function Tasks() {
                 onChange={handleInputChange}
                 className="w-full p-2 border border-gray-300 rounded"
               />
-            </div>
+            </div> */}
+
+<div className="mb-4">
+  <label className="block text-gray-800">Writer</label>
+  <select
+    name="writer"
+    value={newOrder.writer}
+    onChange={handleInputChange}
+    className="w-full p-2 border border-gray-300 rounded"
+  >
+    <option value="">Select Writer</option>
+    {writers.map((writer) => (
+      <option key={writer.id} value={writer.name}>
+        {writer.name}
+      </option>
+    ))}
+  </select>
+</div>
+
             <div className="mb-4">
               <label className="block text-gray-800">Client</label>
               <input
@@ -300,6 +376,30 @@ function Tasks() {
           </div>
         </div>
       )}
+
+{showDeleteModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="bg-white p-4 rounded-lg shadow-lg">
+            <h2 className="text-2xl font-bold mb-4">Confirm Deletion</h2>
+            <p>Are you sure you want to delete this task?</p>
+            <div className="flex mt-4">
+              <button
+                onClick={confirmDelete}
+                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+              >
+                Confirm
+              </button>
+              <button
+                onClick={cancelDelete}
+                className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded ml-2"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }

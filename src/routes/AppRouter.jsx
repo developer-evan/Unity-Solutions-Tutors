@@ -21,6 +21,7 @@ import Writers from '../pages/writers/Writers';
 import Analytics from '../pages/analytics/Analytics';
 // import RequireAuth from '../pages/authentication/persistent/RequireAuth';
 // import PersistLogin from '../pages/authentication/persistent/PersistLogin';
+// import RequireAuth from '../pages/authentication/persistent/RequireAuth';
 
 
 function AppRouter() {

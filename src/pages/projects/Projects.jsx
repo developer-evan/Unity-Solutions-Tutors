@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-refresh/only-export-components */
 import axios from 'axios';
 import { useState, useEffect } from 'react';
@@ -18,20 +19,27 @@ function Projects() {
   });
   const [editingProject, setEditingProject] = useState(null);
   const [isAddingProject, setIsAddingProject] = useState(false);
+  const [writers, setWriters] = useState([]);
+  const [editingWriters, setEditingWriters] = useState([]);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [projectToDelete, setProjectToDelete] = useState(null);
+
+
+
 
   // Define a function to fetch data from the endpoint
   const fetchData = async () => {
     try {
       const response = await axios.get('https://adamsite-tawny.vercel.app/api/projects/');
       setProjects(response.data); // Assuming the response contains an array of projects
-     
+
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
 
   // Use the useEffect hook to fetch data when the component mounts
-  useEffect(() => {    
+  useEffect(() => {
     fetchData();
   }, []); // The empty dependency array ensures this effect runs once after the initial render
 
@@ -56,19 +64,19 @@ function Projects() {
       !newProject.title ||
       !newProject.deadline ||
       !newProject.writer_assigned ||
-      !newProject.status 
+      !newProject.status
       // !newProject.description
-      
+
     ) {
       // alert('Please fill in all fields.');
-      toast.error('Please fill in all fields.',{
+      toast.error('Please fill in all fields.', {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
       });
-     
+
 
       return;
     }
@@ -84,7 +92,7 @@ function Projects() {
         // description: '',
         fileUrl: '',
       });
-      toast.success('Project added successfully!',{
+      toast.success('Project added successfully!', {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -95,7 +103,7 @@ function Projects() {
       closeAddProjectModal();
     } catch (error) {
       console.error('Error adding project:', error);
-      toast.error('Error adding project!',{
+      toast.error('Error adding project!', {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -113,11 +121,11 @@ function Projects() {
       !editingProject.title ||
       !editingProject.deadline ||
       !editingProject.writer_assigned ||
-      !editingProject.status 
+      !editingProject.status
       // !editingProject.description
     ) {
       // alert('Please fill in all fields.');
-      toast.error('Please fill in all fields.',{
+      toast.error('Please fill in all fields.', {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -125,7 +133,7 @@ function Projects() {
         pauseOnHover: true,
       }
       );
-      
+
       return;
     }
 
@@ -137,7 +145,7 @@ function Projects() {
 
       setProjects(updatedProjects);
       setEditingProject(null);
-      toast.success('Project edited successfully!',{
+      toast.success('Project edited successfully!', {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -147,7 +155,7 @@ function Projects() {
       );
     } catch (error) {
       console.error('Error editing project:', error);
-      toast.error('Error editing project!',{
+      toast.error('Error editing project!', {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -157,32 +165,100 @@ function Projects() {
       );
     }
   };
+  useEffect(() => {
+    const fetchWriters = async () => {
+      try {
+        const response = await axios.get('https://adamsite-tawny.vercel.app/api/writers/all/');
+        setWriters(response.data);
+      } catch (error) {
+        console.error('Error fetching writers:', error);
+      }
+    };
 
-  const handleDeleteProject = async (id) => {
+    fetchWriters();
+  }, []);
+
+  const handleDeleteProject = (id, title) => {
+    setProjectToDelete({ id, title });
+    setShowDeleteModal(true);
+  };
+
+  // const handleDeleteProject = async (id) => {
+  //   // const shouldDelete = window.confirm('Are you sure you want to delete this project?');
+
+  //   // if (shouldDelete) {
+  //   //   // Perform deletion logic
+  //   //   console.log(`Deleting project with ID: ${id}`);
+  //   // }
+  //   try {
+  //     await axios.delete(`https://adamsite-tawny.vercel.app/api/projects/${id}`);
+  //     const updatedProjects = projects.filter((project) => project.id !== id);
+  //     setProjects(updatedProjects);
+  //     toast.success('Project deleted successfully!', {
+  //       position: "top-center",
+  //       autoClose: 5000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //     }
+  //     );
+  //   } catch (error) {
+  //     console.error('Error deleting project:', error);
+  //     toast.error('Error deleting project!', {
+  //       position: "top-center",
+  //       autoClose: 5000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //     }
+  //     );
+  //   }
+  // };
+  const confirmDelete = async (id) => {
     try {
       await axios.delete(`https://adamsite-tawny.vercel.app/api/projects/${id}`);
       const updatedProjects = projects.filter((project) => project.id !== id);
       setProjects(updatedProjects);
-      toast.success('Project deleted successfully!',{
+      toast.success('Project deleted successfully!', {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
-      }
-      );
+      });
     } catch (error) {
       console.error('Error deleting project:', error);
-      toast.error('Error deleting project!',{
+      toast.error('Error deleting project!', {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
-      }
-      );
+      });
+    } finally {
+      setShowDeleteModal(false);
+      setProjectToDelete(null);
     }
   };
+
+  const cancelDelete = () => {
+    setShowDeleteModal(false);
+    setProjectToDelete(null);
+  };
+
+  useEffect(() => {
+    const fetchEditingWriters = async () => {
+      try {
+        const response = await axios.get('https://adamsite-tawny.vercel.app/api/writers/all/');
+        setEditingWriters(response.data);
+      } catch (error) {
+        console.error('Error fetching editing writers:', error);
+      }
+    };
+
+    fetchEditingWriters();
+  }, []);
+
 
   // const statusOptions = ['In Progress', 'Completed', 'On Hold', 'Cancelled'];
   const statusOptions = [
@@ -194,11 +270,12 @@ function Projects() {
     'Resubmission',
     'Pending',
   ];
-  
+
+
 
   return (
     <div className="container mx-auto p-4">
-      <ToastContainer/>
+      <ToastContainer />
       <h1 className="text-2xl font-bold mb-4">All Projects</h1>
       <button
         onClick={openAddProjectModal}
@@ -243,7 +320,8 @@ function Projects() {
                   Edit
                 </button>
                 <button
-                  onClick={() => handleDeleteProject(project.id)}
+                  // onClick={() => handleDeleteProject(project.id)}
+                  onClick={() => handleDeleteProject(project.id, project.title)}
                   className="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded mx-1"
                 >
                   Delete
@@ -281,7 +359,7 @@ function Projects() {
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 />
               </div>
-              <div className="w-full md:w-full mb-4">
+              {/* <div className="w-full md:w-full mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Writer Assigned:</label>
                 <input
                   type="text"
@@ -291,7 +369,25 @@ function Projects() {
                   }
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 />
+              </div> */}
+              <div className="w-full mb-4">
+                <label className="block text-gray-700 font-bold mb-2">Writer Assigned:</label>
+                <select
+                  value={newProject.writer_assigned}
+                  onChange={(e) =>
+                    setNewProject({ ...newProject, writer_assigned: e.target.value })
+                  }
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
+                >
+                  <option value="">Select Writer</option>
+                  {writers.map((writer) => (
+                    <option key={writer.id} value={writer.name}>
+                      {writer.name}
+                    </option>
+                  ))}
+                </select>
               </div>
+
               <div className="w-full md:w-full mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Status:</label>
                 <select
@@ -377,7 +473,7 @@ function Projects() {
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 />
               </div>
-              <div className="mb-4">
+              {/* <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Writer Assigned:</label>
                 <input
                   type="text"
@@ -387,7 +483,25 @@ function Projects() {
                   }
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 />
+              </div> */}
+              <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2">Writer Assigned:</label>
+                <select
+                  value={editingProject.writer_assigned}
+                  onChange={(e) =>
+                    setEditingProject({ ...editingProject, writer_assigned: e.target.value })
+                  }
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
+                >
+                  <option value="">Select Writer</option>
+                  {editingWriters.map((writer) => (
+                    <option key={writer.id} value={writer.name}>
+                      {writer.name}
+                    </option>
+                  ))}
+                </select>
               </div>
+
               <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Status:</label>
                 <select
@@ -442,6 +556,33 @@ function Projects() {
           </div>
         </div>
       )}
+ {showDeleteModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="modal bg-white p-4 rounded-lg shadow-lg w-96">
+            <h2 className="text-2xl font-bold mb-4">Confirm Deletion</h2>
+            <p>Are you sure you want to delete   
+              <span className="font-bold text-sky-600"> {projectToDelete.title} </span>
+               project?</p>
+            <div className="flex mt-4">
+              <button
+                // onClick={confirmDelete}
+                onClick={() => confirmDelete(projectToDelete.id)}
+                
+                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+              >
+                Confirm
+              </button>
+              <button
+                onClick={cancelDelete}
+                className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded ml-2"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
