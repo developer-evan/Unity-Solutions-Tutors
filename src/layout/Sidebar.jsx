@@ -51,14 +51,14 @@ const navigate = useNavigate();
       <div className="flex-grow">
         <Link to="/dashboard">
           <div className="group py-3 pl-5 flex items-center cursor-pointer  hover:text-sky-500 hover:bg-slate-200 hover:border-r-4 hover:border-sky-500">
-            <h6 className="flex group-hover:translate-x-2 font-medium text-sm items-center justify-center">
+            <h6 className="flex group-hover:translate-x-2  text-sm items-center justify-center">
               <FaHome className="pr-2 text-2xl" /> Dashboard
             </h6>
           </div>
         </Link>
         <Link to="/projects">
         <div className="group py-3 pl-5 flex items-center cursor-pointer  hover:text-sky-500 hover:bg-slate-200 hover:border-r-4 hover:border-sky-500">
-            <h6 className="flex group-hover:translate-x-2 font-medium text-sm items-center justify-center">
+            <h6 className="flex group-hover:translate-x-2  text-sm items-center justify-center">
               <FaProjectDiagram className="pr-2 text-2xl" /> Projects
             </h6>
           </div>
@@ -66,42 +66,42 @@ const navigate = useNavigate();
        
         <Link to="/writers">
         <div className="group py-3 pl-5 flex items-center cursor-pointer  hover:text-sky-500 hover:bg-slate-200 hover:border-r-4 hover:border-sky-500">
-            <h6 className="flex group-hover:translate-x-2 font-medium text-sm items-center justify-center">
+            <h6 className="flex group-hover:translate-x-2  text-sm items-center justify-center">
               <FaUserFriends className="pr-2 text-xl" /> Writers
             </h6>
           </div>
         </Link>
         <Link to="/analytics">
         <div className="group py-3 pl-5 flex items-center cursor-pointer  hover:text-sky-500 hover:bg-slate-200 hover:border-r-4 hover:border-sky-500">
-            <h6 className="flex group-hover:translate-x-2 font-medium text-sm items-center justify-center">
+            <h6 className="flex group-hover:translate-x-2  text-sm items-center justify-center">
               <FaRegFilePowerpoint className="pr-2 text-xl" />Analytics
             </h6>
           </div>
         </Link>
         <Link to="/tasks">
         <div className="group py-3 pl-5 flex items-center cursor-pointer  hover:text-sky-500 hover:bg-slate-200 hover:border-r-4 hover:border-sky-500">
-            <h6 className="flex group-hover:translate-x-2 font-medium text-sm items-center justify-center">
+            <h6 className="flex group-hover:translate-x-2  text-sm items-center justify-center">
               <FaTasks className="pr-2 text-xl" />Tasks
             </h6>
           </div>
         </Link>
         <Link to="/settings">
         <div className="group py-3 pl-5 flex items-center cursor-pointer  hover:text-sky-500 hover:bg-slate-200 hover:border-r-4 hover:border-sky-500">
-            <h6 className="flex group-hover:translate-x-2 font-medium text-sm items-center justify-center">
+            <h6 className="flex group-hover:translate-x-2  text-sm items-center justify-center">
               <FaCogs className="pr-2 text-2xl" /> Settings
             </h6>
           </div>
         </Link>
         <Link to="/profile">
         <div className="group py-3 pl-5 flex items-center cursor-pointer  hover:text-sky-500 hover:bg-slate-200 hover:border-r-4 hover:border-sky-500">
-            <h6 className="flex group-hover:translate-x-2 font-medium text-sm items-center justify-center">
+            <h6 className="flex group-hover:translate-x-2  text-sm items-center justify-center">
               <FaUserCircle className="pr-2 text-xl" /> Profile
             </h6>
           </div>
         </Link> 
         <Link to="">
         {/* <div className="group py-3 pl-5 flex items-center cursor-pointer  hover:text-sky-500 hover:bg-slate-200 hover:border-r-4 hover:border-sky-500">
-            <h6 className="flex group-hover:translate-x-2 font-medium text-sm items-center justify-center"
+            <h6 className="flex group-hover:translate-x-2  text-sm items-center justify-center"
             onClick={handleLogout}
             >
               <FaLock className="pr-2 text-xl" /> Logout
