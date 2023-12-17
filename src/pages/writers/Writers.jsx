@@ -243,7 +243,7 @@ function Writers() {
             <input
               type="date"
               placeholder="Date Added"
-              className="border border-gray-300 rounded-md p-2 mb-2 w-full"
+              className="hidden md:hidden  border border-gray-300 rounded-md p-2 mb-2 w-full"
               value={newWriter.date}
               onChange={(e) => setNewWriter({ ...newWriter, date: e.target.value })}
             />
