@@ -91,7 +91,7 @@ const Login = () => {
       // style={{ backgroundImage: "url('/Images/amboseli.jpg')" }}
     >
       <ToastContainer />
-      <div
+      {/* <div
         className='top-left-logo w-30 h-30'
         style={{ position: 'absolute', top: '10px', left: '10px' }}
       >
@@ -100,7 +100,7 @@ const Login = () => {
           alt='logo'
           className='w-full h-full'
         />
-      </div>
+      </div> */}
 
       <div className='p-6 rounded-lg bg-white opacity-80 shadow-md'>
         <div className='mb-4'>
