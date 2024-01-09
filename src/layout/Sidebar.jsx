@@ -109,7 +109,7 @@ const navigate = useNavigate();
           </div> */}
         </Link> 
       </div>
-      <div className="flex-shrink mt-40">
+      <div className="flex-shrink ">
         
         {/* <div className="bg-slate-800 p-2 text-center border-t text-xs text-semibold border-slate-300 flex items-center">
           <FaCopyright className="text-3xl pr-2"/> 2023 Reserved </div> */}
