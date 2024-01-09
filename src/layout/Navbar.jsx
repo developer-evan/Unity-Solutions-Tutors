@@ -33,7 +33,7 @@ const Navbar = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://adamsite-tawny.vercel.app/api/user/get-user/${id}/`);
+        const response = await axios.get(`https://unit-solutions.vercel.app/api/user/get-user/${id}/`);
         setUserData(response.data);      
         console.log('user data' ,userData);
         console.log('user', userData.data.username)
@@ -115,7 +115,7 @@ const Navbar = () => {
               <AiOutlineUser />
             </p>
             <p className=" text-lg">
-              {userData ? userData.username : 'Unity'}
+              {userData ? userData.email : 'loading...'}
             </p>
           </div>
           {isOpen && (

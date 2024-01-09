@@ -22,7 +22,7 @@ function Tasks() {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get('https://adamsite-tawny.vercel.app/api/tasks/');
+      const response = await axios.get('https://unit-solutions.vercel.app/api/tasks/');
       if (response.status === 200) {
         setOrders(response.data);
       } else {
@@ -65,7 +65,7 @@ function Tasks() {
       try {
         if (newOrder.id) {
           // If an ID exists, it's an existing task that needs updating
-          const response = await axios.put(`https://adamsite-tawny.vercel.app/api/tasks/${newOrder.id}`, newOrder);
+          const response = await axios.put(`https://unit-solutions.vercel.app/api/tasks/${newOrder.id}`, newOrder);
 
           if (response.status === 200) {
             // alert('The task has been successfully updated');
@@ -90,7 +90,7 @@ function Tasks() {
           }
         } else {
           // If no ID, it's a new task that needs adding
-          const response = await axios.post('https://adamsite-tawny.vercel.app/api/tasks/', newOrder);
+          const response = await axios.post('https://unit-solutions.vercel.app/api/tasks/', newOrder);
 
           if (response.status === 201) {
             // alert('The task has been successfully added');
@@ -131,7 +131,7 @@ function Tasks() {
 
   // const handleDeleteOrder = async (orderId) => {
   //   try {
-  //     const response = await axios.delete(`https://adamsite-tawny.vercel.app/api/tasks/${orderId}`);
+  //     const response = await axios.delete(`https://unit-solutions.vercel.app/api/tasks/${orderId}`);
   //     if (response.status === 204) {
   //       const updatedOrders = orders.filter((order) => order.id !== orderId);
   //       setOrders(updatedOrders);
@@ -164,7 +164,7 @@ function Tasks() {
 
   const confirmDelete = async () => {
     try {
-      const response = await axios.delete(`https://adamsite-tawny.vercel.app/api/tasks/${orderToDelete}`);
+      const response = await axios.delete(`https://unit-solutions.vercel.app/api/tasks/${orderToDelete}`);
       if (response.status === 204) {
         const updatedOrders = orders.filter((order) => order.id !== orderToDelete);
         setOrders(updatedOrders);
@@ -201,7 +201,7 @@ function Tasks() {
   useEffect(() => {
     const fetchWriters = async () => {
       try {
-        const response = await axios.get('https://adamsite-tawny.vercel.app/api/writers/all/');
+        const response = await axios.get('https://unit-solutions.vercel.app/api/writers/all/');
         setWriters(response.data);
       } catch (error) {
         console.error('Error fetching writers:', error);

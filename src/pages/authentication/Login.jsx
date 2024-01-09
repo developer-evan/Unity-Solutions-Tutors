@@ -5,7 +5,8 @@ import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import * as jwt_decode from 'jwt-decode'; // Import jwt_decode
+// import {jwt_decode} from 'jwt-decode'; // Import jwt_decode
+import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
   const [userData, setUserData] = useState({
@@ -27,7 +28,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://adamsite-tawny.vercel.app/api/auth/login/', {
+      const response = await axios.post('https://unit-solutions.vercel.app/api/user/sign-in/', {
         email: userData.email.toLowerCase(),
         password: userData.password,
       });
@@ -43,7 +44,8 @@ const Login = () => {
         });
 
         const { access, refresh } = response.data;
-        const decoded = jwt_decode(access);
+        // const decoded = jwt_decode(access);
+        const decoded = jwtDecode(access);
         localStorage.setItem('access', access);
         localStorage.setItem('refresh', refresh);
         setAuth({
