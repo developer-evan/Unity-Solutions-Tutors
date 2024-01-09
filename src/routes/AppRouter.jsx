@@ -19,8 +19,8 @@ import ViewFile from '../pages/projects/ViewFile';
 import Tasks from '../pages/tasks/Tasks';
 import Writers from '../pages/writers/Writers';
 import Analytics from '../pages/analytics/Analytics';
-// import RequireAuth from '../pages/authentication/persistent/RequireAuth';
-// import PersistLogin from '../pages/authentication/persistent/PersistLogin';
+import RequireAuth from '../pages/authentication/persistent/RequireAuth';
+import PersistLogin from '../pages/authentication/persistent/PersistLogin';
 // import RequireAuth from '../pages/authentication/persistent/RequireAuth';
 
 
@@ -32,8 +32,8 @@ function AppRouter() {
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<Landing />}/> 
 
-             {/* <Route element={<PersistLogin />}> */}
-        {/* <Route element={<RequireAuth allowedRoles={[100]} />}> */}
+             <Route element={<PersistLogin />}>
+        <Route element={<RequireAuth allowedRoles={[100]} />}>
        <Route path="/dashboard" element={<Dashboard/>} />
        <Route path="/post-orders" element={<PostOrders/>} />
        <Route path="/list-orders" element={<ListOrders/>} />
@@ -47,8 +47,8 @@ function AppRouter() {
        <Route path="/tasks" element={<Tasks/>} />
        <Route path="/writers" element={<Writers/>} />
        <Route path="analytics" element={<Analytics />} />
-       {/* </Route>         */}
-       {/* </Route> */}
+       </Route>        
+       </Route>
       </Routes>
     
     </Router>

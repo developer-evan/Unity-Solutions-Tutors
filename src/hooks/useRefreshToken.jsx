@@ -1,5 +1,6 @@
 import useAuth from "./useAuth";
-import jwt_decode from "jwt-decode";
+// import jwt_decode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 
 const useRefreshToken = () => {
@@ -13,10 +14,11 @@ const useRefreshToken = () => {
     let payload = {
       refresh: refreshToken,
     };
-    const { data } = await axios.post("https://adamsite-tawny.vercel.app/api/token/refresh/", payload);
+    const { data } = await axios.post("https://unit-solutions.vercel.app/api/token/refresh/", payload);
     localStorage.setItem("refresh", data.refresh);
     // console.log("res",data)
-    var decoded = jwt_decode(data.access);
+    // var decoded = jwt_decode(data.access);
+    var decoded = jwtDecode(data.access);
     // console.log("decoded decoded",decoded)
 
     //setAuth({user:email,roles:cat,accessToken:fetchLoginResponses.accessToken})
