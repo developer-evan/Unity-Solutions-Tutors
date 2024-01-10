@@ -85,7 +85,8 @@ const navigate = useNavigate();
             </h6>
           </div>
         </Link>
-        <Link to="/settings">
+        <Link to="/change-password">
+        {/* <Link to="/settings"> */}
         <div className="group py-3 pl-5 flex items-center cursor-pointer  hover:text-sky-500 hover:bg-slate-200 hover:border-r-4 hover:border-sky-500">
             <h6 className="flex group-hover:translate-x-2  text-sm items-center justify-center">
               <FaCogs className="pr-2 text-2xl" /> Settings

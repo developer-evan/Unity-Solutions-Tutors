@@ -36,7 +36,7 @@ const Navbar = () => {
         const response = await axios.get(`https://unit-solutions.vercel.app/api/user/get-user/${id}/`);
         setUserData(response.data);      
         console.log('user data' ,userData);
-        console.log('user', userData.data.username)
+        // console.log('user', userData.data.username)
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -115,7 +115,8 @@ const Navbar = () => {
               <AiOutlineUser />
             </p>
             <p className=" text-lg">
-              {userData ? userData.email : 'loading...'}
+              {/* {userData ? userData.email : 'loading...'} */}
+              {userData ? userData.first_name : 'loading...'} {userData ? userData.last_name : 'loading...'}
             </p>
           </div>
           {isOpen && (
