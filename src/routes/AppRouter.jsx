@@ -25,12 +25,12 @@ import PersistLogin from '../pages/authentication/persistent/PersistLogin';
 
 
 function AppRouter() {
-
   return (
     <Router>
       <Routes>       
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<Landing />}/> 
+
 
              <Route element={<PersistLogin />}>
         <Route element={<RequireAuth allowedRoles={[100]} />}>
