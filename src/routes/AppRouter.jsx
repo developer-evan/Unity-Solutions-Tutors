@@ -23,6 +23,7 @@ import RequireAuth from '../pages/authentication/persistent/RequireAuth';
 import PersistLogin from '../pages/authentication/persistent/PersistLogin';
 import ForgotPassword from '../pages/authentication/ForgotPassword';
 import ChangePassword from '../pages/authentication/ChangePassword';
+import SignUp from '../pages/authentication/SignUp';
 // import RequireAuth from '../pages/authentication/persistent/RequireAuth';
 
 
@@ -31,6 +32,7 @@ function AppRouter() {
     <Router>
       <Routes>       
       <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
       <Route path="/" element={<Landing />}/> 
       <Route path="/forgot-password" element={<ForgotPassword />}/>
       <Route path="/change-password" element={<ChangePassword/>} />

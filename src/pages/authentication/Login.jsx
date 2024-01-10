@@ -232,11 +232,13 @@ const Login = () => {
           </small>{' '}
           <small className='text-gray-500'>
             Please{' '}
-            <a href='mailto:unity@gmail.com' className='text-sky-500'>
-              contact
-            </a>{' '}
+            <Link to='/signup' className='text-sky-500'>
+               {/* href='mailto:unity@gmail.com' className='text-sky-500'> */}
+              register
+            </Link>{' '}
             {/* Sopa Lodges */}            
-             Administrator to get an account
+             {/* Administrator */}
+              to get an account
           </small>
         </div>
       </div>
