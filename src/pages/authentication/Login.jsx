@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import {jwt_decode} from 'jwt-decode'; // Import jwt_decode
 import { jwtDecode } from "jwt-decode";
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Login = () => {
   const [userData, setUserData] = useState({
@@ -16,6 +17,11 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { setAuth } = useAuth();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const clearFormValues = () => {
     setUserData({
@@ -132,6 +138,41 @@ const Login = () => {
             />
           </div>
           <div className='mb-4'>
+      <label
+        className='block text-gray-700 text-sm font-bold mb-2'
+        htmlFor='loginPassword'
+      >
+        Password <span className='text-red-500'>*</span>
+      </label>
+      <div className='relative'>
+        <input
+          type={showPassword ? 'text' : 'password'}
+          id='loginPassword'
+          name='password'
+          value={userData.password}
+          onChange={(e) =>
+            setUserData({ ...userData, password: e.target.value })
+          }
+          className='w-full border rounded-md py-2 px-3 pr-10'
+          placeholder='Enter your password'
+          required
+        />
+        <button
+          type='button'
+          onClick={togglePasswordVisibility}
+          className='absolute inset-y-0 right-0 flex items-center px-2 focus:outline-none'
+        >
+          {showPassword ? (
+            <FaEyeSlash
+             className='text-gray-500 hover:text-gray-700 cursor-pointer' />
+          ) : (
+            <FaEye
+               className='text-gray-500 hover:text-gray-700 cursor-pointer' />
+          )}
+        </button>
+      </div>
+    </div>
+          {/* <div className='mb-4'>
             <label
               className='block text-gray-700 text-sm font-bold mb-2'
               htmlFor='loginPassword'
@@ -150,7 +191,7 @@ const Login = () => {
               placeholder='Enter your password'
               required
             />
-          </div>
+          </div> */}
 
           {/* checkbox and forgot password */}
           <div className='mb-4 flex flex-wrap justify-between items-center'>
@@ -183,7 +224,7 @@ const Login = () => {
           </small>{' '}
           <small className='text-gray-500'>
             Please{' '}
-            <a href='mailto:johnnjauv@gmail.com' className='text-red-950'>
+            <a href='mailto:unity@gmail.com' className='text-red-950'>
               contact
             </a>{' '}
             {/* Sopa Lodges */}            
