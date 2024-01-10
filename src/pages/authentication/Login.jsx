@@ -187,6 +187,7 @@ const Login = () => {
               contact
             </a>{' '}
             {/* Sopa Lodges */}
+            
              Administrator to get an account
           </small>
         </div>
