@@ -186,8 +186,7 @@ const Login = () => {
             <a href='mailto:johnnjauv@gmail.com' className='text-red-950'>
               contact
             </a>{' '}
-            {/* Sopa Lodges */}
-            
+            {/* Sopa Lodges */}            
              Administrator to get an account
           </small>
         </div>
