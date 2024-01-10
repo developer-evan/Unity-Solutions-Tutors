@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-refresh/only-export-components */
 import { useState } from 'react';
 // import { axiosPublic } from '../../lib/axios/axios';
@@ -7,13 +8,15 @@ import useAuth from '../../hooks/useAuth';
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import MainLayout from '../../layout/MainLayout';
 // import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ChangePassword = () => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+//   const [successMessage, setSuccessMessage] = useState('');
   const { auth } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
@@ -35,7 +38,15 @@ const ChangePassword = () => {
     e.preventDefault();
 
     if (newPassword !== confirmPassword) {
-      setErrorMessage("New password and confirm password don't match.");
+    //   setErrorMessage("New password and confirm password don't match.");
+    toast.error("New password and confirm password don't match.", {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        });
       return;
     }
     console.log('user', auth)
@@ -57,7 +68,16 @@ const ChangePassword = () => {
       );
 
       if (response.status === 200) {
-        setSuccessMessage('Password changed successfully.');
+        // setSuccessMessage('Password changed successfully.');
+        toast.success('Password changed successfully.', {
+            position: 'top-right',
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            });
+
         setCurrentPassword('');
         setNewPassword('');
         setConfirmPassword('');
@@ -65,7 +85,16 @@ const ChangePassword = () => {
       }
     } catch (error) {
       if (error.response) {
-        setErrorMessage(error.response.data.message);
+        // setErrorMessage(error.response.data.message);
+        toast.error('error occured', {
+            position: 'top-right',
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            });
+
       } else {
         setErrorMessage('An error occurred while changing the password.');
       }
@@ -75,8 +104,9 @@ const ChangePassword = () => {
   return (
 
     <div className='bg-white'>
-      {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-      {successMessage && <p className="text-green-500">{successMessage}</p>}
+      {/* {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+      {successMessage && <p className="text-green-500">{successMessage}</p>} */}
+        <ToastContainer />
       <form onSubmit={handleSubmit} className="max-w-sm  mx-auto flex flex-col gap-3 items-center justify-center bg-white bg-opacity-97 px-6 md:px-16 py-8 rounded-2xl">
         <div className="flex flex-col items-center justify-center gap-2 mb-4">
           <h1 className="text-maroon text-center mb-2 text-2xl font-bold">
