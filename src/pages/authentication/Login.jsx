@@ -108,8 +108,16 @@ const Login = () => {
         />
       </div> */}
 
-      <div className='p-6 rounded-lg bg-white opacity-80 shadow-md'>
+      <div className='p-6 rounded-lg bg-white  shadow-md'>
         <div className='mb-4'>
+          <Link to='/'>
+            <div className='flex justify-center w-full items-end gap-2'>
+              {/* <img src="img/logo.png" alt="Equity Bank Logo" className="w-10" /> */}
+              <h1 className='text-[#364258] text-sm font-semibold text-end'>
+                Unity Solutions
+              </h1>
+            </div>
+          </Link>
           <h3 className='text-3xl text-gray-500 font-bold mb-1'>
             Welcome Back
           </h3>
@@ -201,7 +209,7 @@ const Login = () => {
             </label>
             <Link
               to='/forgot-password'
-              className='text-red-900 font-bold hover:underline'
+              className='text-[#364258] font-bold hover:underline'
             >
               Forgot Password?
             </Link>
@@ -209,7 +217,7 @@ const Login = () => {
 
           <button
             type='submit'
-            className='w-full bg-[#4B0006] text-white px-4 py-2 rounded-lg hover:bg-blue-600'
+            className='w-full bg-[#364258] text-white px-4 py-2 rounded-lg hover:bg-blue-600'
           >
             Sign In
           </button>
@@ -224,7 +232,7 @@ const Login = () => {
           </small>{' '}
           <small className='text-gray-500'>
             Please{' '}
-            <a href='mailto:unity@gmail.com' className='text-red-950'>
+            <a href='mailto:unity@gmail.com' className='text-sky-500'>
               contact
             </a>{' '}
             {/* Sopa Lodges */}            

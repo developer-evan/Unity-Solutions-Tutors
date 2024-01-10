@@ -21,6 +21,8 @@ import Writers from '../pages/writers/Writers';
 import Analytics from '../pages/analytics/Analytics';
 import RequireAuth from '../pages/authentication/persistent/RequireAuth';
 import PersistLogin from '../pages/authentication/persistent/PersistLogin';
+import ForgotPassword from '../pages/authentication/ForgotPassword';
+import ChangePassword from '../pages/authentication/ChangePassword';
 // import RequireAuth from '../pages/authentication/persistent/RequireAuth';
 
 
@@ -30,6 +32,8 @@ function AppRouter() {
       <Routes>       
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<Landing />}/> 
+      <Route path="/forgot-password" element={<ForgotPassword />}/>
+      <Route path="/change-password" element={<ChangePassword/>} />
 
 
              <Route element={<PersistLogin />}>
