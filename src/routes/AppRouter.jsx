@@ -24,39 +24,40 @@ import PersistLogin from '../pages/authentication/persistent/PersistLogin';
 import ForgotPassword from '../pages/authentication/ForgotPassword';
 import ChangePassword from '../pages/authentication/ChangePassword';
 import SignUp from '../pages/authentication/SignUp';
+import ResetPassword from '../pages/authentication/ResetPassword';
 // import RequireAuth from '../pages/authentication/persistent/RequireAuth';
 
 
 function AppRouter() {
   return (
     <Router>
-      <Routes>       
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/" element={<Landing />}/> 
-      <Route path="/forgot-password" element={<ForgotPassword />}/>
-      <Route path="/change-password" element={<ChangePassword/>} />
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/change-password" element={<ChangePassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
 
 
-             <Route element={<PersistLogin />}>
-        <Route element={<RequireAuth allowedRoles={[100]} />}>
-       <Route path="/dashboard" element={<Dashboard/>} />
-       <Route path="/post-orders" element={<PostOrders/>} />
-       <Route path="/list-orders" element={<ListOrders/>} />
-       <Route path="/writers-profiles" element={<WritersProfiles/>} />
-       <Route path="/add-writer" element={<AddWriter/>} />
-       <Route path="/order" element={<Order/>} />
-       <Route path="/settings" element={<Settings/>} />
-       <Route path="/profile" element={<Profile/>} />
-       <Route path="/projects" element={<Projects/>} />
-        <Route path="/view-file" element={<ViewFile/>} />
-       <Route path="/tasks" element={<Tasks/>} />
-       <Route path="/writers" element={<Writers/>} />
-       <Route path="analytics" element={<Analytics />} />
-       </Route>        
-       </Route>
+        <Route element={<PersistLogin />}>
+          <Route element={<RequireAuth allowedRoles={[100]} />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/post-orders" element={<PostOrders />} />
+            <Route path="/list-orders" element={<ListOrders />} />
+            <Route path="/writers-profiles" element={<WritersProfiles />} />
+            <Route path="/add-writer" element={<AddWriter />} />
+            <Route path="/order" element={<Order />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/view-file" element={<ViewFile />} />
+            <Route path="/tasks" element={<Tasks />} />
+            <Route path="/writers" element={<Writers />} />
+            <Route path="analytics" element={<Analytics />} />
+          </Route>
+        </Route>
       </Routes>
-    
     </Router>
   );
 }
