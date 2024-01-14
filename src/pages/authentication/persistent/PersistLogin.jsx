@@ -5,6 +5,8 @@ import useAuth from "../../../hooks/useAuth";
 // import useRefreshToken from "../../../hooks/useRefreshToken";
 import "react-toastify/dist/ReactToastify.css";
 import useRefreshToken from "../../../hooks/useRefreshToken"
+// import { TailSpin } from '@agney/react-loading';
+import { TailSpin } from "react-loader-spinner";
 
 const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -37,7 +39,24 @@ const PersistLogin = () => {
     <>
       {isLoading ? (
         //  console.log("Loading...")
-        "loading..."
+        // "loading..."
+        <TailSpin
+          visible={true}
+          height="80"
+          width="80"
+          color="#4fa94d"
+          ariaLabel="tail-spin-loading"
+          radius="1"
+          wrapperStyle={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+          // }}
+          }}
+          wrapperClass=""
+          // className="items-center justify-center "
+        />
       ) : (
         <Outlet />
       )}

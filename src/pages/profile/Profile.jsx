@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import MainLayout from "../../layout/MainLayout";
 import useAuth from '../../hooks/useAuth';
 import axios from 'axios';
-
+import { TailSpin } from "react-loader-spinner";
 function Profile() {
   const { auth } = useAuth();
   const id = auth.user_id;
@@ -18,7 +18,7 @@ function Profile() {
       try {
         const response = await axios.get(`https://unit-solutions.vercel.app/api/user/get-user/${id}/`);
         setUserData(response.data);
-        console.log('user data' ,userData);
+        console.log('user data', userData);
 
         setLoading(false);
       } catch (error) {
@@ -35,7 +35,25 @@ function Profile() {
     <div className="flex items-center justify-center h-screen">
       <div className="max-w-md w-full p-6 bg-white rounded-md shadow-md">
         <h1 className="text-2xl font-bold mb-4 text-center">Profile</h1>
-        {loading && <div className="text-gray-600 italic text-center">Loading...</div>}
+        {loading && <div className="text-gray-600 italic text-center">
+          {/* Loading... */}
+          <TailSpin
+            visible={true}
+            height="40"
+            width="40"
+            color="#4fa94d"
+            ariaLabel="tail-spin-loading"
+            radius="1"
+            wrapperStyle={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "30vh",
+            }}
+            wrapperClass=""
+            // className="items-center justify-center ml-16"
+          />
+        </div>}
         {error && <div className="text-red-500 text-center">{error.message}</div>}
         {userData && (
           <div className="mt-4">

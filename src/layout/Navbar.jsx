@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 // import GlobalSearch from '../components/globalsearch/GlobalSearch';
+import { ThreeDots } from 'react-loader-spinner';
 
 import {
   FaUserCircle,
@@ -22,20 +23,20 @@ const Navbar = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   // const { id } = useParams();
-  const { auth, setAuth} = useAuth();
+  const { auth, setAuth } = useAuth();
   console.log(auth, 'auth')
   const id = auth.user_id;
   console.log(id, 'id')
 
   const navigate = useNavigate();
-  
- 
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`https://unit-solutions.vercel.app/api/user/get-user/${id}/`);
-        setUserData(response.data);      
-        console.log('user data' ,userData);
+        setUserData(response.data);
+        console.log('user data', userData);
         // console.log('user', userData.data.username)
         setLoading(false);
       } catch (error) {
@@ -47,7 +48,7 @@ const Navbar = () => {
     fetchData();
   }, [id, userData]);
 
-  
+
   // const handleLogout = (e) => {
   //   e.preventDefault();
   //   // toast.confirm = () => {};
@@ -63,7 +64,7 @@ const Navbar = () => {
   //   // Clear refresh token from local storage
   //   localStorage.removeItem("refresh");
   //   // Clear access token from context
-   
+
   //   // window.location.reload();
   // };
   const handleLogout = (e) => {
@@ -83,7 +84,7 @@ const Navbar = () => {
     sessionStorage.clear();
 
     navigate("/login");
-}
+  }
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
@@ -91,7 +92,7 @@ const Navbar = () => {
   return (
     <header className="bg-[#364258]  ml-1 p-3 md:ml-[48] overflow-hidden">
       <ToastContainer />
-      
+
       <div className="flex flex-col-reverse gap-4 md:gap-0 md:flex-row items-center">
         <div className="flex items-center flex-grow">
           <div className="md:w-1/4 flex items-center px-3 rounded-full">
@@ -116,13 +117,29 @@ const Navbar = () => {
             </p>
             <p className=" text-lg">
               {/* {userData ? userData.email : 'loading...'} */}
-              {userData ? userData.first_name : ''} {userData ? userData.last_name : 'loading...'}
+              {userData ? userData.first_name : ''} {userData ? userData.last_name :
+              <ThreeDots
+              visible={true}
+              height="30"
+              width="40"
+              // color="#4fa94d"
+              radius="9"
+              ariaLabel="three-dots-loading"
+              wrapperStyle={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                color: "blue",
+              }}
+              wrapperClass=""
+              // className="items-center justify-center text-sky-500"
+              />}
             </p>
           </div>
           {isOpen && (
             <div className="origin-top-right ml-[-40px] absolute mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
               <div className="py-1" role="none">
-              <Link to="/profile" className=" flex items-center gap-1  text-sm px-1  hover:bg-slate-200 hover:text-blue-800 cursor-pointer">
+                <Link to="/profile" className=" flex items-center gap-1  text-sm px-1  hover:bg-slate-200 hover:text-blue-800 cursor-pointer">
                   <p className="items-center  justify-start flex  gap-1 hover:translate-x-2 text-sm px-4 py-2 hover:font-semibold  cursor-pointer">
                     <AiOutlineUser /> Profile
                   </p>
@@ -133,12 +150,12 @@ const Navbar = () => {
                   </p>
                 </Link>
                 <Link to="" className=" flex items-center gap-1  text-sm px-1  hover:bg-slate-200 hover:text-blue-800 cursor-pointer">
-          <p 
-          onClick={handleLogout}  
-          className="flex items-center gap-1 hover:translate-x-2 text-sm px-4 py-2 hover:font-semibold cursor-pointer">
-                <AiOutlineLogout /> Logout
-          </p>
-          </Link>
+                  <p
+                    onClick={handleLogout}
+                    className="flex items-center gap-1 hover:translate-x-2 text-sm px-4 py-2 hover:font-semibold cursor-pointer">
+                    <AiOutlineLogout /> Logout
+                  </p>
+                </Link>
               </div>
             </div>
           )}
