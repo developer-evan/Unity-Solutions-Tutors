@@ -12,7 +12,8 @@ function Projects() {
   const [newProject, setNewProject] = useState({
     title: '',
     deadline: '',
-    writer_assigned: '',
+    // writer_assigned: '',
+    client: '',
     status: '',
     description: '',
     fileUrl: '',
@@ -63,7 +64,8 @@ function Projects() {
     if (
       !newProject.title ||
       !newProject.deadline ||
-      !newProject.writer_assigned ||
+      // !newProject.writer_assigned ||
+      !newProject.client ||
       !newProject.status
       // !newProject.description
 
@@ -87,7 +89,8 @@ function Projects() {
       setNewProject({
         title: '',
         deadline: '',
-        writer_assigned: '',
+        // writer_assigned: '',
+        client: '',
         status: '',
         // description: '',
         fileUrl: '',
@@ -120,7 +123,8 @@ function Projects() {
     if (
       !editingProject.title ||
       !editingProject.deadline ||
-      !editingProject.writer_assigned ||
+      // !editingProject.writer_assigned ||
+      !editingProject.client ||
       !editingProject.status
       // !editingProject.description
     ) {
@@ -289,7 +293,7 @@ function Projects() {
           <tr className="bg-gray-200">
             <th className="border p-2">Title</th>
             <th className="border p-2">Deadline</th>
-            <th className="border p-2">Writer Assigned</th>
+            <th className="border p-2">Client</th>
             <th className="border p-2">Status</th>
             {/* <th className="border p-2">Description</th> */}
             <th className="border p-2 items-center justify-center">Project File</th>
@@ -301,7 +305,7 @@ function Projects() {
             <tr key={project.id}>
               <td className="border p-2">{project.title}</td>
               <td className="border p-2">{project.deadline}</td>
-              <td className="border p-2">{project.writer_assigned}</td>
+              <td className="border p-2">{project.client}</td>
               <td className="border p-2">{project.status}</td>
               {/* <td className="border p-2">{project.description}</td> */}
               <td className="border p-2">
@@ -359,18 +363,18 @@ function Projects() {
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 />
               </div>
-              {/* <div className="w-full md:w-full mb-4">
-                <label className="block text-gray-700 font-bold mb-2">Writer Assigned:</label>
+              <div className="w-full md:w-full mb-4">
+                <label className="block text-gray-700 font-bold mb-2">Client:</label>
                 <input
                   type="text"
-                  value={newProject.writer_assigned}
+                  value={newProject.client}
                   onChange={(e) =>
-                    setNewProject({ ...newProject, writer_assigned: e.target.value })
+                    setNewProject({ ...newProject, client: e.target.value })
                   }
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 />
-              </div> */}
-              <div className="w-full mb-4">
+              </div>
+              {/* <div className="w-full mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Writer Assigned:</label>
                 <select
                   value={newProject.writer_assigned}
@@ -386,7 +390,7 @@ function Projects() {
                     </option>
                   ))}
                 </select>
-              </div>
+              </div> */}
 
               <div className="w-full md:w-full mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Status:</label>
@@ -473,18 +477,18 @@ function Projects() {
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 />
               </div>
-              {/* <div className="mb-4">
-                <label className="block text-gray-700 font-bold mb-2">Writer Assigned:</label>
+              <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2">Client:</label>
                 <input
                   type="text"
-                  value={editingProject.writer_assigned}
+                  value={editingProject.client}
                   onChange={(e) =>
-                    setEditingProject({ ...editingProject, writer_assigned: e.target.value })
+                    setEditingProject({ ...editingProject, client: e.target.value })
                   }
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 />
-              </div> */}
-              <div className="mb-4">
+              </div>
+              {/* <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Writer Assigned:</label>
                 <select
                   value={editingProject.writer_assigned}
@@ -500,7 +504,7 @@ function Projects() {
                     </option>
                   ))}
                 </select>
-              </div>
+              </div> */}
 
               <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Status:</label>

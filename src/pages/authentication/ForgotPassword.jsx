@@ -87,6 +87,7 @@ const handleSubmit = async (e) => {
       </div>
       
           <div className="flex items-center justify-center gap-2 flex-col">
+
             <input
             type="email"
             name="email"
@@ -95,8 +96,7 @@ const handleSubmit = async (e) => {
             className="bg-slate-100 outline-slate-400 rounded-md input min-w-full w-72 xl:w-96 p-3 text-sm"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-          />
-             
+          />             
           {/* {inputs.map((input) => (
             <FormInput
               key={input.id}
