@@ -13,6 +13,7 @@
     "axios": "^1.5.1",
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
+    "md5": "^2.3.0",
     "react": "^18.2.0",
     "react-audio-player": "^0.17.0",
     "react-dom": "^18.2.0",

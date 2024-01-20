@@ -58,6 +58,19 @@ function Profile() {
         {userData && (
           <div className="mt-4">
             <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-4">
+                <img
+                  src={userData.profile_image || 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200'}
+                  alt="profile"
+                  className="w-16 h-16 rounded-full"
+                />
+                </div>
+                {/* <div>
+                  <h2 className="text-lg font-semibold">{userData.first_name || 'loading...'} {userData.last_name || 'loading...'}</h2>
+                  <p className="text-gray-600">{userData.email || 'loading...'}</p>
+                  {/* <p className="text-gray-600">{userData.date_joined || 'loading...'}</p> */}
+              
+              
               <div>
                 <h2 className="text-lg font-semibold">{userData.first_name || 'loading...'} {userData.last_name || 'loading...'}</h2>
                 <p className="text-gray-600">{userData.email || 'loading...'}</p>
@@ -85,7 +98,10 @@ function Profile() {
                 <h3 className="text-md font-semibold mb-1">Phone</h3>
                 <p className="text-gray-600">{userData.phone || 'loading...'}</p>
               </div>
+
               {/* Add more details as needed */}
+              {/* profile image */}
+
             </div>
             {/* Add more sections or details as needed */}
           </div>

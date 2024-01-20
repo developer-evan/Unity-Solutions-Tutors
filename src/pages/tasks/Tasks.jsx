@@ -4,6 +4,7 @@ import axios from 'axios';
 import MainLayout from '../../layout/MainLayout';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FaPlus } from 'react-icons/fa';
 
 function Tasks() {
   const [orders, setOrders] = useState([]);
@@ -222,8 +223,9 @@ function Tasks() {
             <h2 className="text-xl font-semibold text-gray-800">Tasks</h2>
             <button
               onClick={toggleAddOrderModal}
-              className="px-2 py-1 bg-gray-800 text-gray-100 font-bold rounded hover:bg-gray-700"
+              className="px-2 py-1 bg-sky-500 text-gray-100 font-bold rounded hover:bg-gray-700 flex items-center"
             >
+              <FaPlus className="inline-block mr-2" />
               Add Task
             </button>
           </div>

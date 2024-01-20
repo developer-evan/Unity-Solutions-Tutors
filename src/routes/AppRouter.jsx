@@ -25,6 +25,8 @@ import ForgotPassword from '../pages/authentication/ForgotPassword';
 import ChangePassword from '../pages/authentication/ChangePassword';
 import SignUp from '../pages/authentication/SignUp';
 import ResetPassword from '../pages/authentication/ResetPassword';
+import Clients from '../pages/writers/Clients';
+import Users from '../pages/users/Users';
 // import RequireAuth from '../pages/authentication/persistent/RequireAuth';
 
 
@@ -54,7 +56,9 @@ function AppRouter() {
             <Route path="/view-file" element={<ViewFile />} />
             <Route path="/tasks" element={<Tasks />} />
             <Route path="/writers" element={<Writers />} />
-            <Route path="analytics" element={<Analytics />} />
+            <Route path="/analytics" element={<Analytics />} />
+           <Route path="/all-users" element={<Users />} />
+           <Route path="/clients" element={<Clients />} />
           </Route>
         </Route>
       </Routes>
