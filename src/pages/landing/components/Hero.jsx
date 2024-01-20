@@ -34,7 +34,7 @@ function Hero() {
           </div>
           {/* <div className="w-full lg:w-1/2 flex justify-end items-end"> */}
           <img
-            src="https://www.vesselsystems.co.ke/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FIllustration1.07cd1fa9.png&w=1920&q=100"
+            src="./Illustration1.png"
             alt="hero"
             className="mb-10"
             width={500}
