@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Link } from 'react-router-dom';
 function  Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -64,6 +64,11 @@ function  Header() {
      <a href='#home'  >      
       <li className='mx-4 font-bold hover:translate-x-2' onClick={closeMenu}>
           Home
+        </li>
+        </a>
+        <a href='#about'  >      
+      <li className='mx-4 font-bold hover:translate-x-2' onClick={closeMenu}>
+          About Us
         </li>
         </a>
         <a href='#samples'  >

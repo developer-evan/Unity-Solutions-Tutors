@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import MainLayout from '../../layout/MainLayout';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FaPlus } from 'react-icons/fa';
 
 function Projects() {
   const [projects, setProjects] = useState([]);
@@ -280,13 +281,17 @@ function Projects() {
   return (
     <div className="container mx-auto p-4">
       <ToastContainer />
-      <h1 className="text-2xl font-bold mb-4">All Projects</h1>
+     
+     <div className="flex justify-between items-center mb-4">
+     <h1 className="text-2xl font-bold mb-4">All Projects</h1>
       <button
         onClick={openAddProjectModal}
-        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded flex items-center"
       >
+        <FaPlus className="inline-block mr-2" />
         Add Project
       </button>
+    </div>
 
       <table className="min-w-full border border-gray-300 mt-4">
         <thead>

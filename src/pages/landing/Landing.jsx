@@ -6,6 +6,7 @@ import Reviews from './components/Reviews';
 import Services from './components/Services';
 import ContactUs from './components/ContactUs';
 import Hero from './components/Hero';
+import About from './components/About';
 // import MainLayout from '../../layout/MainLayout';
 
 const Landing = () => {
@@ -14,6 +15,7 @@ const Landing = () => {
       <div className="bg-gray-100 min-h-screen ">
       <Header />
       <Hero />
+      <About />
       <HowWeWork />
       <Samples />
       <Reviews />
