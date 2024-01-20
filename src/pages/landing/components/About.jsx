@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 function About() {
   return (
-    <div className="container mx-auto my-10 p-8 bg-gray-100 rounded-lg" id="about">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+    <section className="container mx-auto my-10 p-8 flex justify-around bg-gray-100 rounded-lg" id="about">
+      <article className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
         <div className="flex flex-col justify-center items-start">
           <h1 className="text-4xl font-bold text-gray-800 mb-4">
             Welcome to Academic Solutions Hub
@@ -17,9 +17,11 @@ function About() {
             </button>
           </Link>
         </div>
-      </div>
-    </div>
+        <div className="items-center mt-10">
+          <img src="./Illustration2.png" alt="Illustration representing Academic Solutions Hub" className="mb-10 w-96 h-96" />
+        </div>
+      </article>
+    </section>
   );
 }
-
 export default About;
