@@ -116,24 +116,26 @@ const Navbar = () => {
               <AiOutlineUser />
             </p>
             <p className=" text-lg">
+
               {/* {userData ? userData.email : 'loading...'} */}
-              {userData ? userData.first_name : ''} {userData ? userData.last_name :
-              <ThreeDots
-              visible={true}
-              height="30"
-              width="40"
-              // color="#4fa94d"
-              radius="9"
-              ariaLabel="three-dots-loading"
-              wrapperStyle={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                color: "blue",
-              }}
-              wrapperClass=""
-              // className="items-center justify-center text-sky-500"
-              />}
+              {/* {userData ? userData.first_name : ''} {userData ? userData.last_name : */}
+              {userData ? userData.username :
+                <ThreeDots
+                  visible={true}
+                  height="30"
+                  width="40"
+                  // color="#4fa94d"
+                  radius="9"
+                  ariaLabel="three-dots-loading"
+                  wrapperStyle={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    color: "blue",
+                  }}
+                  wrapperClass=""
+                // className="items-center justify-center text-sky-500"
+                />}
             </p>
           </div>
           {isOpen && (
