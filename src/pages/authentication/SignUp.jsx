@@ -10,6 +10,7 @@ const SignUp = () => {
   const [userData, setUserData] = useState({
     first_name: '',
     last_name: '',
+    specialization: '',
     email: '',
     phone: '',
     password: '',
@@ -17,6 +18,7 @@ const SignUp = () => {
   const [errors, setErrors] = useState({
     first_name: '',
     last_name: '',
+    specialization: '',
     email: '',
     phone: '',
     password: '',
@@ -33,12 +35,14 @@ const SignUp = () => {
       first_name: '',
       last_name: '',
       email: '',
+      specialization: '',    
       phone: '',
       password: '',
     });
     setErrors({
       first_name: '',
       last_name: '',
+      specialization: '',
       email: '',
       phone: '',
       password: '',
@@ -52,6 +56,7 @@ const SignUp = () => {
       const response = await axios.post('https://unit-solutions.vercel.app/api/user/register/', {
         first_name: userData.first_name,
         last_name: userData.last_name,
+        specialization: userData.specialization,
         email: userData.email.toLowerCase(),
         phone: userData.phone,
         password: userData.password,
@@ -60,6 +65,7 @@ const SignUp = () => {
       setErrors({
         first_name: '',
         last_name: '',
+        specialization: '',
         email: '',
         phone: '',
         password: '',
@@ -103,12 +109,11 @@ const SignUp = () => {
         draggable: true,
       });
     }
-
     clearFormValues();
   };
 
   return (
-    <div className='min-h-screen flex justify-center items-center bg-sky-500'>
+    <div className='h-1/2 flex justify-center items-center bg-sky-500'>
       {/* <ToastContainer /> */}
       <ToastContainer/>
 
@@ -182,6 +187,32 @@ const SignUp = () => {
           </div>
 
           {/* ... (other input fields) */}
+          <div className='mb-4'>
+              <label
+                className='block text-gray-700 text-sm font-bold mb-2'
+                htmlFor='specialization'
+              >
+                Specialization <span className='text-red-500'>*</span>
+              </label>
+              <input
+                type='text'
+                id='specialization'
+                name='specialization'
+                value={userData.specialization}
+                onChange={(e) =>
+                  setUserData({ ...userData, specialization: e.target.value })
+                }
+                className={`w-full border rounded-md py-2 px-3 ${
+                  errors.specialization ? 'border-red-500' : ''
+                }`}
+                placeholder='Enter your specialization'
+                required
+              />
+              {errors.specialization && (
+                <p className='text-red-500 text-sm'>{errors.specialization[0]}</p>
+              )}
+            </div>
+
             <div className='mb-4'>
                 <label
                 className='block text-gray-700 text-sm font-bold mb-2'
