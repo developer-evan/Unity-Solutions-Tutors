@@ -35,8 +35,9 @@ function Dashboard() {
   const [newOrder, setNewOrder] = useState({
     id: null,
     status: '',
+    title: '',
     writer: '',
-    client: '',
+    // client: '',
     book_balance: '',
     deadline: '',
   });
@@ -64,7 +65,8 @@ function Dashboard() {
       id: null,
       status: '',
       writer: '',
-      client: '',
+      title: '',
+      // client: '',
       book_balance: '',
       deadline: '',
     });
@@ -79,7 +81,8 @@ function Dashboard() {
     if (
       newOrder.status.trim() !== '' &&
       newOrder.writer.trim() !== '' &&
-      newOrder.client.trim() !== '' &&
+      newOrder.title.trim() !== '' &&
+      // newOrder.client.trim() !== '' &&
       newOrder.book_balance.trim() !== '' &&
       newOrder.deadline.trim() !== ''
     ) {
@@ -389,7 +392,8 @@ function Dashboard() {
                 <tr className="bg-gray-200 text-slate-400">
                   <th className="px-4 py-2 text-start">Status</th>
                   <th className="px-2 py-2 text-start">Writer</th>
-                  <th className="px-2 py-2 text-start">Client</th>
+                  <th className="px-2 py-2 text-start">Title</th>
+                  {/* <th className="px-2 py-2 text-start">Client</th> */}
                   <th className="px-2 py-2 text-start">Book Balance</th>
                   <th className="px-2 py-2 text-start">Deadline</th>
                   {/* <th className="px-2 py-2 text-start">Actions</th> */}
@@ -406,7 +410,9 @@ function Dashboard() {
                       </button>
                     </td>
                     <td className="px-2 py-2 text-gray-500">{order.writer}</td>
-                    <td className="px-2 py-2 text-gray-500">{order.client}</td>
+                    {/* <td className="px-2 py-2 text-gray-500">{order.client}</td> */}
+                    <td className="px-2 py-2 text-gray-500">{order.title}</td>
+                    
                     <td className="px-2 py-2 text-slate-600 font-semibold">{order.book_balance}</td>
                     <td className="px-2 py-2 text-slate-600 font-semibold">{order.deadline}</td>
                     {/* <td className="px-2 py-2">
