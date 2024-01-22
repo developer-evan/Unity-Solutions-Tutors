@@ -297,11 +297,12 @@ function Projects() {
         <thead>
           <tr className="bg-gray-200">
             <th className="border p-2">Title</th>
-            <th className="border p-2">Deadline</th>
+            
             <th className="border p-2">Client</th>
             <th className="border p-2">Status</th>
             {/* <th className="border p-2">Description</th> */}
             <th className="border p-2 items-center justify-center">Project File</th>
+            <th className="border p-2">Deadline</th>
             <th className="border p-2">Actions</th>
           </tr>
         </thead>
@@ -309,7 +310,7 @@ function Projects() {
           {projects.map((project) => (
             <tr key={project.id}>
               <td className="border p-2">{project.title}</td>
-              <td className="border p-2">{project.deadline}</td>
+              
               <td className="border p-2">{project.client}</td>
               <td className="border p-2">{project.status}</td>
               {/* <td className="border p-2">{project.description}</td> */}
@@ -321,6 +322,7 @@ function Projects() {
                   View File
                 </Link>
               </td>
+              <td className="border p-2">{project.deadline}</td>
               <td className="border p-2">
                 <button
                   onClick={() => setEditingProject(project)}
@@ -347,7 +349,7 @@ function Projects() {
             <h2 className="text-2xl font-bold mb-4">Add Project</h2>
             <form className="flex flex-wrap gap-2">
               <div className="w-full  mb-4 ">
-                <label className="block text-gray-700 font-bold mb-2">Title:</label>
+                <label className="block text-gray-700 font-bold mb-2"> Project Title:</label>
                 <input
                   type="text"
                   value={newProject.title}
@@ -357,17 +359,7 @@ function Projects() {
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 />
               </div>
-              <div className="w-full md:w-full mb-4">
-                <label className="block text-gray-700 font-bold mb-2">Deadline:</label>
-                <input
-                  type="date"
-                  value={newProject.deadline}
-                  onChange={(e) =>
-                    setNewProject({ ...newProject, deadline: e.target.value })
-                  }
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
-                />
-              </div>
+             
               <div className="w-full md:w-full mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Client:</label>
                 <input
@@ -431,6 +423,17 @@ function Projects() {
                   type="file"
                   onChange={handleFileChange}
                   value={newProject.attachment}
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
+                />
+              </div>
+              <div className="w-full md:w-full mb-4">
+                <label className="block text-gray-700 font-bold mb-2">Deadline:</label>
+                <input
+                  type="date"
+                  value={newProject.deadline}
+                  onChange={(e) =>
+                    setNewProject({ ...newProject, deadline: e.target.value })
+                  }
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 />
               </div>

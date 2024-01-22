@@ -12,8 +12,9 @@ function Tasks() {
   const [newOrder, setNewOrder] = useState({
     id: null,
     status: '',
+    title: '',
     writer: '',
-    client: '',
+    // client: '',
     book_balance: '',
     deadline: '',
   });
@@ -41,10 +42,27 @@ function Tasks() {
   const toggleAddOrderModal = () => {
     setShowAddOrderModal(!showAddOrderModal);
     setNewOrder({
+
+      // {
+      //   "title": [
+      //     "This field is required."
+      //   ],
+      //   "writer": [
+      //     "This field is required."
+      //   ],
+      //   "book_balance": [
+      //     "This field is required."
+      //   ],
+      //   "deadline": [
+      //     "This field is required."
+      //   ]
+      // }
       id: null,
       status: '',
+      title: '',
       writer: '',
-      client: '',
+      // client: '',
+
       book_balance: '',
       deadline: '',
     });
@@ -59,7 +77,8 @@ function Tasks() {
     if (
       newOrder.status.trim() !== '' &&
       newOrder.writer.trim() !== '' &&
-      newOrder.client.trim() !== '' &&
+      newOrder.title.trim() !== '' &&
+      // newOrder.client.trim() !== '' &&
       newOrder.book_balance.trim() !== '' &&
       newOrder.deadline.trim() !== ''
     ) {
@@ -208,10 +227,10 @@ function Tasks() {
         console.error('Error fetching writers:', error);
       }
     };
-  
+
     fetchWriters();
   }, []);
-  
+
 
 
   return (
@@ -234,9 +253,13 @@ function Tasks() {
             <table className="w-full table-auto">
               <thead>
                 <tr className="bg-gray-200 text-slate-400">
+
                   <th className="px-4 py-2 text-start">Status</th>
-                  <th className="px-2 py-2 text-start">Writer</th>
-                  <th className="px-2 py-2 text-start">Client</th>
+
+
+                  <th className="px-2 py-2 text-start">Project Title</th>
+                  {/* <th className="px-2 py-2 text-start">Client</th> */}
+                  <th className="px-2 py-2 text-start">Writer Assigned</th>
                   <th className="px-2 py-2 text-start">Book Balance</th>
                   <th className="px-2 py-2 text-start">Deadline</th>
                   <th className="px-2 py-2 text-start">Actions</th>
@@ -252,8 +275,9 @@ function Tasks() {
                         {order.status}
                       </button>
                     </td>
+                    <td className="px-2 py-2 text-gray-500">{order.title}</td>
                     <td className="px-2 py-2 text-gray-500">{order.writer}</td>
-                    <td className="px-2 py-2 text-gray-500">{order.client}</td>
+                    {/* <td className="px-2 py-2 text-gray-500">{order.client}</td> */}
                     <td className="px-2 py-2 text-slate-600 font-semibold">{order.book_balance}</td>
                     <td className="px-2 py-2 text-slate-600 font-semibold">{order.deadline}</td>
                     <td className="px-2 py-2">
@@ -314,24 +338,9 @@ function Tasks() {
               />
             </div> */}
 
-<div className="mb-4">
-  <label className="block text-gray-800">Writer</label>
-  <select
-    name="writer"
-    value={newOrder.writer}
-    onChange={handleInputChange}
-    className="w-full p-2 border border-gray-300 rounded"
-  >
-    <option value="">Select Writer</option>
-    {writers.map((writer) => (
-      <option key={writer.id} value={writer.name}>
-        {writer.name}
-      </option>
-    ))}
-  </select>
-</div>
 
-            <div className="mb-4">
+
+            {/* <div className="mb-4">
               <label className="block text-gray-800">Client</label>
               <input
                 type="text"
@@ -340,6 +349,32 @@ function Tasks() {
                 onChange={handleInputChange}
                 className="w-full p-2 border border-gray-300 rounded"
               />
+            </div> */}
+            <div className="mb-4">
+              <label className="block text-gray-800">Project Title</label>
+              <input
+                type="text"
+                name="title"
+                value={newOrder.title}
+                onChange={handleInputChange}
+                className="w-full p-2 border border-gray-300 rounded"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-800">Writer Assigned</label>
+              <select
+                name="writer"
+                value={newOrder.writer}
+                onChange={handleInputChange}
+                className="w-full p-2 border border-gray-300 rounded"
+              >
+                <option value="">Select Writer</option>
+                {writers.map((writer) => (
+                  <option key={writer.id} value={writer.name}>
+                    {writer.name}
+                  </option>
+                ))}
+              </select>
             </div>
             <div className="mb-4">
               <label className="block text-gray-800">Book Balance</label>
@@ -379,7 +414,7 @@ function Tasks() {
         </div>
       )}
 
-{showDeleteModal && (
+      {showDeleteModal && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="bg-white p-4 rounded-lg shadow-lg">
             <h2 className="text-2xl font-bold mb-4">Confirm Deletion</h2>
@@ -401,9 +436,7 @@ function Tasks() {
           </div>
         </div>
       )}
-
     </div>
   );
 }
-
 export default MainLayout(Tasks);
