@@ -43,7 +43,7 @@ function AppRouter() {
 
 
         <Route element={<PersistLogin />}>
-          <Route element={<RequireAuth allowedRoles={[100]} />}>
+          <Route element={<RequireAuth allowedRoles={[100,200,300]} />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/post-orders" element={<PostOrders />} />
             <Route path="/list-orders" element={<ListOrders />} />
