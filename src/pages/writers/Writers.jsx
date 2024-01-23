@@ -1,9 +1,12 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-refresh/only-export-components */
 import { useState, useEffect } from "react";
 import MainLayout from "../../layout/MainLayout";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useAuth from "../../hooks/useAuth";
+import moment from 'moment';
 
 
 const getFormattedDate = () => {
@@ -21,7 +24,8 @@ function Writers() {
   const [currentDate, setCurrentDate] = useState(getFormattedDate());
 
   const [newWriter, setNewWriter] = useState({
-    name: "",
+    first_name: "",
+    last_name: "",
     specialization: "",
     date: currentDate,
     email: "",
@@ -31,10 +35,20 @@ function Writers() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingWriter, setEditingWriter] = useState(null);
   const [deletingWriter, setDeletingWriter] = useState(null);
+  const { auth, setAuth } = useAuth();
+  
+  const isAdmin = auth.roles.includes(200) || auth.roles.includes(300);
+
+  // const filteredWriters = isAdmin ? writers : writers.filter((writer) => writer.id === auth.id);
+  // const filteredWriters = writers.filter(writer => writer.roles.includes(100) && !isAdmin);
+  // const filteredWriters = writers.filter(writer => writer.roles && writer.roles.includes(100) && !isAdmin);
+
+
+
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("https://unit-solutions.vercel.app/api/writers/all/");
+      const response = await axios.get("https://unit-solutions.vercel.app/api/user/");
       setWriters(response.data);
       console.log(response.data);
       // alert("Data fetched successfully");
@@ -155,7 +169,8 @@ function Writers() {
 
   const resetForm = () => {
     setNewWriter({
-      name: "",
+      first_name: "",
+      last_name: "",
       specialization: "",
       date: currentDate, // Set the current date when resetting the form
       email: "",
@@ -181,7 +196,7 @@ function Writers() {
     <div className="container mx-auto mt-8 p-4">
       <ToastContainer />
       <h1 className="text-3xl font-semibold mb-4">Writers</h1>
-      <button
+      {/* <button
         className="bg-blue-500 text-white py-2 px-4 rounded-md mb-4"
         onClick={() => {
           setIsModalOpen(true);
@@ -190,35 +205,51 @@ function Writers() {
         }}
       >
         Add Writer
-      </button>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {writers.map((writer) => (
-          <div
-            key={writer.id}
-            className="bg-white border border-gray-300 p-4 rounded-md shadow-md transition-transform hover:scale-105 transform-gpu"
-          >
-            <h2 className="text-xl font-semibold text-blue-700">{writer.name}</h2>
-            <p className="text-gray-600 mt-2">Specialization: {writer.specialization}</p>
-            <p className="text-gray-600">Email: {writer.email}</p>
-            <p className="text-gray-600">Phone Number: {writer.phone_number}</p>
-            <p className="text-gray-600">Date Added: {writer.date}</p>
-            <div className="mt-4 flex justify-end space-x-2">
-              <button
-                className="text-white bg-blue-500 hover:bg-blue-700 py-2 px-4 rounded-md transition-transform transform-gpu hover:scale-105"
-                onClick={() => handleEditWriter(writer)}
-              >
-                Edit
-              </button>
-              <button
-                className="text-white bg-red-500 hover:bg-red-700 py-2 px-4 rounded-md transition-transform transform-gpu hover:scale-105"
-                onClick={() => setDeletingWriter(writer)}
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
+      </button> */}
+      {/* {!isAdmin && ( */}
+  <table className="table w-full">
+    <thead>
+      <tr className="bg-gray-800 text-white">
+        <th className="p-2">#</th>
+        <th className="p-2">Name</th>
+        <th className="p-2">Specialization</th>
+        <th className="p-2">Email</th>
+        <th className="p-2">Phone Number</th>
+        <th className="p-2">Date Added</th>
+        <th className="p-2">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {writers.map((writer, index) => (
+        <tr key={writer.id} className={index % 2 === 0 ? 'bg-slate-200' : 'bg-white'}>
+          <td className="p-2">{index + 1}</td>
+          <td className="p-2">{writer.first_name} {writer.last_name}</td>
+          <td className="p-2">{writer.specialization}</td>
+          <td className="p-2">{writer.email}</td>
+          <td className="p-2">{writer.phone}</td>
+          <td className="p-2">{moment(writer.date_joined).format('YYYY-MM-DD')}</td>
+          <td className="p-2">
+            <button
+              className="text-white bg-blue-500 hover:bg-blue-700 py-1 px-2 rounded-md transition-transform transform-gpu hover:scale-105 mr-1"
+              onClick={() => handleEditWriter(writer)}
+            >
+              Edit
+            </button>
+            <button
+              className="text-white bg-red-500 hover:bg-red-700 py-1 px-2 rounded-md transition-transform transform-gpu hover:scale-105"
+              onClick={() => setDeletingWriter(writer)}
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+{/* )} */}
+
+
+
 
       {isModalOpen && (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
