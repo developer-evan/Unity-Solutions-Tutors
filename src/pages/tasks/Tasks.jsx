@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-refresh/only-export-components */
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -21,6 +22,7 @@ function Tasks() {
   const [writers, setWriters] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [orderToDelete, setOrderToDelete] = useState(null);
+  const [projects, setProjects] = useState([]);
 
   const fetchTasks = async () => {
     try {
@@ -221,7 +223,7 @@ function Tasks() {
   useEffect(() => {
     const fetchWriters = async () => {
       try {
-        const response = await axios.get('https://unit-solutions.vercel.app/api/writers/all/');
+        const response = await axios.get('https://unit-solutions.vercel.app/api/user/');
         setWriters(response.data);
       } catch (error) {
         console.error('Error fetching writers:', error);
@@ -230,6 +232,21 @@ function Tasks() {
 
     fetchWriters();
   }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('https://unit-solutions.vercel.app/api/projects/');
+      setProjects(response.data); // Assuming the response contains an array of projects
+
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  // Use the useEffect hook to fetch data when the component mounts
+  useEffect(() => {
+    fetchData();
+  }, []); 
 
 
 
@@ -350,7 +367,7 @@ function Tasks() {
                 className="w-full p-2 border border-gray-300 rounded"
               />
             </div> */}
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <label className="block text-gray-800">Project Title</label>
               <input
                 type="text"
@@ -359,6 +376,25 @@ function Tasks() {
                 onChange={handleInputChange}
                 className="w-full p-2 border border-gray-300 rounded"
               />
+            </div> */}
+
+            <div className="mb-4">
+              <label className="block text-gray-800">Project</label>
+              <select
+                name="writer"
+                value={newOrder.title}
+                onChange={handleInputChange}
+                className="w-full p-2 border border-gray-300 rounded"
+              >
+                <option value="">Select Project</option>
+                {projects.map((title) => (
+                  <option key={title.id} value={title.title}>
+                    {/* {title.first_name} {title.last_name} */}
+                    {/* {writer.email} */}
+                    {title.title}
+                  </option>
+                ))}
+              </select>
             </div>
             <div className="mb-4">
               <label className="block text-gray-800">Writer Assigned</label>
@@ -371,7 +407,8 @@ function Tasks() {
                 <option value="">Select Writer</option>
                 {writers.map((writer) => (
                   <option key={writer.id} value={writer.name}>
-                    {writer.name}
+                    {writer.first_name} {writer.last_name}
+                    {/* {writer.email} */}
                   </option>
                 ))}
               </select>

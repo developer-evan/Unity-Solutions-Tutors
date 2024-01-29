@@ -19,7 +19,7 @@ function Clients() {
     contact_phone: "",
     // project_type: "",
     // project_description: "",
-    project_deadline: "",
+    // project_deadline: "",
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingClient, setEditingClient] = useState(null);
@@ -148,7 +148,7 @@ function Clients() {
       contact_phone: "",
       // project_type: "",
       // project_description: "",
-      project_deadline: "",
+      // project_deadline: "",
     });
   };
 
@@ -230,7 +230,7 @@ function Clients() {
       <h2 className="text-2xl font-semibold mb-4">
         {editingClient ? "Edit client" : "Add New client"}
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
         <div>
         <input
             type="text"
@@ -276,7 +276,7 @@ function Clients() {
             onChange={(e) => setNewClient({ ...newClient, project_description: e.target.value })}
           /> */}
         </div>
-        <div>
+        {/* <div>
           <input
             type="date"
             placeholder="Project Deadline"
@@ -284,7 +284,7 @@ function Clients() {
             value={newClient.project_deadline}
             onChange={(e) => setNewClient({ ...newClient, project_deadline: e.target.value })}
           />
-        </div>
+        </div> */}
       </div>
       <div className="flex justify-end mt-4">
         <button
