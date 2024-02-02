@@ -138,7 +138,6 @@ function Projects() {
         pauseOnHover: true,
       }
       );
-
       return;
     }
 
@@ -173,7 +172,7 @@ function Projects() {
   useEffect(() => {
     const fetchWriters = async () => {
       try {
-        const response = await axios.get('https://unit-solutions.vercel.app/api/writers/all/');
+        const response = await axios.get('https://unit-solutions.vercel.app/api/clients/all/');
         setWriters(response.data);
       } catch (error) {
         console.error('Error fetching writers:', error);
@@ -182,6 +181,11 @@ function Projects() {
 
     fetchWriters();
   }, []);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewProject({ ...newProject, [name]: value });
+  };
 
   const handleDeleteProject = (id, title) => {
     setProjectToDelete({ id, title });
@@ -360,7 +364,7 @@ function Projects() {
                 />
               </div>
              
-              <div className="w-full md:w-full mb-4">
+              {/* <div className="w-full md:w-full mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Client:</label>
                 <input
                   type="text"
@@ -370,7 +374,24 @@ function Projects() {
                   }
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 />
-              </div>
+              </div> */}
+               <div className="w-full md:w-full mb-4">
+              <label className="block text-gray-800">Client</label>
+              <select
+                name="writer"
+                value={newProject.client}
+                onChange={handleInputChange}
+                className="w-full p-2 border border-gray-300 rounded"
+              >
+                <option value="">Select Client</option>
+                {writers.map((client) => (
+                  <option key={client.id} value={client.company_name}>
+                    {/* {writer.first_name} {writer.last_name} */}
+                    {client.company_name}
+                  </option>
+                ))}
+              </select>
+            </div>
               {/* <div className="w-full mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Writer Assigned:</label>
                 <select
