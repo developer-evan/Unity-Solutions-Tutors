@@ -172,7 +172,7 @@ function Projects() {
   useEffect(() => {
     const fetchWriters = async () => {
       try {
-        const response = await axios.get('https://unit-solutions.vercel.app/api/writers/all/');
+        const response = await axios.get('https://unit-solutions.vercel.app/api/clients/all/');
         setWriters(response.data);
       } catch (error) {
         console.error('Error fetching writers:', error);
@@ -375,8 +375,8 @@ function Projects() {
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 />
               </div> */}
-               <div className="mb-4">
-              <label className="block text-gray-800">Writer Assigned</label>
+               <div className="w-full md:w-full mb-4">
+              <label className="block text-gray-800">Client</label>
               <select
                 name="writer"
                 value={newProject.client}
@@ -384,10 +384,10 @@ function Projects() {
                 className="w-full p-2 border border-gray-300 rounded"
               >
                 <option value="">Select Client</option>
-                {writers.map((writer) => (
-                  <option key={writer.id} value={writer.name}>
-                    {writer.first_name} {writer.last_name}
-                    {/* {writer.email} */}
+                {writers.map((client) => (
+                  <option key={client.id} value={client.company_name}>
+                    {/* {writer.first_name} {writer.last_name} */}
+                    {client.company_name}
                   </option>
                 ))}
               </select>
