@@ -93,7 +93,7 @@ const Login = () => {
 
   return (
     <div
-      className='min-h-screen flex justify-center items-center bg-sky-500'
+      className='min-h-screen flex justify-center items-center bg-slate-900'
       // style={{ backgroundImage: "url('/Images/amboseli.jpg')" }}
     >
       <ToastContainer />

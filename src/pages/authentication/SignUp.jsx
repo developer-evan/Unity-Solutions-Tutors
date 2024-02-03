@@ -109,7 +109,7 @@ const SignUp = () => {
     clearFormValues();
   };
   return (
-    <div className='h-1/2 flex justify-center items-center bg-sky-500'>
+    <div className='min-h-screen flex justify-center items-center bg-slate-900'>
       {/* <ToastContainer /> */}
       <ToastContainer/>
 
