@@ -112,11 +112,17 @@ const Navbar = () => {
             className={`flex items-center self-end md:self-center mr-6 cursor-pointer bg-slate-300 text-[#364258] rounded-2xl py-1 w-auto px-1 space-x-2 ${isOpen ? 'bg-blue-500' : ''
               }`}
           >
-            <p className=" text-xl">
+            {/* <p className=" text-xl">
               <AiOutlineUser />
-            </p>
+            </p> */}
+             <div className="flex items-center gap-2">
+                <img
+                  src={userData.profile_image || 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200'}
+                  alt="profile"
+                  className="w-6 h-6 rounded-full"
+                />
+                </div>
             <p className=" text-lg">
-
               {/* {userData ? userData.email : 'loading...'} */}
               {/* {userData ? userData.first_name : ''} {userData ? userData.last_name : */}
               {userData ? userData.username :

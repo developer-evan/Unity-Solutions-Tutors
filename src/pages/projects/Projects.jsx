@@ -21,7 +21,8 @@ function Projects() {
   });
   const [editingProject, setEditingProject] = useState(null);
   const [isAddingProject, setIsAddingProject] = useState(false);
-  const [writers, setWriters] = useState([]);
+  // const [writers, setWriters] = useState([]);
+  const [clients, setClients] = useState([]);
   const [editingWriters, setEditingWriters] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [projectToDelete, setProjectToDelete] = useState(null);
@@ -142,7 +143,7 @@ function Projects() {
     }
 
     try {
-      const response = await axios.put(`https://unit-solutions.vercel.app/api/projects/${editingProject.id}`, editingProject);
+      const response = await axios.put(`https://unit-solutions.vercel.app/api/projects/${editingProject.id}/`, editingProject);
       const updatedProjects = projects.map((project) =>
         project.id === editingProject.id ? response.data : project
       );
@@ -170,16 +171,16 @@ function Projects() {
     }
   };
   useEffect(() => {
-    const fetchWriters = async () => {
+    const fetchClients = async () => {
       try {
-        const response = await axios.get('https://unit-solutions.vercel.app/api/clients/all/');
-        setWriters(response.data);
+        const response = await axios.get('https://unit-solutions.vercel.app/api/clients/');
+        setClients(response.data);
       } catch (error) {
         console.error('Error fetching writers:', error);
       }
     };
 
-    fetchWriters();
+    fetchClients();
   }, []);
 
   const handleInputChange = (e) => {
@@ -255,18 +256,18 @@ function Projects() {
     setProjectToDelete(null);
   };
 
-  useEffect(() => {
-    const fetchEditingWriters = async () => {
-      try {
-        const response = await axios.get('https://unit-solutions.vercel.app/api/writers/all/');
-        setEditingWriters(response.data);
-      } catch (error) {
-        console.error('Error fetching editing writers:', error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchEditingWriters = async () => {
+  //     try {
+  //       const response = await axios.get('https://unit-solutions.vercel.app/api/writers/all/');
+  //       setEditingWriters(response.data);
+  //     } catch (error) {
+  //       console.error('Error fetching editing writers:', error);
+  //     }
+  //   };
 
-    fetchEditingWriters();
-  }, []);
+  //   fetchEditingWriters();
+  // }, []);
 
 
   // const statusOptions = ['In Progress', 'Completed', 'On Hold', 'Cancelled'];
@@ -380,11 +381,14 @@ function Projects() {
               <select
                 name="writer"
                 value={newProject.client}
-                onChange={handleInputChange}
+                // onChange={handleInputChange}
+                onChange={(e) =>
+                  setNewProject({ ...newProject, client: e.target.value })
+                }                
                 className="w-full p-2 border border-gray-300 rounded"
               >
                 <option value="">Select Client</option>
-                {writers.map((client) => (
+                {clients.map((client) => (
                   <option key={client.id} value={client.company_name}>
                     {/* {writer.first_name} {writer.last_name} */}
                     {client.company_name}
