@@ -12,9 +12,9 @@ function  Header() {
   };
 
   return (
-    <div className='fixed top-0 w-full bg-gradient-to-r from-violet-500 to-blue-800 md:flex md:justify-between md:items-center md:px-4'>
+    <div className='fixed top-0 w-full bg-slate-900 md:flex md:justify-between md:items-center md:px-4'>
       <header className='flex justify-between p-3 items-center '>
-        <h2 className='font-bold text-white text-lg md:text-2xl'>Unity Solutions</h2>
+        <h2 className=' text-white text-lg md:text-2xl'>Unity Solutions</h2>
         {/* <img src='./tutor.png' alt='logo' className='h- w-28' /> */}
 
         <div className='md:hidden flex flex-row justify-center gap-2 items-center'>
@@ -50,7 +50,7 @@ function  Header() {
             to="/login"
             className="bg-blue-500 text-white px-4 py-2 w-36 rounded-lg hover:bg-blue-600"
           >
-            Login
+            Get Started
           </Link>
         </button>
     </div>
@@ -62,50 +62,49 @@ function  Header() {
         } md:flex md:w-auto text-start text-white  p-4 md:p-0 md:static md:space-x-4`}
       >
      <a href='#home'  >      
-      <li className='mx-4 font-bold hover:translate-x-2' onClick={closeMenu}>
+      <li className='mx-2  hover:translate-x-2' onClick={closeMenu}>
           Home
         </li>
         </a>
         <a href='#about'  >      
-      <li className='mx-4 font-bold hover:translate-x-2' onClick={closeMenu}>
+      <li className='mx-2  hover:translate-x-2' onClick={closeMenu}>
           About Us
         </li>
         </a>
-        <a href='#samples'  >
-        <li className='mx-4 font-bold hover:translate-x-2' onClick={closeMenu}>
+        {/* <a href='#samples'  >
+        <li className='mx-4  hover:translate-x-2' onClick={closeMenu}>
           Samples
         </li>
-        </a>
+        </a> */}
         <a href='#how-we-work'  > 
-        <li className='mx-4 font-bold hover:translate-x-2' onClick={closeMenu}>
+        <li className='mx-  hover:translate-x-2' onClick={closeMenu}>
           Our Work
         </li>
         </a>
         <a href='#reviews'  > 
-        <li className='mx-4 font-bold hover:translate-x-2' onClick={closeMenu}>
+        <li className='mx-2  hover:translate-x-2' onClick={closeMenu}>
           Reviews
         </li>
         </a>
         <a href='#services'  > 
-        <li className='mx-4 font-bold hover:translate-x-2' onClick={closeMenu}>
+        <li className='mx-2  hover:translate-x-2' onClick={closeMenu}>
           Services
         </li>
         </a>
         <a href='#contact-us'  > 
-        <li className='mx-4 font-bold hover:translate-x-2
+        <li className='mx-2  hover:translate-x-2
         
         ' onClick={closeMenu}>
           Contact Us
         </li>
         </a>
-      </ul>
-     
+      </ul>     
       <button className="hidden md:block text-white hover:text-purple-300">
           <Link
             to="/login"
             className="bg-blue-500 text-white px-4 py-2 w-36 rounded-lg hover:bg-blue-600"
           >
-            Login
+            Get Started
           </Link>
         </button>
     </div>

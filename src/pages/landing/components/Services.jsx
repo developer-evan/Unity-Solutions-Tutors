@@ -2,7 +2,7 @@
 
 const Services = () => {
   return (
-    <section id="services" className="bg-gradient-to-r from-purple-800 to-blue-600 text-white py-16">
+    <section id="services" className="bg-slate-900 text-white py-16">
       <div className="container mx-auto text-center">
         <h2 className="text-3xl font-extrabold mb-6">Our Writing Services</h2>
         <p className="text-lg text-gray-200 mb-8">

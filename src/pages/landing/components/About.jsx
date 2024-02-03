@@ -2,10 +2,15 @@ import { Link } from "react-router-dom";
 
 function About() {
   return (
-    <section className="container mx-auto my-10 p-8 flex justify-around bg-gray-100 rounded-lg" id="about">
-      <article className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-        <div className="flex flex-col justify-center items-start">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">
+    <div className="bg-gray-100 px-6  pt-20 min-h-screen" id="about">
+       <h1 className="text-xl  text-gray-800 text-center">
+        About Us
+      </h1>
+    <section className="container mx-auto   gap-3 flex flex-col md:flex-row justify-around bg-gray-100 rounded-lg" >
+      {/* <article className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center"> */}
+     
+        <div className="flex flex-col justify-center max-w-lg items-start">
+          <h1 className="text-lg  text-gray-900 mb-4">
             Welcome to Academic Solutions Hub
           </h1>
           <p className="text-gray-600 mb-6">
@@ -17,11 +22,12 @@ function About() {
             </button>
           </Link>
         </div>
-        <div className="items-center mt-10">
+        <div className="items-center max-w-lg ">
           <img src="./Illustration2.png" alt="Illustration representing Academic Solutions Hub" className="mb-10 w-96 h-96" />
         </div>
-      </article>
+      {/* </article> */}
     </section>
+    </div>
   );
 }
 export default About;
