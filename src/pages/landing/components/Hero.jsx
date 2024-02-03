@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function Hero() {
   return (
-    <div className="bg-slate-900 md:min-h-screen md:pt-12 sm:pt-9 pt-16" id="home">
+    <div className="bg-slate-900  md:pt-12 sm:pt-9 pt-16" id="home">
       <div className="max-w-screen mx-auto flex md:flex-row flex-col justify-around items-center pt-6 px-6 xl:px-10">
         {/* <div className="grid grid-cols-1 lg:grid-cols-2 grid-rows-2 md:gap-8 py-2 sm:py-10"> */}
           <div className="sm:col-span-1 md:w-1/2 max-w-lg flex flex-col justify-center items-start">
