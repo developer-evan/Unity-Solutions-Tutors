@@ -108,7 +108,7 @@ function Writers() {
     try {
       if (editingWriter) {
         // Send a PATCH request to update an existing writer
-        await axios.patch(`https://unit-solutions.vercel.app/api/writers/update/${editingWriter.id}`, newWriter);
+        await axios.patch(`https://unit-solutions.vercel.app/user/get-user/${editingWriter.id}/`, newWriter);
         const updatedWriters = writers.map((writer) =>
           writer.id === editingWriter.id ? { ...newWriter } : writer
         );

@@ -144,7 +144,6 @@ function Tasks() {
       }
     }
   }
-
   const handleEditOrder = (orderId) => {
     const orderToEdit = orders.find((order) => order.id === orderId);
     setNewOrder(orderToEdit);
@@ -246,7 +245,7 @@ function Tasks() {
   // Use the useEffect hook to fetch data when the component mounts
   useEffect(() => {
     fetchData();
-  }, []); 
+  }, []);
 
 
 
@@ -344,44 +343,10 @@ function Tasks() {
                 <option value="Resubmission">Resubmission</option>
               </select>
             </div>
-            {/* <div className="mb-4">
-              <label className="block text-gray-800">Writer</label>
-              <input
-                type="text"
-                name="writer"
-                value={newOrder.writer}
-                onChange={handleInputChange}
-                className="w-full p-2 border border-gray-300 rounded"
-              />
-            </div> */}
-
-
-
-            {/* <div className="mb-4">
-              <label className="block text-gray-800">Client</label>
-              <input
-                type="text"
-                name="client"
-                value={newOrder.client}
-                onChange={handleInputChange}
-                className="w-full p-2 border border-gray-300 rounded"
-              />
-            </div> */}
-            {/* <div className="mb-4">
-              <label className="block text-gray-800">Project Title</label>
-              <input
-                type="text"
-                name="title"
-                value={newOrder.title}
-                onChange={handleInputChange}
-                className="w-full p-2 border border-gray-300 rounded"
-              />
-            </div> */}
-
             <div className="mb-4">
               <label className="block text-gray-800">Project</label>
               <select
-                name="writer"
+                name="title"
                 value={newOrder.title}
                 onChange={handleInputChange}
                 className="w-full p-2 border border-gray-300 rounded"
@@ -389,12 +354,11 @@ function Tasks() {
                 <option value="">Select Project</option>
                 {projects.map((title) => (
                   <option key={title.id} value={title.title}>
-                    {/* {title.first_name} {title.last_name} */}
-                    {/* {writer.email} */}
-                    {title.title}
+                    {title.title ? title.title : 'No Project'}
                   </option>
                 ))}
               </select>
+
             </div>
             <div className="mb-4">
               <label className="block text-gray-800">Writer Assigned</label>

@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { FaPlus } from 'react-icons/fa';
 
-const API_BASE_URL = "https://unit-solutions.vercel.app/api/clients/all";
+// const API_BASE_URL = "https://unit-solutions.vercel.app/api/clients/all";
 
 function Clients() {
   const [clients, setClients] = useState([]);
@@ -27,7 +27,7 @@ function Clients() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(API_BASE_URL);
+      const response = await axios.get("https://unit-solutions.vercel.app/api/clients/");
       setClients(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -74,7 +74,7 @@ function Clients() {
   const handleUpdateClient = async () => {
     try {
       if (editingClient) {
-        const response = await axios.put(`'https://unit-solutions.vercel.app/api/clients/update/${editingClient.id}`, newClient);
+        const response = await axios.patch(`https://unit-solutions.vercel.app/api/clients/${editingClient.id}/`, newClient);
 
         if (response.status === 200) {
           const updatedClients = clients.map((client) =>
@@ -110,12 +110,15 @@ function Clients() {
 
   const handleDelete = async (id) => {
     try {
-      const response = await axios.delete(`https://unit-solutions.vercel.app/api/clients/delete/${id}`);
-
+      const response = await axios.delete(`https://unit-solutions.vercel.app/api/clients/${id}/`);
+  
+      console.log('Delete Response:', response);
+  
       if (response.status === 200) {
         const updatedClients = clients.filter((client) => client.id !== id);
         setClients(updatedClients);
         setDeletingClient(null);
+        // toast.success('Client deleted successfully', notificationOptions);
         toast.success('Client deleted successfully', {
           position: 'top-right',
           autoClose: 3000,
@@ -124,11 +127,13 @@ function Clients() {
           pauseOnHover: true,
           draggable: true,
         });
+
       } else {
         throw new Error('Failed to delete client');
+        
       }
     } catch (error) {
-      console.error("Error deleting client:", error);
+      // handleRequestError("Error deleting client:", error);
       toast.error('Failed to delete client', {
         position: 'top-right',
         autoClose: 3000,
@@ -139,6 +144,39 @@ function Clients() {
       });
     }
   };
+  
+
+  // const handleDelete = async (id) => {
+  //   try {
+  //     const response = await axios.delete(`https://unit-solutions.vercel.app/api/clients/${id}/`);
+
+  //     if (response.status === 200) {
+  //       const updatedClients = clients.filter((client) => client.id !== id);
+  //       setClients(updatedClients);
+  //       setDeletingClient(null);
+  //       toast.success('Client deleted successfully', {
+  //         position: 'top-right',
+  //         autoClose: 3000,
+  //         hideProgressBar: false,
+  //         closeOnClick: true,
+  //         pauseOnHover: true,
+  //         draggable: true,
+  //       });
+  //     } else {
+  //       throw new Error('Failed to delete client');
+  //     }
+  //   } catch (error) {
+  //     console.error("Error deleting client:", error);
+  //     toast.error('Failed to delete client', {
+  //       position: 'top-right',
+  //       autoClose: 3000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //     });
+  //   }
+  // };
    
   const resetForm = () => {
     setNewClient({
