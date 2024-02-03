@@ -137,7 +137,6 @@ function Writers() {
       });
     }
   };
-
   const handleDelete = async (id) => {
     try {
       // Send a DELETE request to delete a writer by ID
@@ -216,19 +215,31 @@ function Writers() {
         <th className="p-2">Email</th>
         <th className="p-2">Phone Number</th>
         <th className="p-2">Date Added</th>
-        <th className="p-2">Action</th>
+        {/* <th className="p-2">Action</th> */}
       </tr>
     </thead>
     <tbody>
       {writers.map((writer, index) => (
         <tr key={writer.id} className={index % 2 === 0 ? 'bg-slate-200' : 'bg-white'}>
           <td className="p-2">{index + 1}</td>
-          <td className="p-2">{writer.first_name} {writer.last_name}</td>
-          <td className="p-2">{writer.specialization}</td>
-          <td className="p-2">{writer.email}</td>
-          <td className="p-2">{writer.phone}</td>
-          <td className="p-2">{moment(writer.date_joined).format('YYYY-MM-DD')}</td>
           <td className="p-2">
+            
+            {/* {writer.first_name} {writer.last_name} */}
+            {writer.first_name? writer.first_name : 'Admin'} {writer.last_name}
+            
+            </td>
+          <td className="p-2">
+            {/* {writer.specialization} */}
+            {/* {writer.roles.includes(100) ? 'Writer' : 'Admin'} */}
+            {writer.specialization ? writer.specialization : 'Admin'}
+            </td>
+          <td className="p-2">{writer.email}</td>
+          <td className="p-2">
+            {/* {writer.phone} */}
+            {writer.phone? writer.phone: 'no phone number available'}
+            </td>
+          <td className="p-2">{moment(writer.date_joined).format('YYYY-MM-DD')}</td>
+          {/* <td className="p-2">
             <button
               className="text-white bg-blue-500 hover:bg-blue-700 py-1 px-2 rounded-md transition-transform transform-gpu hover:scale-105 mr-1"
               onClick={() => handleEditWriter(writer)}
@@ -241,7 +252,7 @@ function Writers() {
             >
               Delete
             </button>
-          </td>
+          </td> */}
         </tr>
       ))}
     </tbody>
