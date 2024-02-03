@@ -70,7 +70,6 @@ const SignUp = () => {
         phone: '',
         password: '',
       });
-
       if (response.status === 201 || response.status === 200) {
         toast.success('Signup successful', {
           position: 'top-right',
@@ -97,9 +96,7 @@ const SignUp = () => {
         // Set error messages based on the response
         setErrors(error.response.data);
       }
-
       console.error('Error during signup:', error);
-
       toast.error('Signup failed', {
         position: 'top-right',
         autoClose: 3000,
@@ -111,7 +108,6 @@ const SignUp = () => {
     }
     clearFormValues();
   };
-
   return (
     <div className='h-1/2 flex justify-center items-center bg-sky-500'>
       {/* <ToastContainer /> */}

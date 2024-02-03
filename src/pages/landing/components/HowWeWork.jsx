@@ -4,11 +4,15 @@ import { FaAccusoft, FaAcquisitionsIncorporated, FaAddressBook, FaAdjust, FaBook
 
 const HowWeWork = () => {
   return (
-    <section id="how-we-work" className="bg-gradient-to-r from-blue-400 to-purple-600 py-16 text-white">
+    <div id="how-we-work" className="bg-slate-900 py-16 text-white">
+
+    <h1 className="text-xl text-center  text-slate-200 mb-12">
+    Our Efficient Writing Process
+  </h1>
+    <section>
       <div className="container mx-auto text-center">
-        <h2 className="text-3xl font-semibold mb-6">
-          Our Efficient Writing Process
-        </h2>
+        {/* <h2 className="text-3xl font-semibold mb-6">          
+        </h2> */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="flex flex-col items-center">
             <div className="p-6 rounded-full bg-white text-blue-400 text-4xl">
@@ -51,6 +55,7 @@ const HowWeWork = () => {
         </div>
       </div>
     </section>
+  </div>
   );
 };
 
