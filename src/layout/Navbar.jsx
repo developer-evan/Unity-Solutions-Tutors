@@ -115,9 +115,11 @@ const Navbar = () => {
             {/* <p className=" text-xl">
               <AiOutlineUser />
             </p> */}
+            
              <div className="flex items-center gap-2">
                 <img
-                  src={userData.profile_image || 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200'}
+                  src={'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200'}
+                  // srcSet={userData.profile_image || 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200'}
                   alt="profile"
                   className="w-6 h-6 rounded-full"
                 />
