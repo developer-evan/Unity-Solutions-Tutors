@@ -5,6 +5,7 @@ import MainLayout from "../../layout/MainLayout";
 import useAuth from '../../hooks/useAuth';
 import axios from 'axios';
 import { TailSpin } from "react-loader-spinner";
+import { FaEdit, FaPen } from "react-icons/fa";
 function Profile() {
   const { auth } = useAuth();
   const id = auth.user_id;
@@ -77,8 +78,8 @@ function Profile() {
                 {/* <p className="text-gray-600">{userData.date_joined || 'loading...'}</p> */}
 
               </div>
-              <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
-                Edit Profile
+              <button className="text-blue-500  px-4 py-2 rounded-md">
+                <FaPen className="mr-2" />
               </button>
             </div>
             <div className="grid grid-cols-2 gap-4">

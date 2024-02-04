@@ -111,8 +111,7 @@ const SignUp = () => {
   return (
     <div className='min-h-screen flex justify-center items-center bg-slate-900'>
       {/* <ToastContainer /> */}
-      <ToastContainer/>
-
+      <ToastContainer/> 
       <div className='p-6 rounded-lg bg-white shadow-md'>
         <div className='mb-4'>
           <Link to='/'>
@@ -183,6 +182,7 @@ const SignUp = () => {
           </div>
 
           {/* ... (other input fields) */}
+          <div className='grid grid-cols-2 gap-4'>
           <div className='mb-4'>
               <label
                 className='block text-gray-700 text-sm font-bold mb-2'
@@ -208,6 +208,34 @@ const SignUp = () => {
                 <p className='text-red-500 text-sm'>{errors.specialization[0]}</p>
               )}
             </div>
+            <div className='mb-4'>
+                <label
+                className='block text-gray-700 text-sm font-bold mb-2'
+                htmlFor='phone'
+                >
+                Phone Number <span className='text-red-500'>*</span>
+                </label>
+                <input
+                type='text'
+                id='phone'
+                name='phone'
+                value={userData.phone}
+                onChange={(e) =>
+                    setUserData({ ...userData, phone: e.target.value })
+                }
+                className={`w-full border rounded-md py-2 px-3 ${
+                    errors.phone ? 'border-red-500' : ''
+                }`}
+                placeholder='Enter your phone number'
+                required
+                />
+                {errors.phone && (
+                <p className='text-red-500 text-sm'>{errors.phone[0]}</p>
+                )}
+                </div>
+                </div>
+
+                <div className='grid grid-cols-2 gap-4'>
 
             <div className='mb-4'>
                 <label
@@ -234,31 +262,7 @@ const SignUp = () => {
                 <p className='text-red-500 text-sm'>{errors.email[0]}</p>
                 )}
                 </div>
-                <div className='mb-4'>
-                <label
-                className='block text-gray-700 text-sm font-bold mb-2'
-                htmlFor='phone'
-                >
-                Phone Number <span className='text-red-500'>*</span>
-                </label>
-                <input
-                type='text'
-                id='phone'
-                name='phone'
-                value={userData.phone}
-                onChange={(e) =>
-                    setUserData({ ...userData, phone: e.target.value })
-                }
-                className={`w-full border rounded-md py-2 px-3 ${
-                    errors.phone ? 'border-red-500' : ''
-                }`}
-                placeholder='Enter your phone number'
-                required
-                />
-                {errors.phone && (
-                <p className='text-red-500 text-sm'>{errors.phone[0]}</p>
-                )}
-                </div>
+                
                 <div className='mb-4'>
                 <label
                 className='block text-gray-700 text-sm font-bold mb-2'
@@ -294,6 +298,7 @@ const SignUp = () => {
                     className='text-gray-500 hover:text-gray-700 cursor-pointer' />
                 )}
                 </button>
+                </div>
                 </div>
                 </div>
 

@@ -74,7 +74,7 @@ function Clients() {
     try {
       if (editingClient) {
         // const response =
-         await axios.patch(`https://unit-solutions.vercel.app/api/clients/${editingClient.id}/`, newClient);
+         await axios.put(`https://unit-solutions.vercel.app/api/clients/${editingClient.id}/`, newClient);
 
         // if (response.status === 200) {
           const updatedClients = clients.map((client) =>
@@ -203,7 +203,7 @@ function Clients() {
               <td className="border border-gray-300 p-2">{client.company_name}</td>
               <td className="border border-gray-300 p-2">{client.contact_email}</td>
               <td className="border border-gray-300 p-2">{client.contact_phone}</td>
-              <td className="border border-gray-300 p-2">
+              <td className="border border-gray-300 p-2 flex flex-row gap-2">
                 <button
                   className="text-white bg-blue-500 hover:bg-blue-700 py-1 px-2 rounded-md transition-transform transform-gpu hover:scale-105"
                   onClick={() => handleEditClient(client)}
