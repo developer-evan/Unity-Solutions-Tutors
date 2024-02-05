@@ -68,7 +68,8 @@ function Projects() {
       !newProject.deadline ||
       // !newProject.writer_assigned ||
       !newProject.client ||
-      !newProject.status
+      !newProject.status ||
+      !newProject.fileUrl
       // !newProject.description
 
     ) {
@@ -127,7 +128,9 @@ function Projects() {
       !editingProject.deadline ||
       // !editingProject.writer_assigned ||
       !editingProject.client ||
-      !editingProject.status
+      !editingProject.status ||
+      !editingProject.fileUrl
+      
       // !editingProject.description
     ) {
       // alert('Please fill in all fields.');
@@ -451,6 +454,7 @@ function Projects() {
                   onChange={handleFileChange}
                   value={newProject.attachment}
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
+                  required
                 />
               </div>
               <div className="w-full md:w-full mb-4">
