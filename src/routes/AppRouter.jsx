@@ -27,6 +27,8 @@ import SignUp from '../pages/authentication/SignUp';
 import ResetPassword from '../pages/authentication/ResetPassword';
 import Clients from '../pages/writers/Clients';
 import Users from '../pages/users/Users';
+import Chat from '../pages/userdash/Chat';
+import Submit from '../pages/userdash/Submit';
 // import RequireAuth from '../pages/authentication/persistent/RequireAuth';
 
 
@@ -59,6 +61,11 @@ function AppRouter() {
             <Route path="/analytics" element={<Analytics />} />
            <Route path="/all-users" element={<Users />} />
            <Route path="/clients" element={<Clients />} />
+
+           {/* users */}
+
+           <Route path="/message-admin" element={<Chat />} />
+           <Route path='submit-task' element={<Submit />} />
           </Route>
         </Route>
       </Routes>

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import MainLayout from '../../layout/MainLayout';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { FaPlus } from 'react-icons/fa';
+import { FaPlus, FaPen, FaTrash } from 'react-icons/fa';
 
 function Projects() {
   const [projects, setProjects] = useState([]);
@@ -286,28 +286,29 @@ function Projects() {
   return (
     <div className="container mx-auto p-4">
       <ToastContainer />
-     
-     <div className="flex justify-between items-center mb-4">
-     <h1 className="text-2xl font-bold mb-4">All Projects</h1>
-      <button
-        onClick={openAddProjectModal}
-        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded flex items-center"
-      >
-        <FaPlus className="inline-block mr-2" />
-        Add Project
-      </button>
-    </div>
+
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-bold mb-4">All Projects</h1>
+        <button
+          onClick={openAddProjectModal}
+          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded flex items-center"
+        >
+          <FaPlus className="inline-block mr-2" />
+          Add Project
+        </button>
+      </div>
 
       <table className="min-w-full border border-gray-300 mt-4">
         <thead>
           <tr className="bg-gray-200">
             <th className="border p-2">Title</th>
-            
+
             <th className="border p-2">Client</th>
-            <th className="border p-2">Status</th>
+            {/* <th className="border p-2">Status</th> */}
             {/* <th className="border p-2">Description</th> */}
             <th className="border p-2 items-center justify-center">Project File</th>
             <th className="border p-2">Deadline</th>
+            <th className="border p-2">Status</th>
             <th className="border p-2">Actions</th>
           </tr>
         </thead>
@@ -315,33 +316,34 @@ function Projects() {
           {projects.map((project) => (
             <tr key={project.id}>
               <td className="border p-2">{project.title}</td>
-              
+
               <td className="border p-2">{project.client}</td>
-              <td className="border p-2">{project.status}</td>
+
               {/* <td className="border p-2">{project.description}</td> */}
               <td className="border p-2">
+
                 <Link
                   to={`/view-file/${project.id}`}
                   className="text-blue-500 hover:underline"
                 >
-                  View File
+                  Project File
                 </Link>
               </td>
               <td className="border p-2">{project.deadline}</td>
-              <td className="border p-2">
-                <button
+              <td className="border p-2">{project.status}</td>
+              <td className="p-3 border   gap-4 flex flex-row">
+                <p
                   onClick={() => setEditingProject(project)}
-                  className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded mx-1"
+                  className="  rounded-lg text-blue-600 text-xs cursor-pointer  "
                 >
-                  Edit
-                </button>
-                <button
-                  // onClick={() => handleDeleteProject(project.id)}
+                  <FaPen className="inline-block " />
+                </p>
+                <p
                   onClick={() => handleDeleteProject(project.id, project.title)}
-                  className="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded mx-1"
+                  className="rounded-lg text-red-600 text-xs cursor-pointer "
                 >
-                  Delete
-                </button>
+                  <FaTrash className="inline-block " />
+                </p>
               </td>
             </tr>
           ))}
@@ -364,7 +366,7 @@ function Projects() {
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 />
               </div>
-             
+
               {/* <div className="w-full md:w-full mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Client:</label>
                 <input
@@ -376,26 +378,26 @@ function Projects() {
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 />
               </div> */}
-               <div className="w-full md:w-full mb-4">
-              <label className="block text-gray-800">Client</label>
-              <select
-                name="writer"
-                value={newProject.client}
-                // onChange={handleInputChange}
-                onChange={(e) =>
-                  setNewProject({ ...newProject, client: e.target.value })
-                }                
-                className="w-full p-2 border border-gray-300 rounded"
-              >
-                <option value="">Select Client</option>
-                {clients.map((client) => (
-                  <option key={client.id} value={client.company_name}>
-                    {/* {writer.first_name} {writer.last_name} */}
-                    {client.company_name}
-                  </option>
-                ))}
-              </select>
-            </div>
+              <div className="w-full md:w-full mb-4">
+                <label className="block text-gray-800">Client</label>
+                <select
+                  name="writer"
+                  value={newProject.client}
+                  // onChange={handleInputChange}
+                  onChange={(e) =>
+                    setNewProject({ ...newProject, client: e.target.value })
+                  }
+                  className="w-full p-2 border border-gray-300 rounded"
+                >
+                  <option value="">Select Client</option>
+                  {clients.map((client) => (
+                    <option key={client.id} value={client.company_name}>
+                      {/* {writer.first_name} {writer.last_name} */}
+                      {client.company_name}
+                    </option>
+                  ))}
+                </select>
+              </div>
               {/* <div className="w-full mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Writer Assigned:</label>
                 <select
@@ -510,7 +512,7 @@ function Projects() {
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 />
               </div>
-              <div className="mb-4">
+              {/* <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Client:</label>
                 <input
                   type="text"
@@ -520,6 +522,26 @@ function Projects() {
                   }
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 />
+              </div> */}
+              <div className="w-full md:w-full mb-4">
+                <label className="block text-gray-800">Client</label>
+                <select
+                  name="writer"
+                  value={editingProject.client}
+                  // onChange={handleInputChange}
+                  onChange={(e) =>
+                    setEditingProject({ ...editingProject, client: e.target.value })
+                  }
+                  className="w-full p-2 border border-gray-300 rounded"
+                >
+                  <option value="">Select Client</option>
+                  {clients.map((client) => (
+                    <option key={client.id} value={client.company_name}>
+                      {/* {writer.first_name} {writer.last_name} */}
+                      {client.company_name}
+                    </option>
+                  ))}
+                </select>
               </div>
               {/* <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Writer Assigned:</label>
@@ -593,18 +615,18 @@ function Projects() {
           </div>
         </div>
       )}
- {showDeleteModal && (
+      {showDeleteModal && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="modal bg-white p-4 rounded-lg shadow-lg w-96">
             <h2 className="text-2xl font-bold mb-4">Confirm Deletion</h2>
-            <p>Are you sure you want to delete   
+            <p>Are you sure you want to delete
               <span className="font-bold text-sky-600"> {projectToDelete.title} </span>
-               project?</p>
+              project?</p>
             <div className="flex mt-4">
               <button
                 // onClick={confirmDelete}
                 onClick={() => confirmDelete(projectToDelete.id)}
-                
+
                 className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
               >
                 Confirm

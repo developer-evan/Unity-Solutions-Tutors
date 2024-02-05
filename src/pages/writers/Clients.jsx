@@ -7,7 +7,8 @@ import MainLayout from "../../layout/MainLayout";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-import { FaPlus } from 'react-icons/fa';
+import { FaPlus, FaPen, FaTrash } from 'react-icons/fa';
+
 
 function Clients() {
   const [clients, setClients] = useState([]);
@@ -204,19 +205,21 @@ function Clients() {
               <td className="border border-gray-300 p-2">{client.contact_email}</td>
               <td className="border border-gray-300 p-2">{client.contact_phone}</td>
               <td className="border border-gray-300 p-2 flex flex-row gap-2">
-                <button
-                  className="text-white bg-blue-500 hover:bg-blue-700 py-1 px-2 rounded-md transition-transform transform-gpu hover:scale-105"
+               
+                <p
                   onClick={() => handleEditClient(client)}
+                  className="  rounded-lg text-blue-600 text-xs cursor-pointer  "
                 >
-                  Edit
-                </button>
-                <button
-                  className="text-white bg-red-500 hover:bg-red-700 py-1 px-2 rounded-md transition-transform transform-gpu hover:scale-105"
+                  <FaPen className="inline-block " />
+                </p>
+                <p
                   onClick={() => setDeletingClient(client)}
+                  className="rounded-lg text-red-600 text-xs cursor-pointer "
                 >
-                  Delete
-                </button>
+                  <FaTrash className="inline-block " />
+                </p>
               </td>
+               
             </tr>
           ))}
         </tbody>
