@@ -5,7 +5,9 @@ import axios from 'axios';
 import MainLayout from '../../layout/MainLayout';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { FaPlus } from 'react-icons/fa';
+import { FaPen, FaPlus, FaTrash } from 'react-icons/fa';
+import useAuth from '../../hooks/useAuth';
+import Admin from '../../layout/dash/Admin';
 
 function Tasks() {
   const [orders, setOrders] = useState([]);
@@ -23,6 +25,10 @@ function Tasks() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [orderToDelete, setOrderToDelete] = useState(null);
   const [projects, setProjects] = useState([]);
+
+  const { auth } = useAuth();
+  // auth roles: 100 - user, 200 - hub admin, 300 - chapter admin, 400 - staff_admin and 500 - super admin
+  const isAdmin = auth.roles.includes(200) || auth.roles.includes(300)
 
   const fetchTasks = async () => {
     try {
@@ -249,6 +255,7 @@ function Tasks() {
 
 
 
+
   return (
     <div className="flex flex-col md:flex-row p-4 md:p-0">
       <ToastContainer />
@@ -256,13 +263,17 @@ function Tasks() {
         <div className="bg-white shadow-md rounded-lg p-3">
           <div className="flex justify-between items-center">
             <h2 className="text-xl font-semibold text-gray-800">Tasks</h2>
-            <button
-              onClick={toggleAddOrderModal}
-              className="px-2 py-1 bg-sky-500 text-gray-100 font-bold rounded hover:bg-gray-700 flex items-center"
-            >
-              <FaPlus className="inline-block mr-2" />
-              Add Task
-            </button>
+            {isAdmin ? (
+              <button
+                onClick={toggleAddOrderModal}
+                className="px-2 py-1 bg-sky-500 text-gray-100 font-bold rounded hover:bg-gray-700 flex items-center"
+              >
+                <FaPlus className="inline-block mr-2" />
+                Add Task
+              </button>
+            ) : (
+              null
+            )}
           </div>
 
           <div className="overflow-x-auto mt-6">
@@ -270,20 +281,44 @@ function Tasks() {
               <thead>
                 <tr className="bg-gray-200 text-slate-400">
 
-                  <th className="px-4 py-2 text-start">Status</th>
-
 
                   <th className="px-2 py-2 text-start">Project Title</th>
                   {/* <th className="px-2 py-2 text-start">Client</th> */}
                   <th className="px-2 py-2 text-start">Writer Assigned</th>
-                  <th className="px-2 py-2 text-start">Book Balance</th>
+                  {isAdmin ? (
+                    <th className="px-2 py-2 text-start">Book Balance</th>
+                  ) : (
+                    null
+                  )}
                   <th className="px-2 py-2 text-start">Deadline</th>
-                  <th className="px-2 py-2 text-start">Actions</th>
+                  <th className="px-4 py-2 text-start">Status</th>
+
+                  {isAdmin ? (
+                    <th className="px-2 py-2 text-start">Actions</th>
+                  ) : (
+                    null
+                  )}
                 </tr>
               </thead>
               <tbody>
                 {orders.map((order) => (
                   <tr key={order.id} className="border-t border-gray-300 hover:bg-slate-100">
+                    {/* <td className="px-2 py-2">
+                      <button
+                        className={`bg-${order.status.toLowerCase()}-400 py-2 px-2 rounded-lg w-28 bg-sky-600 text-xs font-bold text-slate-100`}
+                      >
+                        {order.status}
+                      </button>
+                    </td> */}
+                    <td className="px-2 py-2 text-gray-500">{order.title}</td>
+                    <td className="px-2 py-2 text-gray-500">{order.writer}</td>
+                    {/* <td className="px-2 py-2 text-gray-500">{order.client}</td> */}
+                    {isAdmin ? (
+                      <td className="px-2 py-2 text-slate-600 font-semibold">{order.book_balance}</td>
+                    ) : (
+                      null
+                    )}
+                    <td className="px-2 py-2 text-slate-600 font-semibold">{order.deadline}</td>
                     <td className="px-2 py-2">
                       <button
                         className={`bg-${order.status.toLowerCase()}-400 py-2 px-2 rounded-lg w-28 bg-sky-600 text-xs font-bold text-slate-100`}
@@ -291,25 +326,27 @@ function Tasks() {
                         {order.status}
                       </button>
                     </td>
-                    <td className="px-2 py-2 text-gray-500">{order.title}</td>
-                    <td className="px-2 py-2 text-gray-500">{order.writer}</td>
-                    {/* <td className="px-2 py-2 text-gray-500">{order.client}</td> */}
-                    <td className="px-2 py-2 text-slate-600 font-semibold">{order.book_balance}</td>
-                    <td className="px-2 py-2 text-slate-600 font-semibold">{order.deadline}</td>
-                    <td className="px-2 py-2">
-                      <button
-                        onClick={() => handleEditOrder(order.id)}
-                        className=" py-2 px-4 w-20 rounded-lg  bg-blue-600 text-xs font-bold text-slate-100 mr-2"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => handleDeleteOrder(order.id)}
-                        className="py-2 px-4 w-20 rounded-lg  bg-red-600 text-xs font-bold text-slate-100"
-                      >
-                        Delete
-                      </button>
-                    </td>
+                    {isAdmin ? (
+                      // If the user is an admin, render the following JSX
+                      <td className="px-2 py-2 gap-4 flex flex-row">
+                        <p
+                          onClick={() => handleEditOrder(order.id)}
+                          className="  rounded-lg text-blue-600 text-xs cursor-pointer  "
+                        >
+                          <FaPen className="inline-block " />
+                        </p>
+                        <p
+                          onClick={() => handleDeleteOrder(order.id)}
+                          className="rounded-lg text-red-600 text-xs cursor-pointer "
+                        >
+                          <FaTrash className="inline-block " />
+                        </p>
+                      </td>
+                    ) : (
+                      // If the user is not an admin, render nothing (null)
+                      null
+                    )}
+
                   </tr>
                 ))}
               </tbody>

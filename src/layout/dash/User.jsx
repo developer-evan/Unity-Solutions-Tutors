@@ -1,7 +1,7 @@
 // import React from "react";
 import { useState } from "react";
 import { AiOutlineLogout } from "react-icons/ai";
-import { FaHome, FaTasks, FaUserEdit, FaCogs } from "react-icons/fa";
+import { FaHome, FaTasks, FaUserEdit, FaCogs, FaArrowAltCircleRight, FaFacebookMessenger } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -59,11 +59,21 @@ const User = () => {
 
         {isTasksMenuOpen && (
           <div className='pl-10 items-start space-y-4'>
-            <Link to='/all-tasks'>
+            <Link to='/tasks'>
               <div className="group py-2 pl-5 flex items-center cursor-pointer  hover:text-sky-500 hover:bg-slate-200 hover:border-r-4 hover:border-sky-500">
                 <h6 className="flex group-hover:translate-x-2  text-sm items-center justify-center">
                   <FaUserEdit className='text-2xl pr-2' />
                   All Tasks
+                </h6>
+              </div>
+              
+
+            </Link>
+            <Link to='/submit-task'>
+              <div className="group py-2 pl-5 flex items-center cursor-pointer  hover:text-sky-500 hover:bg-slate-200 hover:border-r-4 hover:border-sky-500">
+                <h6 className="flex group-hover:translate-x-2  text-sm items-center justify-center">
+                  <FaArrowAltCircleRight className='text-2xl pr-2' />
+                  Submit Task
                 </h6>
               </div>
             </Link>
@@ -77,6 +87,15 @@ const User = () => {
             </h6>
           </div>
         </Link>
+ {/* message admin */}
+        <Link to="/message-admin">
+          <div className="group py-2 pl-5 flex items-center cursor-pointer  hover:text-sky-500 hover:bg-slate-200 hover:border-r-4 hover:border-sky-500">
+            <h6 className="flex group-hover:translate-x-2  text-sm items-center justify-center">
+              <FaFacebookMessenger className="pr-2 text-2xl" /> Message Admin
+            </h6>
+          </div>
+        </Link>
+        
       </div>
       <div className="flex-shrink ">
         <div className="bg-slate-800 p-2 text-center pl-3 border-t text-sm text-semibold border-slate-300 flex items-center cursor-pointer hover:text-sky-500 hover:bg-slate-200 hover:border-r-4 hover:border-sky-500"
