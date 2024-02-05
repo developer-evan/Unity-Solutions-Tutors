@@ -96,13 +96,15 @@ const Navbar = () => {
       <div className="flex flex-col-reverse gap-4 md:gap-0 md:flex-row items-center">
         <div className="flex items-center flex-grow">
           <div className="md:w-1/4 flex items-center px-3 rounded-full">
-            <FaBars className="text-gray-500 mr-2 cursor-pointer" />
+            {/* <FaBars className="text-gray-500 mr-2 cursor-pointer" /> */}
             {/* <input
               type="text"
               placeholder="Global Search"
               className="w-full border rounded p-1"
             /> */}
             {/* <GlobalSearch  */}
+
+            <input type="text" placeholder="Search" className="w-full border rounded p-1" />
 
           </div>
         </div>

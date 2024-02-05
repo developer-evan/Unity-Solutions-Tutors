@@ -116,9 +116,7 @@ const SignUp = () => {
         <div className='mb-4'>
           <Link to='/'>
             <div className='flex justify-center w-full items-end gap-2'>
-              <h1 className='text-[#364258] text-sm font-semibold text-end'>
-                Unity Solutions
-              </h1>
+            <img src='./unity.png' alt='logo' className='h-16 ' />
             </div>
           </Link>
           <h3 className='text-3xl text-gray-500 font-bold mb-1'>
