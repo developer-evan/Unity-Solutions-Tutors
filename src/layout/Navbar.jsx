@@ -104,7 +104,7 @@ const Navbar = () => {
             /> */}
             {/* <GlobalSearch  */}
 
-            <input type="text" placeholder="Search" className="w-full border rounded p-1" />
+            <input type="text" placeholder="Search" className="w-full outline-none rounded p-1" />
 
           </div>
         </div>

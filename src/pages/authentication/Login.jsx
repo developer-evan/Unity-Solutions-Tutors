@@ -113,7 +113,7 @@ const Login = () => {
           <Link to='/'>
             <div className='flex justify-center w-full items-end gap-2'>
               {/* <img src="img/logo.png" alt="Equity Bank Logo" className="w-10" /> */}
-              <img src='./unity.png' alt='logo' className='h-16 ' />
+              <img src='./dark.png' alt='logo' className='h-16 ' />
             </div>
           </Link>
           <h3 className='text-3xl text-gray-500 font-bold mb-1'>
