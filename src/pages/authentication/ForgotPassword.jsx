@@ -78,7 +78,7 @@ const handleSubmit = async (e) => {
             {/* <img src="img/logo.png" alt="Equity Bank Logo" className="w-10" /> */}
 
             {/* <h1 className="text-[#364258] text-sm font-semibold text-end">Unity Solutions</h1> */}
-            <img src='./unity.png' alt='logo' className='h-16 ' />
+            <img src='./dark.png' alt='logo' className='h-16 ' />
           </div></Link>
              <div className="flex flex-col items-center justify-center gap-2 mb-4">
         <h1 className="text-maroon text-center mb-2 text-2xl font-bold">
