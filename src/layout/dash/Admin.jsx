@@ -50,13 +50,14 @@ const Admin = () => {
   }
   return (
     <aside className="hidden  bg-slate-800 text-slate-400 w-60 h-full md:flex flex-col fixed">
-      <div className="flex items-center justify-center ">
+      <div className="flex items-center justify-center pt-2 pb-6 ">
         {/* <img src="./img/logo.png" alt="Logo" className="h-10 w-auto" /> */}
 
         {/* <Link to={"/"}>
           <FaAccusoft className="text-5xl"/>
         </Link> */}
-        <img src="./tutor.png" alt='logo' className='h-30 w-40' />
+        {/* <img src="./tutor.png" alt='logo' className='h-30 w-40' /> */}
+        <img src='./unity.png' alt='logo' className='h-16' />
       </div>
       <div className="flex-grow">
         <Link to="/dashboard">

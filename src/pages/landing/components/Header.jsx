@@ -13,9 +13,9 @@ function  Header() {
 
   return (
     <div className='fixed top-0 w-full bg-slate-900 md:flex md:justify-between md:items-center md:px-4'>
-      <header className='flex justify-between p-3 items-center '>
-        <h2 className=' text-white text-lg md:text-2xl'>Unity Solutions</h2>
-        {/* <img src='./tutor.png' alt='logo' className='h- w-28' /> */}
+      <header className='flex justify-between  items-center '>
+        {/* <h2 className=' text-white text-lg md:text-2xl'>Unity Solutions</h2> */}
+        <img src='./unity.png' alt='logo' className='h-16 ' />
 
         <div className='md:hidden flex flex-row justify-center gap-2 items-center'>
         <button

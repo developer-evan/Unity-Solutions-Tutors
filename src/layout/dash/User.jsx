@@ -29,8 +29,9 @@ const User = () => {
 
   return (
     <aside className="hidden  bg-slate-800 text-slate-400 w-60 h-full md:flex flex-col fixed">
-      <div className="flex items-center justify-center ">
-        <img src="./tutor.png" alt='logo' className='h-30 w-40' />
+      <div className="flex items-center justify-start my-4 ">
+        {/* <img src="./tutor.png" alt='logo' className='h-30 w-40' /> */}
+        <img src='./unity.png' alt='logo' className='h-16'/>
       </div>
       <div className="flex-grow">
         <Link to="/dashboard">
