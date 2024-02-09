@@ -122,7 +122,6 @@ function Projects() {
 
   const handleEditProject = async () => {
     if (!editingProject) return;
-
     // if (
     //   !editingProject.title ||
     //   !editingProject.deadline ||
