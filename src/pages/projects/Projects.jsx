@@ -16,7 +16,7 @@ function Projects() {
     // writer_assigned: '',
     client: '',
     status: '',
-    description: '',
+    // description: '',
     fileUrl: '',
   });
   const [editingProject, setEditingProject] = useState(null);
@@ -122,28 +122,27 @@ function Projects() {
 
   const handleEditProject = async () => {
     if (!editingProject) return;
-
-    if (
-      !editingProject.title ||
-      !editingProject.deadline ||
-      // !editingProject.writer_assigned ||
-      !editingProject.client ||
-      !editingProject.status ||
-      !editingProject.fileUrl
+    // if (
+    //   !editingProject.title ||
+    //   !editingProject.deadline ||
+    //   // !editingProject.writer_assigned ||
+    //   !editingProject.client ||
+    //   !editingProject.status ||
+    //   !editingProject.fileUrl
       
-      // !editingProject.description
-    ) {
-      // alert('Please fill in all fields.');
-      toast.error('Please fill in all fields.', {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-      }
-      );
-      return;
-    }
+    //   // !editingProject.description
+    // ) {
+    //   // alert('Please fill in all fields.');
+    //   toast.error('Please fill in all fields.', {
+    //     position: "top-center",
+    //     autoClose: 5000,
+    //     hideProgressBar: false,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //   }
+    //   );
+    //   return;
+    // }
 
     try {
       const response = await axios.put(`https://unit-solutions.vercel.app/api/projects/${editingProject.id}/`, editingProject);
