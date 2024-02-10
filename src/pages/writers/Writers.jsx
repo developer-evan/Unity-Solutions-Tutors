@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useAuth from "../../hooks/useAuth";
 import moment from 'moment';
+import { FaTrash } from 'react-icons/fa';
 
 
 const getFormattedDate = () => {
@@ -36,7 +37,7 @@ function Writers() {
   const [editingWriter, setEditingWriter] = useState(null);
   const [deletingWriter, setDeletingWriter] = useState(null);
   const { auth, setAuth } = useAuth();
-  
+
   const isAdmin = auth.roles.includes(200) || auth.roles.includes(300);
 
   // const filteredWriters = isAdmin ? writers : writers.filter((writer) => writer.id === auth.id);
@@ -140,7 +141,7 @@ function Writers() {
   const handleDelete = async (id) => {
     try {
       // Send a DELETE request to delete a writer by ID
-      await axios.delete(`https://unit-solutions.vercel.app/api/writers/delete/${id}`);
+      await axios.delete(`https://unit-solutions.vercel.app/api/user/get-user/${id}/`);
       const updatedWriters = writers.filter((writer) => writer.id !== id);
       setWriters(updatedWriters);
       setDeletingWriter(null); // Reset deletingWriter
@@ -206,58 +207,65 @@ function Writers() {
         Add Writer
       </button> */}
       {/* {!isAdmin && ( */}
-  <table className="table w-full">
-    <thead>
-      <tr className="bg-gray-800 text-white">
-        <th className="p-2">#</th>
-        <th className="p-2">Name</th>
-        <th className="p-2">Specialization</th>
-        <th className="p-2">Email</th>
-        <th className="p-2">Phone Number</th>
-        <th className="p-2">Date Added</th>
-        {/* <th className="p-2">Action</th> */}
-      </tr>
-    </thead>
-    <tbody>
-      {writers.map((writer, index) => (
-        <tr key={writer.id} className={index % 2 === 0 ? 'bg-slate-200' : 'bg-white'}>
-          <td className="p-2">{index + 1}</td>
-          <td className="p-2">
-            
-            {/* {writer.first_name} {writer.last_name} */}
-            {writer.first_name? writer.first_name : 'Admin'} {writer.last_name}
-            
-            </td>
-          <td className="p-2">
-            {/* {writer.specialization} */}
-            {/* {writer.roles.includes(100) ? 'Writer' : 'Admin'} */}
-            {writer.specialization ? writer.specialization : 'Admin'}
-            </td>
-          <td className="p-2">{writer.email}</td>
-          <td className="p-2">
-            {/* {writer.phone} */}
-            {writer.phone? writer.phone: 'no phone number available'}
-            </td>
-          <td className="p-2">{moment(writer.date_joined).format('YYYY-MM-DD')}</td>
-          {/* <td className="p-2">
-            <button
+      <table className="table w-full">
+        <thead>
+          <tr className="bg-gray-800 text-white">
+            <th className="p-2">#</th>
+            <th className="p-2">Name</th>
+            <th className="p-2">Specialization</th>
+            <th className="p-2">Email</th>
+            <th className="p-2">Phone Number</th>
+            <th className="p-2">Date Added</th>
+            <th className="p-2">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {writers.map((writer, index) => (
+            <tr key={writer.id} className={index % 2 === 0 ? 'bg-slate-200' : 'bg-white'}>
+              <td className="p-2">{index + 1}</td>
+              <td className="p-2">
+
+                {/* {writer.first_name} {writer.last_name} */}
+                {writer.first_name ? writer.first_name : 'Admin'} {writer.last_name}
+
+              </td>
+              <td className="p-2">
+                {/* {writer.specialization} */}
+                {/* {writer.roles.includes(100) ? 'Writer' : 'Admin'} */}
+                {writer.specialization ? writer.specialization : 'Admin'}
+              </td>
+              <td className="p-2">{writer.email}</td>
+              <td className="p-2">
+                {/* {writer.phone} */}
+                {writer.phone ? writer.phone : 'no phone number available'}
+              </td>
+              <td className="p-2">{moment(writer.date_joined).format('YYYY-MM-DD')}</td>
+              <td className="p-2">
+                {/* <button
               className="text-white bg-blue-500 hover:bg-blue-700 py-1 px-2 rounded-md transition-transform transform-gpu hover:scale-105 mr-1"
               onClick={() => handleEditWriter(writer)}
             >
               Edit
-            </button>
-            <button
+            </button> */}
+                {/* <button
               className="text-white bg-red-500 hover:bg-red-700 py-1 px-2 rounded-md transition-transform transform-gpu hover:scale-105"
               onClick={() => setDeletingWriter(writer)}
             >
               Delete
-            </button>
-          </td> */}
-        </tr>
-      ))}
-    </tbody>
-  </table>
-{/* )} */}
+            </button> */}
+            {writer.phone ? <p
+                  onClick={() => setDeletingWriter(writer)}
+                  className="rounded-lg text-red-600 text-xs cursor-pointer "
+                >
+                  <FaTrash className="inline-block " />
+                </p>
+                : null}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {/* )} */}
 
 
 

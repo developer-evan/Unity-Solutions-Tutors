@@ -20,7 +20,6 @@ const useRefreshToken = () => {
     // var decoded = jwt_decode(data.access);
     var decoded = jwtDecode(data.access);
     // console.log("decoded decoded",decoded)
-
     //setAuth({user:email,roles:cat,accessToken:fetchLoginResponses.accessToken})
     setAuth((prev) => {
       //  console.log("JSON.stringify(prev)",JSON.stringify(prev));

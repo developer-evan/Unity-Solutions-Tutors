@@ -1,6 +1,7 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-refresh/only-export-components */
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import MainLayout from '../../layout/MainLayout';
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FaPen, FaPlus, FaTrash } from 'react-icons/fa';
 import useAuth from '../../hooks/useAuth';
 import Admin from '../../layout/dash/Admin';
+import { Link } from 'react-router-dom';
 
 function Tasks() {
   const [orders, setOrders] = useState([]);
@@ -17,9 +19,9 @@ function Tasks() {
     status: '',
     title: '',
     writer: '',
-    // client: '',
     book_balance: '',
     deadline: '',
+    fileUrl: '', // Add fileUrl field to store the project file URL
   });
   const [writers, setWriters] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -27,8 +29,7 @@ function Tasks() {
   const [projects, setProjects] = useState([]);
 
   const { auth } = useAuth();
-  // auth roles: 100 - user, 200 - hub admin, 300 - chapter admin, 400 - staff_admin and 500 - super admin
-  const isAdmin = auth.roles.includes(200) || auth.roles.includes(300)
+  const isAdmin = auth.roles.includes(200) || auth.roles.includes(300);
 
   const fetchTasks = async () => {
     try {
@@ -47,56 +48,57 @@ function Tasks() {
     fetchTasks();
   }, []);
 
+  const fetchProjects = async () => {
+    try {
+      const response = await axios.get('https://unit-solutions.vercel.app/api/projects/');
+      setProjects(response.data);
+    } catch (error) {
+      console.error('Error fetching projects:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+
   const toggleAddOrderModal = () => {
     setShowAddOrderModal(!showAddOrderModal);
     setNewOrder({
-
-      // {
-      //   "title": [
-      //     "This field is required."
-      //   ],
-      //   "writer": [
-      //     "This field is required."
-      //   ],
-      //   "book_balance": [
-      //     "This field is required."
-      //   ],
-      //   "deadline": [
-      //     "This field is required."
-      //   ]
-      // }
       id: null,
       status: '',
       title: '',
       writer: '',
-      // client: '',
-
       book_balance: '',
       deadline: '',
+      fileUrl: '',
     });
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewOrder({ ...newOrder, [name]: value });
+    // If the field being changed is the project title, find the selected project and update the fileUrl field
+
+    if (name === 'title') {
+      const project = projects.find((project) => project.title === value);
+      setNewOrder({ ...newOrder, [name]: value, fileUrl: project ? project.fileUrl : '' });
+    } else {
+      setNewOrder({ ...newOrder, [name]: value });
+    }
   };
+  
 
   const handleAddOrder = async () => {
     if (
       newOrder.status.trim() !== '' &&
       newOrder.writer.trim() !== '' &&
       newOrder.title.trim() !== '' &&
-      // newOrder.client.trim() !== '' &&
       newOrder.book_balance.trim() !== '' &&
       newOrder.deadline.trim() !== ''
     ) {
       try {
         if (newOrder.id) {
-          // If an ID exists, it's an existing task that needs updating
           const response = await axios.put(`https://unit-solutions.vercel.app/api/tasks/${newOrder.id}`, newOrder);
-
           if (response.status === 200) {
-            // alert('The task has been successfully updated');
             toast.success('Task updated successfully', {
               position: "top-center",
               autoClose: 3000,
@@ -104,7 +106,6 @@ function Tasks() {
               closeOnClick: true,
               draggable: true,
             });
-
           } else {
             console.error('Failed to update the task');
             toast.error('Failed to update the task', {
@@ -114,14 +115,10 @@ function Tasks() {
               closeOnClick: true,
               draggable: true,
             });
-
           }
         } else {
-          // If no ID, it's a new task that needs adding
           const response = await axios.post('https://unit-solutions.vercel.app/api/tasks/', newOrder);
-
           if (response.status === 201) {
-            // alert('The task has been successfully added');
             toast.success('Task added successfully', {
               position: "top-center",
               autoClose: 3000,
@@ -129,7 +126,6 @@ function Tasks() {
               closeOnClick: true,
               draggable: true,
             });
-
           } else {
             console.error('Failed to add the task');
             toast.error('Failed to add the task', {
@@ -139,51 +135,22 @@ function Tasks() {
               closeOnClick: true,
               draggable: true,
             });
-
           }
         }
-
         fetchTasks();
         toggleAddOrderModal();
       } catch (error) {
         console.error('Error adding/updating task:', error);
       }
     }
-  }
+  };
+
   const handleEditOrder = (orderId) => {
     const orderToEdit = orders.find((order) => order.id === orderId);
     setNewOrder(orderToEdit);
     setShowAddOrderModal(true);
   };
 
-  // const handleDeleteOrder = async (orderId) => {
-  //   try {
-  //     const response = await axios.delete(`https://unit-solutions.vercel.app/api/tasks/${orderId}`);
-  //     if (response.status === 204) {
-  //       const updatedOrders = orders.filter((order) => order.id !== orderId);
-  //       setOrders(updatedOrders);
-  //       toast.success('Task deleted successfully', {
-  //         position: "top-center",
-  //         autoClose: 3000,
-  //         hideProgressBar: true,
-  //         closeOnClick: true,
-  //         draggable: true,
-  //       });
-  //     } else {
-  //       // console.error('Failed to delete the task');
-  //       toast.error('Failed to delete the task', {
-  //         position: "top-center",
-  //         autoClose: 3000,
-  //         hideProgressBar: true,
-  //         closeOnClick: true,
-  //         draggable: true,
-  //       });
-
-  //     }
-  //   } catch (error) {
-  //     console.error('Error deleting task:', error);
-  //   }
-  // };
   const handleDeleteOrder = (orderId) => {
     setOrderToDelete(orderId);
     setShowDeleteModal(true);
@@ -203,7 +170,6 @@ function Tasks() {
           draggable: true,
         });
       } else {
-        // console.error('Failed to delete the task');
         toast.error('Failed to delete the task', {
           position: "top-center",
           autoClose: 3000,
@@ -234,27 +200,8 @@ function Tasks() {
         console.error('Error fetching writers:', error);
       }
     };
-
     fetchWriters();
   }, []);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get('https://unit-solutions.vercel.app/api/projects/');
-      setProjects(response.data); // Assuming the response contains an array of projects
-
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-
-  // Use the useEffect hook to fetch data when the component mounts
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-
-
 
   return (
     <div className="flex flex-col md:flex-row p-4 md:p-0">
@@ -263,7 +210,7 @@ function Tasks() {
         <div className="bg-white shadow-md rounded-lg p-3">
           <div className="flex justify-between items-center">
             <h2 className="text-xl font-semibold text-gray-800">Tasks</h2>
-            {isAdmin ? (
+            {isAdmin && (
               <button
                 onClick={toggleAddOrderModal}
                 className="px-2 py-1 bg-sky-500 text-gray-100 font-bold rounded hover:bg-gray-700 flex items-center"
@@ -271,8 +218,6 @@ function Tasks() {
                 <FaPlus className="inline-block mr-2" />
                 Add Task
               </button>
-            ) : (
-              null
             )}
           </div>
 
@@ -280,45 +225,32 @@ function Tasks() {
             <table className="w-full table-auto">
               <thead>
                 <tr className="bg-gray-200 text-slate-400">
-
-
                   <th className="px-2 py-2 text-start">Project Title</th>
-                  {/* <th className="px-2 py-2 text-start">Client</th> */}
                   <th className="px-2 py-2 text-start">Writer Assigned</th>
-                  {isAdmin ? (
-                    <th className="px-2 py-2 text-start">Book Balance</th>
-                  ) : (
-                    null
-                  )}
+                  {isAdmin && <th className="px-2 py-2 text-start">Book Balance</th>}
                   <th className="px-2 py-2 text-start">Deadline</th>
+                  <th className="px-2 py-2 text-start">File</th> {/* Add file column */}
                   <th className="px-4 py-2 text-start">Status</th>
 
-                  {isAdmin ? (
-                    <th className="px-2 py-2 text-start">Actions</th>
-                  ) : (
-                    null
-                  )}
+                  {isAdmin && <th className="px-2 py-2 text-start">Actions</th>}
                 </tr>
               </thead>
               <tbody>
                 {orders.map((order) => (
                   <tr key={order.id} className="border-t border-gray-300 hover:bg-slate-100">
-                    {/* <td className="px-2 py-2">
-                      <button
-                        className={`bg-${order.status.toLowerCase()}-400 py-2 px-2 rounded-lg w-28 bg-sky-600 text-xs font-bold text-slate-100`}
-                      >
-                        {order.status}
-                      </button>
-                    </td> */}
                     <td className="px-2 py-2 text-gray-500">{order.title}</td>
                     <td className="px-2 py-2 text-gray-500">{order.writer}</td>
-                    {/* <td className="px-2 py-2 text-gray-500">{order.client}</td> */}
-                    {isAdmin ? (
+                    {isAdmin && (
                       <td className="px-2 py-2 text-slate-600 font-semibold">{order.book_balance}</td>
-                    ) : (
-                      null
                     )}
                     <td className="px-2 py-2 text-slate-600 font-semibold">{order.deadline}</td>
+                    {/* <td className="px-2 py-2 text-slate-600 font-semibold">{order.fileUrl}</td> Display fileUrl */}
+                    <td className="border p-2">
+
+                      <Link to={order.fileUrl} target="_blank" rel="noreferrer" className="text-blue-500 hover:underline">
+                        Open File
+                      </Link>
+                    </td>
                     <td className="px-2 py-2">
                       <button
                         className={`bg-${order.status.toLowerCase()}-400 py-2 px-2 rounded-lg w-28 bg-sky-600 text-xs font-bold text-slate-100`}
@@ -326,8 +258,7 @@ function Tasks() {
                         {order.status}
                       </button>
                     </td>
-                    {isAdmin ? (
-                      // If the user is an admin, render the following JSX
+                    {isAdmin && (
                       <td className="px-2 py-2 gap-4 flex flex-row">
                         <p
                           onClick={() => handleEditOrder(order.id)}
@@ -342,14 +273,11 @@ function Tasks() {
                           <FaTrash className="inline-block " />
                         </p>
                       </td>
-                    ) : (
-                      // If the user is not an admin, render nothing (null)
-                      null
                     )}
-
                   </tr>
                 ))}
               </tbody>
+
             </table>
           </div>
         </div>
@@ -358,9 +286,7 @@ function Tasks() {
       {showAddOrderModal && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="bg-white w-1/2 p-6 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-semibold mb-4">
-              {newOrder.id ? 'Edit Task' : 'Add Task'}
-            </h2>
+            <h2 className="text-2xl font-semibold mb-4">{newOrder.id ? 'Edit Task' : 'Add Task'}</h2>
             <div className="mb-4">
               <label className="block text-gray-800">Status</label>
               <select
@@ -389,14 +315,27 @@ function Tasks() {
                 className="w-full p-2 border border-gray-300 rounded"
               >
                 <option value="">Select Project</option>
-                {projects.map((title) => (
-                  <option key={title.id} value={title.title}>
-                    {title.title ? title.title : 'No Project'}
+                {projects.map((project) => (
+                  <option key={project.id} value={project.title}>
+                    {project.title}
                   </option>
                 ))}
               </select>
-
             </div>
+            {/* Add the following block to display the file URL immediately */}
+            {newOrder.title && (
+              <div className="mb-4">
+                <label className="block text-gray-800">File URL</label>
+                <input
+                  type="text"
+                  name="fileUrl"
+                  value={newOrder.fileUrl}
+                  className="w-full p-2 border border-gray-300 rounded"
+                  readOnly
+                />
+              </div>
+            )}
+
             <div className="mb-4">
               <label className="block text-gray-800">Writer Assigned</label>
               <select
@@ -409,7 +348,6 @@ function Tasks() {
                 {writers.map((writer) => (
                   <option key={writer.id} value={writer.name}>
                     {writer.first_name} {writer.last_name}
-                    {/* {writer.email} */}
                   </option>
                 ))}
               </select>
@@ -477,4 +415,5 @@ function Tasks() {
     </div>
   );
 }
+
 export default MainLayout(Tasks);
