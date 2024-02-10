@@ -87,6 +87,7 @@ function AdminDashboard() {
   ];
 
   const displayedOrders = showAllOrders ? orders : orders.slice(0, 5);
+  
 
   return (
     <div className="flex flex-col space-y-4">
