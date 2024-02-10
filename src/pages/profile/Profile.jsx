@@ -10,11 +10,9 @@ import { FaPen } from "react-icons/fa";
 function Profile() {
   const { auth } = useAuth();
   const id = auth.user_id;
-
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -27,10 +25,8 @@ function Profile() {
         console.error(error);
       }
     };
-
     fetchData();
   }, [id]);
-
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="max-w-2xl w-full p-6 bg-white rounded-md shadow-md">
