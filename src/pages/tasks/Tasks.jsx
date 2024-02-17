@@ -237,7 +237,7 @@ function Tasks() {
               </thead>
               <tbody>
                 {orders.map((order) => (
-                  <tr key={order.id} className="border-t border-gray-300 hover:bg-slate-100">
+                  <tr key={order.id} className="border border-gray-300 hover:bg-slate-100">
                     <td className="px-2 py-2 text-gray-500">{order.title}</td>
                     <td className="px-2 py-2 text-gray-500">{order.writer}</td>
                     {isAdmin && (
@@ -245,7 +245,7 @@ function Tasks() {
                     )}
                     <td className="px-2 py-2 text-slate-600 font-semibold">{order.deadline}</td>
                     {/* <td className="px-2 py-2 text-slate-600 font-semibold">{order.fileUrl}</td> Display fileUrl */}
-                    <td className="border p-2">
+                    <td className=" p-2">
 
                       <Link to={order.fileUrl} target="_blank" rel="noreferrer" className="text-blue-500 hover:underline">
                         Open File
