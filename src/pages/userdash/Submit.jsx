@@ -92,7 +92,7 @@ function Submit() {
         </div>
         <div className="flex flex-col">
           <label htmlFor="deadline" className="text-gray-800">Date Submitted:</label>
-          <input type="date" id="deadline" value={deadline} onChange={(e) => setDeadline(e.target.value)} className="border outline-none border-gray-300 rounded px-3 py-2" />
+          <input type="date" id="deadline" value={deadline} onChange={(e) => setDeadline(e.target.value)} className="border outline-none border-gray-300 rounded px-3 py-2" readOnly />
         </div>
         <div className="flex flex-col">
           <label htmlFor="file" className="text-gray-800">Project File:</label>
