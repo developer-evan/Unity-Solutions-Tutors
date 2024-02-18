@@ -84,19 +84,19 @@ function Submit() {
       <form className="space-y-3 mx-48">
         <div className="flex flex-col">
           <label htmlFor="title" className="text-gray-800">Title:</label>
-          <input type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)} className="border border-gray-300 rounded px-3 py-2" />
+          <input type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)} className="border border-gray-300 outline-none rounded px-3 py-2" />
         </div>
         <div className="flex flex-col">
           <label htmlFor="writer" className="text-gray-800">Writer Email:</label>
-          <input type="email" id="writer" value={writerEmail} className="border border-gray-300 rounded px-3 py-2" readOnly />
+          <input type="email" id="writer" value={writerEmail} className="border border-gray-300 rounded outline-none px-3 py-2" readOnly />
         </div>
         <div className="flex flex-col">
           <label htmlFor="deadline" className="text-gray-800">Date Submitted:</label>
-          <input type="date" id="deadline" value={deadline} onChange={(e) => setDeadline(e.target.value)} className="border border-gray-300 rounded px-3 py-2" />
+          <input type="date" id="deadline" value={deadline} onChange={(e) => setDeadline(e.target.value)} className="border outline-none border-gray-300 rounded px-3 py-2" />
         </div>
         <div className="flex flex-col">
           <label htmlFor="file" className="text-gray-800">Project File:</label>
-          <input type="file" id="file" onChange={(e) => setFile(e.target.files[0])} className="border border-gray-300 rounded px-3 py-2" />
+          <input type="file" id="file" onChange={(e) => setFile(e.target.files[0])} className="border border-gray-300 outline-none rounded px-3 py-2" />
         </div>
         <button type="button" onClick={handleSubmission} className="bg-blue-500 w-full text-white py-2 px-4 rounded hover:bg-blue-600">Submit</button>
       </form>
