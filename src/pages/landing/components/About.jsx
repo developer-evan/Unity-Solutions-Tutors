@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function About() {
   return (
     <div className="bg-gray-100 px-6  pt-20 min-h-screen" id="about">
-       <h1 className="text-xl  text-gray-800 text-center">
+       <h1 className="text-xl font-bold text-gray-800 text-center">
         About Us
       </h1>
     <section className="container mx-auto   gap-3 flex flex-col md:flex-row justify-around bg-gray-100 rounded-lg" >
