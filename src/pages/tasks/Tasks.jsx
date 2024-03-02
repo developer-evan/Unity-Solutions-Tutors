@@ -31,13 +31,22 @@ function Tasks() {
   const { auth } = useAuth();
   const isAdmin = auth.roles.includes(200) || auth.roles.includes(300);
 
+  const { user_id } = auth;
+  console.log(user_id, 'user_id');
+
+
+  const url = isAdmin ? `https://unit-solutions.vercel.app/api/tasks/` : `https://unit-solutions.vercel.app/api/tasks/user-specific/${user_id}/`;
+
+  // console
   const fetchTasks = async () => {
     try {
-      const response = await axios.get('https://unit-solutions.vercel.app/api/tasks/');
+      const response = await axios.get(url);
+      console.log(response, 'response');
       if (response.status === 200) {
         setOrders(response.data);
+        console.log(response.data, 'response.data');
       } else {
-        console.error('Failed to fetch tasks');
+        console.error('Failed to fetch tasks');1` `
       }
     } catch (error) {
       console.error('Error fetching tasks:', error);

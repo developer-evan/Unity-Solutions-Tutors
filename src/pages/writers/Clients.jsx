@@ -194,7 +194,7 @@ function Clients() {
             <th className="border border-gray-300 p-2">Company Name</th>
             <th className="border border-gray-300 p-2">Contact Email</th>
             <th className="border border-gray-300 p-2">Contact Phone</th>
-            <th className="border border-gray-300 p-2">Actions</th>
+            <th className=" border border-gray-300p-2">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -204,7 +204,7 @@ function Clients() {
               <td className="border border-gray-300 p-2">{client.company_name}</td>
               <td className="border border-gray-300 p-2">{client.contact_email}</td>
               <td className="border border-gray-300 p-2">{client.contact_phone}</td>
-              <td className="border border-gray-300 p-2 flex flex-row gap-2">
+              <td className=" p-2 flex flex-row gap-2 items-center">
                
                 <p
                   onClick={() => handleEditClient(client)}
