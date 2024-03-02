@@ -99,7 +99,7 @@ function UserDashboard() {
     ];
   
     return (
-      <div className="flex flex-col space-y-4">
+      <div className="flex flex-col space-y-4 mb-10">
         <ToastContainer />
         <div className="bg-white shadow-xs rounded-lg p-6">
           <h1 className="text-3xl font-semibold text-gray-800">Welcome, 
