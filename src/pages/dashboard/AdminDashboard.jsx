@@ -224,8 +224,7 @@ function AdminDashboard() {
             </tbody>
           </table>
         </div>
-
-        {/* Pagination */}
+       
         <div className="mt-4">
           <ul className="flex justify-center">
             {Array.from({ length: Math.ceil(orders.length / tasksPerPage) }, (_, i) => (
