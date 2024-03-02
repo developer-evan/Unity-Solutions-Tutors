@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FaPen, FaDollarSign } from "react-icons/fa";
 import useAuth from '../../hooks/useAuth';
 
+
 function UserDashboard() {
     const [tasks, setTasks] = useState([]);
     const [earnings, setEarnings] = useState(0);
@@ -19,7 +20,12 @@ function UserDashboard() {
     const [error, setError] = useState(null);
 
     const { auth, setAuth } = useAuth();
-    const id = auth.user_id;
+    const id = auth.user_id;    
+  // const { auth } = useAuth();
+  const isAdmin = auth.roles.includes(200) || auth.roles.includes(300);
+
+  const { user_id } = auth;
+  console.log(user_id, 'user_id');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -36,9 +42,12 @@ function UserDashboard() {
         fetchData();
       }, [id]);
 
+      const url = isAdmin ? `https://unit-solutions.vercel.app/api/tasks/` : `https://unit-solutions.vercel.app/api/tasks/user-specific/${user_id}/`;
+
+
     const fetchTasks = async () => {
       try {
-        const response = await axios.get('https://unit-solutions.vercel.app/api/tasks/');
+        const response = await axios.get(url);
         if (response.status === 200) {
           setTasks(response.data);
         } else {
