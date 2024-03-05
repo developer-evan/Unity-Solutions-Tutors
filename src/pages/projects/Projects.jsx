@@ -374,6 +374,7 @@ function Projects() {
                   // type="url"
                   type='text'
                   // onChange={handleFileChange}
+                  placeholder='add project link here...'
                   onChange={(e) =>
                     setNewProject({ ...newProject, attachment: e.target.value })
                   }
@@ -488,6 +489,7 @@ function Projects() {
                   onChange={(e) =>
                     setEditingProject({ ...editingProject, attachment: e.target.value })
                   }
+                  placeholder='add project link here...'
                   // onChange={handleFileChange}
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 />

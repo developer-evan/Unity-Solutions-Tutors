@@ -52,22 +52,22 @@ function Analytics() {
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-6">Submitted Tasks</h1>
       <div className="overflow-x-auto">
-        <table className="table-auto w-full border-collapse border border-gray-800">
+        <table className="w-full">
           <thead>
             <tr className="bg-gray-200">
-              <th className="border border-gray-800 px-4 py-2">Title</th>
-              <th className="border border-gray-800 px-4 py-2">Writer Email</th>
-              <th className="border border-gray-800 px-4 py-2">Date Submitted</th>
-              <th className="border border-gray-800 px-4 py-2">Project Link</th>
+              <th className="px-4 py-2">Title</th>
+              <th className="px-4 py-2">Writer Email</th>
+              <th className="px-4 py-2">Date Submitted</th>
+              <th className="px-4 py-2">Project Link</th>
             </tr>
           </thead>
           <tbody>
-            {currentTasks.map((task) => (
-              <tr key={task.id} className="bg-white">
-                <td className="border border-gray-800 px-4 py-2">{task.title}</td>
-                <td className="border border-gray-800 px-4 py-2">{task.writer_email}</td>
-                <td className="border border-gray-800 px-4 py-2">{task.date_submitted}</td>
-                <td className="border border-gray-800 px-4 py-2">
+            {currentTasks.map((task, index) => (
+              <tr key={task.id} className={index === 0 ? 'bg-white' : index % 2 === 1 ? 'bg-slate-300' : 'bg-white'}>
+                <td className="px-4 py-2">{task.title}</td>
+                <td className="px-4 py-2">{task.writer_email}</td>
+                <td className="px-4 py-2">{task.date_submitted}</td>
+                <td className="px-4 py-2">
                   <a href={task.project_link} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                     View Project
                   </a>
@@ -76,7 +76,7 @@ function Analytics() {
             ))}
           </tbody>
         </table>
-        {/* Pagination */}
+        
         <div className="mt-4">
           {pageNumbers.map((number) => (
             <button
