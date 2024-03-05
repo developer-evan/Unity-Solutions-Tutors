@@ -179,7 +179,7 @@ function AdminDashboard() {
                 <th className="px-2 py-2 text-start">Deadline</th>
                 <th className="px-2 py-2 text-start">File</th>
                 <th className="px-4 py-2 text-start">Status</th>
-                {isAdmin && <th className="px-2 py-2 text-start">Actions</th>}
+                {/* {isAdmin && <th className="px-2 py-2 text-start">Actions</th>} */}
               </tr>
             </thead>
             <tbody>
