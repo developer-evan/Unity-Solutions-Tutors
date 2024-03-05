@@ -39,10 +39,10 @@ function Submit() {
       const formData = new FormData();
       formData.append('title', title);
       formData.append('writer_email', writerEmail); 
-      formData.append('deadline', deadline);
-      formData.append('file', file);
+      formData.append('date_submitted', deadline);
+      formData.append('project_link', file);
 
-      const response = await axios.post('https://unit-solutions.vercel.app/api/tasks/', formData, {
+      const response = await axios.post('https://unit-solutions.vercel.app/api/submit-task/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -96,11 +96,14 @@ function Submit() {
         </div>
         <div className="flex flex-col">
           <label htmlFor="file" className="text-gray-800">Project File:</label>
-          <input type="file" id="file" onChange={(e) => setFile(e.target.files[0])} className="border border-gray-300 outline-none rounded px-3 py-2" />
+          {/* need a link  */}
+          < input type ="url" id='file' value={file} onChange={(e) => setFile(e.target.value)} className="border border-gray-300 outline-none rounded px-3 py-2" />
+          {/* <input type="file" id="file" onChange={(e) => setFile(e.target.files[0])} className="border border-gray-300 outline-none rounded px-3 py-2" /> */}
         </div>
         <button type="button" onClick={handleSubmission} className="bg-blue-500 w-full text-white py-2 px-4 rounded hover:bg-blue-600">Submit</button>
       </form>
     </div>
+    
   );
 }
 
