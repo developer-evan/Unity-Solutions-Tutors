@@ -39,7 +39,7 @@ const handleSubmit = async (e) => {
   setStatus(null); 
   try {    
     const response = await axios.post(
-      "https://unit-solutions.vercel.app/api/reset-password",
+      "https://unitysolutionstutors.vercel.app/api/reset-password",
       {
          email,
          password, password_confirmation, token }    

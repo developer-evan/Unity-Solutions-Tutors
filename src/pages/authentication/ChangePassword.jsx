@@ -59,7 +59,7 @@ const ChangePassword = () => {
 
 
       };
-      const response = await axios.post('https://unit-solutions.vercel.app/api/change-password', {
+      const response = await axios.post('https://unitysolutionstutors.vercel.app/api/change-password', {
         old_password: currentPassword,
         new_password1: newPassword,
         new_password2: confirmPassword,

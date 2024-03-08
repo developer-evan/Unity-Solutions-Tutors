@@ -21,7 +21,7 @@ function Submit() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://unit-solutions.vercel.app/api/user/get-user/${auth.user_id}/`);
+        const response = await axios.get(`https://unitysolutionstutors.vercel.app/api/user/get-user/${auth.user_id}/`);
         setUserData(response.data);
         setWriterEmail(response.data.email); 
         setLoading(false);
@@ -42,7 +42,7 @@ function Submit() {
       formData.append('date_submitted', deadline);
       formData.append('project_link', file);
 
-      const response = await axios.post('https://unit-solutions.vercel.app/api/submit-task/', formData, {
+      const response = await axios.post('https://unitysolutionstutors.vercel.app/api/submit-task/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

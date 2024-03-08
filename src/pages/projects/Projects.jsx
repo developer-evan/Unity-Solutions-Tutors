@@ -34,7 +34,7 @@ function Projects() {
   // Define a function to fetch data from the endpoint
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://unit-solutions.vercel.app/api/projects/');
+      const response = await axios.get('https://unitysolutionstutors.vercel.app/api/projects/');
       setProjects(response.data); // Assuming the response contains an array of projects
 
     } catch (error) {
@@ -88,7 +88,7 @@ function Projects() {
     // }
 
     try {
-      const response = await axios.post('https://unit-solutions.vercel.app/api/projects/', newProject);
+      const response = await axios.post('https://unitysolutionstutors.vercel.app/api/projects/', newProject);
       setProjects([...projects, response.data]);
       setNewProject({
         title: '',
@@ -146,7 +146,7 @@ function Projects() {
     // }
 
     try {
-      const response = await axios.put(`https://unit-solutions.vercel.app/api/projects/${editingProject.id}/`, editingProject);
+      const response = await axios.put(`https://unitysolutionstutors.vercel.app/api/projects/${editingProject.id}/`, editingProject);
       const updatedProjects = projects.map((project) =>
         project.id === editingProject.id ? response.data : project
       );
@@ -176,7 +176,7 @@ function Projects() {
   useEffect(() => {
     const fetchClients = async () => {
       try {
-        const response = await axios.get('https://unit-solutions.vercel.app/api/clients/');
+        const response = await axios.get('https://unitysolutionstutors.vercel.app/api/clients/');
         setClients(response.data);
       } catch (error) {
         console.error('Error fetching writers:', error);
@@ -199,7 +199,7 @@ function Projects() {
 
   const confirmDelete = async (id) => {
     try {
-      await axios.delete(`https://unit-solutions.vercel.app/api/projects/${id}`);
+      await axios.delete(`https://unitysolutionstutors.vercel.app/api/projects/${id}`);
       const updatedProjects = projects.filter((project) => project.id !== id);
       setProjects(updatedProjects);
       toast.success('Project deleted successfully!', {

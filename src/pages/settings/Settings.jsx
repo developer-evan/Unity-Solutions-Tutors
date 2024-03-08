@@ -65,7 +65,7 @@ function Settings() {
 
 
       };
-      const response = await axios.post('https://unit-solutions.vercel.app/api/change-password', {
+      const response = await axios.post('https://unitysolutionstutors.vercel.app/api/change-password', {
         old_password: currentPassword,
         new_password1: newPassword,
         new_password2: confirmPassword,
@@ -111,7 +111,7 @@ function Settings() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://unit-solutions.vercel.app/api/user/get-user/${id}/`);
+        const response = await axios.get(`https://unitysolutionstutors.vercel.app/api/user/get-user/${id}/`);
         setUserData(response.data);
         console.log('user data', userData);
 

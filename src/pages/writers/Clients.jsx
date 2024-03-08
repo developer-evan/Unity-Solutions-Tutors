@@ -24,7 +24,7 @@ function Clients() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("https://unit-solutions.vercel.app/api/clients/");
+      const response = await axios.get("https://unitysolutionstutors.vercel.app/api/clients/");
       setClients(response.data);
     } catch (error) {
       handleRequestError("Error fetching data:", error);
@@ -48,7 +48,7 @@ function Clients() {
   };
   const handleAddClient = async () => {
     try {
-      const response = await axios.post("https://unit-solutions.vercel.app/api/clients/", newClient);
+      const response = await axios.post("https://unitysolutionstutors.vercel.app/api/clients/", newClient);
 
       if (response.status === 201) {
         const data = response.data;
@@ -75,7 +75,7 @@ function Clients() {
     try {
       if (editingClient) {
         // const response =
-         await axios.put(`https://unit-solutions.vercel.app/api/clients/${editingClient.id}/`, newClient);
+         await axios.put(`https://unitysolutionstutors.vercel.app/api/clients/${editingClient.id}/`, newClient);
 
         // if (response.status === 200) {
           const updatedClients = clients.map((client) =>
@@ -113,7 +113,7 @@ function Clients() {
   const handleDelete = async (id) => {
     try {
       // const response = 
-      await axios.delete(`https://unit-solutions.vercel.app/api/clients/${id}/`);
+      await axios.delete(`https://unitysolutionstutors.vercel.app/api/clients/${id}/`);
   
       // if (response.status === 200) {
         // Update state only if the deletion was successful

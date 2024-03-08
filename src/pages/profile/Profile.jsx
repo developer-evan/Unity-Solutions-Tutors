@@ -16,7 +16,7 @@ function Profile() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://unit-solutions.vercel.app/api/user/get-user/${id}/`);
+        const response = await axios.get(`https://unitysolutionstutors.vercel.app/api/user/get-user/${id}/`);
         setUserData(response.data);
         setLoading(false);
       } catch (error) {
