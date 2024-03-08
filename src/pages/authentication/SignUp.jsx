@@ -53,7 +53,7 @@ const SignUp = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://unit-solutions.vercel.app/api/user/register/', {
+      const response = await axios.post('https://unitysolutionstutors.vercel.app/api/user/register/', {
         first_name: userData.first_name,
         last_name: userData.last_name,
         specialization: userData.specialization,

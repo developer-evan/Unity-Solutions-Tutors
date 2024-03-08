@@ -31,7 +31,7 @@ function UserDashboard() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`https://unit-solutions.vercel.app/api/user/get-user/${id}/`);
+                const response = await axios.get(`https://unitysolutionstutors.vercel.app/api/user/get-user/${id}/`);
                 setUserData(response.data);
                 setLoading(false);
             } catch (error) {
@@ -46,7 +46,7 @@ function UserDashboard() {
     useEffect(() => {
         const fetchTasks = async () => {
             try {
-                const url = isAdmin ? `https://unit-solutions.vercel.app/api/tasks/` : `https://unit-solutions.vercel.app/api/tasks/user-specific/${user_id}/`;
+                const url = isAdmin ? `https://unitysolutionstutors.vercel.app/api/tasks/` : `https://unitysolutionstutors.vercel.app/api/tasks/user-specific/${user_id}/`;
                 const response = await axios.get(url);
                 if (response.status === 200) {
                     setTasks(response.data);

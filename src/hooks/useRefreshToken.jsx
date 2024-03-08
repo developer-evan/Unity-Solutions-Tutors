@@ -14,7 +14,7 @@ const useRefreshToken = () => {
     let payload = {
       refresh: refreshToken,
     };
-    const { data } = await axios.post("https://unit-solutions.vercel.app/api/token/refresh/", payload);
+    const { data } = await axios.post("https://unitysolutionstutors.vercel.app/api/token/refresh/", payload);
     localStorage.setItem("refresh", data.refresh);
     // console.log("res",data)
     // var decoded = jwt_decode(data.access);

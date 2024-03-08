@@ -20,7 +20,7 @@ function Users() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://unit-solutions.vercel.app/api/user/'); // Replace 'YOUR_API_ENDPOINT' with the actual endpoint
+        const response = await axios.get('https://unitysolutionstutors.vercel.app/api/user/'); // Replace 'YOUR_API_ENDPOINT' with the actual endpoint
         setUserData(response.data); // Assuming the response is an array of user data
       } catch (error) {
         console.error('Error fetching user data:', error);

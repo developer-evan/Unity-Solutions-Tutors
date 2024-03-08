@@ -34,7 +34,7 @@ function Tasks() {
 
   const { user_id } = auth;
 
-  const url = isAdmin ? `https://unit-solutions.vercel.app/api/tasks/` : `https://unit-solutions.vercel.app/api/tasks/user-specific/${user_id}/`;
+  const url = isAdmin ? `https://unitysolutionstutors.vercel.app/api/tasks/` : `https://unitysolutionstutors.vercel.app/api/tasks/user-specific/${user_id}/`;
 
   const fetchTasks = async () => {
     try {
@@ -55,7 +55,7 @@ function Tasks() {
 
   const fetchProjects = async () => {
     try {
-      const response = await axios.get('https://unit-solutions.vercel.app/api/projects/');
+      const response = await axios.get('https://unitysolutionstutors.vercel.app/api/projects/');
       setProjects(response.data);
     } catch (error) {
       console.error('Error fetching projects:', error);
@@ -102,7 +102,7 @@ function Tasks() {
     ) {
       try {
         if (newOrder.id) {
-          const response = await axios.put(`https://unit-solutions.vercel.app/api/tasks/${newOrder.id}/`, newOrder);
+          const response = await axios.put(`https://unitysolutionstutors.vercel.app/api/tasks/${newOrder.id}/`, newOrder);
           if (response.status === 200) {
             toast.success('Task updated successfully', {
               position: "top-center",
@@ -122,7 +122,7 @@ function Tasks() {
             });
           }
         } else {
-          const response = await axios.post('https://unit-solutions.vercel.app/api/tasks/', newOrder);
+          const response = await axios.post('https://unitysolutionstutors.vercel.app/api/tasks/', newOrder);
           if (response.status === 201) {
             toast.success('Task added successfully', {
               position: "top-center",
@@ -163,7 +163,7 @@ function Tasks() {
 
   const confirmDelete = async () => {
     try {
-      const response = await axios.delete(`https://unit-solutions.vercel.app/api/tasks/${orderToDelete}/`);
+      const response = await axios.delete(`https://unitysolutionstutors.vercel.app/api/tasks/${orderToDelete}/`);
       if (response.status === 204) {
         const updatedOrders = orders.filter((order) => order.id !== orderToDelete);
         setOrders(updatedOrders);
@@ -199,7 +199,7 @@ function Tasks() {
   useEffect(() => {
     const fetchWriters = async () => {
       try {
-        const response = await axios.get('https://unit-solutions.vercel.app/api/user/');
+        const response = await axios.get('https://unitysolutionstutors.vercel.app/api/user/');
         setWriters(response.data);
       } catch (error) {
         console.error('Error fetching writers:', error);

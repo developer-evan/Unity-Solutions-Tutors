@@ -49,7 +49,7 @@ function Writers() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("https://unit-solutions.vercel.app/api/user/");
+      const response = await axios.get("https://unitysolutionstutors.vercel.app/api/user/");
       setWriters(response.data);
       console.log(response.data);
       // alert("Data fetched successfully");
@@ -78,7 +78,7 @@ function Writers() {
   const handleAddWriter = async () => {
     try {
       // Send a POST request to add a new writer
-      const response = await axios.post("https://unit-solutions.vercel.app/api/writers/", newWriter);
+      const response = await axios.post("https://unitysolutionstutors.vercel.app/api/writers/", newWriter);
       setWriters([...writers, response.data]);
       // alert("Writer added successfully");
       toast.success('Writer added successfully', {
@@ -109,7 +109,7 @@ function Writers() {
     try {
       if (editingWriter) {
         // Send a PATCH request to update an existing writer
-        await axios.patch(`https://unit-solutions.vercel.app/user/get-user/${editingWriter.id}/`, newWriter);
+        await axios.patch(`https://unitysolutionstutors.vercel.app/user/get-user/${editingWriter.id}/`, newWriter);
         const updatedWriters = writers.map((writer) =>
           writer.id === editingWriter.id ? { ...newWriter } : writer
         );
@@ -141,7 +141,7 @@ function Writers() {
   const handleDelete = async (id) => {
     try {
       // Send a DELETE request to delete a writer by ID
-      await axios.delete(`https://unit-solutions.vercel.app/api/user/get-user/${id}/`);
+      await axios.delete(`https://unitysolutionstutors.vercel.app/api/user/get-user/${id}/`);
       const updatedWriters = writers.filter((writer) => writer.id !== id);
       setWriters(updatedWriters);
       setDeletingWriter(null); // Reset deletingWriter

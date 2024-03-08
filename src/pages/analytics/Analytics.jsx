@@ -14,7 +14,7 @@ function Analytics() {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get('https://unit-solutions.vercel.app/api/submit-task/');
+        const response = await axios.get('https://unitysolutionstutors.vercel.app/api/submit-task/');
         setTasks(response.data);
         setLoading(false);
       } catch (error) {

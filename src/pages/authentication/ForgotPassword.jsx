@@ -36,8 +36,8 @@ const handleSubmit = async (e) => {
   try {
     // const csrfToken = csrf(); 
     const response = await axios.post(
-      "https://unit-solutions.vercel.app/api/reset-password/",
-      // "https://unit-solutions.vercel.app/api/password_reset/",
+      "https://unitysolutionstutors.vercel.app/api/reset-password/",
+      // "https://unitysolutionstutors.vercel.app/api/password_reset/",
       { email },
       // {
       //   headers: {
